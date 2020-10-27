@@ -1,0 +1,1116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E6B6C833-69FA-488A-A810-9CD0A8B52230}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DispenseAPP</RootNamespace>
+    <AssemblyName>DispenseAPP</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ApplicationsFolder.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AdvMotAPI, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\AdvMotAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="Basler.Pylon, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e389355f398382ab, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Basler.Pylon.dll</HintPath>
+    </Reference>
+    <Reference Include="DataGridViewNumericUpDownElements, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DataGridViewNumericUpDownElements.dll</HintPath>
+    </Reference>
+    <Reference Include="EntQsPlc_Asc, Version=3.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\EntQsPlc_Asc.dll</HintPath>
+    </Reference>
+    <Reference Include="halcondotnet, Version=12.0.0.0, Culture=neutral, PublicKeyToken=4973bed59ddbf2b8, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\halcondotnet.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.1.278, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.0.1\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics, Version=4.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.9.1\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MvCameraControl.Net, Version=3.2.0.2, Culture=neutral, PublicKeyToken=52fddfb3f94be800, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\MvCameraControl.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutData\AnalysisDataClass.cs" />
+    <Compile Include="AboutData\CameraDataClass.cs" />
+    <Compile Include="AboutData\MCDataClass.cs" />
+    <Compile Include="AboutMotionCard\AxisStateAndMotion\ManualParamSetClass.cs" />
+    <Compile Include="AboutMotionCard\ConfigMotionCard\IOSet\FrmAutoSetInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\IOSet\FrmAutoSetInput.Designer.cs">
+      <DependentUpon>FrmAutoSetInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\FrmLimitSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\FrmLimitSet.Designer.cs">
+      <DependentUpon>FrmLimitSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\CommandInvertOrder.cs" />
+    <Compile Include="FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MathTools\Math_GeometryClass.cs" />
+    <Compile Include="MotionCardClass\ADLINKMC\AdlinkClass.cs" />
+    <Compile Include="MotionCardClass\ADLINKMC\APS168.cs" />
+    <Compile Include="MotionCardClass\AdvantechMC\AdvClass.cs" />
+    <Compile Include="MotionCardClass\DMC\DMCClass.cs" />
+    <Compile Include="MotionCardClass\DMC\LTDMC.cs" />
+    <Compile Include="MotionCardClass\MotionCardFactory.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Modbus\ModbusDataClass.cs" />
+    <Compile Include="Tools_CommunControl\Modbus\Tools_Modbus.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Modbus\Tools_Modbus.Designer.cs">
+      <DependentUpon>Tools_Modbus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Modbus\UC_ModbusSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Modbus\UC_ModbusSet.Designer.cs">
+      <DependentUpon>UC_ModbusSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\PLC\PLCDataClass.cs" />
+    <Compile Include="Tools_CommunControl\Serial\SerialDataClass.cs" />
+    <Compile Include="AboutMotionCard\ConfigCardClass\ConfigClass\ConfigCardable.cs" />
+    <Compile Include="AboutMotionCard\ConfigCardClass\ConfigClass\ConfigFileAndIDClass.cs" />
+    <Compile Include="AboutMotionCard\ConfigCardClass\FrmConfig\FrmConfigFileID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigCardClass\FrmConfig\FrmConfigFileID.Designer.cs">
+      <DependentUpon>FrmConfigFileID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigCardClass\FrmConfig\FrmConfigIPAddress.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigCardClass\FrmConfig\FrmConfigIPAddress.Designer.cs">
+      <DependentUpon>FrmConfigIPAddress.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigCardClass\ConfigClass\IPAddressClass.cs" />
+    <Compile Include="AttributeClass\ReferenceImageAttribute.cs" />
+    <Compile Include="Register\FileTypeRegInfo.cs" />
+    <Compile Include="Register\FileTypeRegister.cs" />
+    <Compile Include="FrmList\FrmSystemSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList\FrmSystemSet.Designer.cs">
+      <DependentUpon>FrmSystemSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\PLC\DLL\Qs_Ent_Asc_Class.cs" />
+    <Compile Include="Tools_CommunControl\PLC\PLC_CommunClass.cs" />
+    <Compile Include="Tools_CommunControl\PLC\Tools_PLC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\PLC\Tools_PLC.Designer.cs">
+      <DependentUpon>Tools_PLC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\PLC\UC_PLCSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\PLC\UC_PLCSet.Designer.cs">
+      <DependentUpon>UC_PLCSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Serial\SerialClass.cs" />
+    <Compile Include="Tools_CommunControl\Serial\Tools_Serial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Serial\Tools_Serial.Designer.cs">
+      <DependentUpon>Tools_Serial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Serial\UC_SerialSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\Serial\UC_SerialSet.Designer.cs">
+      <DependentUpon>UC_SerialSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\CommunType\ADChannel\ADChannelReadClass.cs" />
+    <Compile Include="Tools_MotionControl\MeasureHeight\CommunType\GetHeightValueClass.cs" />
+    <Compile Include="Tools_MotionControl\MeasureHeight\CommunType\Serial\MeasureHeight_Serial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\CommunType\Serial\MeasureHeight_Serial.Designer.cs">
+      <DependentUpon>MeasureHeight_Serial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\FrmHeightIndicatorCalib.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\FrmHeightIndicatorCalib.Designer.cs">
+      <DependentUpon>FrmHeightIndicatorCalib.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\FrmMeasureHeightSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\FrmMeasureHeightSet.Designer.cs">
+      <DependentUpon>FrmMeasureHeightSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\MeasureHeightClass.cs" />
+    <Compile Include="Tools_MotionControl\MeasureHeight\CommunType\ADChannel\MeasureHeight_ADChannelRead.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\CommunType\ADChannel\MeasureHeight_ADChannelRead.Designer.cs">
+      <DependentUpon>MeasureHeight_ADChannelRead.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\Tools_MeasureHeight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\Tools_MeasureHeight.Designer.cs">
+      <DependentUpon>Tools_MeasureHeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\UC_Save.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureHeight\UC_Save.Designer.cs">
+      <DependentUpon>UC_Save.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DispenseFunction\Dispense_ArrayClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DispenseFunction\Dispense_ChamferingClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DispenseFunction\Dispense_ZoomClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DispenseFunction\Dispense_RotateClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\FrmSetCrossParam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\FrmSetCrossParam.Designer.cs">
+      <DependentUpon>FrmSetCrossParam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\FrmDispenseParamSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\FrmDispenseParamSet.Designer.cs">
+      <DependentUpon>FrmDispenseParamSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\HandleDispenseFunction\HandlerClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\PathProgramClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\CrossParamClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\FrmSetRoadMapParam.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\FrmSetRoadMapParam.Designer.cs">
+      <DependentUpon>FrmSetRoadMapParam.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\RoadMap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\RoadMap.Designer.cs">
+      <DependentUpon>RoadMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\RoadMapParamClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\FrmDispensePathSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\FrmDispensePathSet.Designer.cs">
+      <DependentUpon>FrmDispensePathSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\FrmSelectCommand.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\FrmSelectCommand.Designer.cs">
+      <DependentUpon>FrmSelectCommand.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AttributeClass\AbleManualExecuteAttribute.cs" />
+    <Compile Include="Tools_CommunControl\TCP\TCPDataClass.cs" />
+    <Compile Include="AboutData\VarClass.cs" />
+    <Compile Include="AboutXML\OperationXML.cs" />
+    <Compile Include="AttributeClass\CalibROIAttribute.cs" />
+    <Compile Include="ControlClass.cs" />
+    <Compile Include="AttributeClass\ConditionJudgeAttribute.cs" />
+    <Compile Include="FlowChart\IfSwitchJudgeClass.cs" />
+    <Compile Include="FlowChart\LineClass\EndLine.cs" />
+    <Compile Include="FlowChart\LineClass\FirstLine.cs" />
+    <Compile Include="FlowChart\FrmIfSwitchPort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlowChart\FrmIfSwitchPort.Designer.cs">
+      <DependentUpon>FrmIfSwitchPort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigCardClass\FrmConfigMotionCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigCardClass\FrmConfigMotionCard.Designer.cs">
+      <DependentUpon>FrmConfigMotionCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmList\FrmConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList\FrmConfigWindow.Designer.cs">
+      <DependentUpon>FrmConfigWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmList\FrmDebug.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList\FrmDebug.Designer.cs">
+      <DependentUpon>FrmDebug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmList\FrmPrimary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList\FrmPrimary.Designer.cs">
+      <DependentUpon>FrmPrimary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmList\FrmRun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList\FrmRun.Designer.cs">
+      <DependentUpon>FrmRun.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MultiLanguage\LanguageHelper.cs" />
+    <Compile Include="MyStyleControl\ComboBoxCombinNumericUpDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyStyleControl\ComboBoxCombinNumericUpDown.Designer.cs">
+      <DependentUpon>ComboBoxCombinNumericUpDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AttributeClass\ReferenceAngleAttribute.cs" />
+    <Compile Include="AttributeClass\ReferenceAttribute.cs" />
+    <Compile Include="AttributeClass\ReferencePointAttribute.cs" />
+    <Compile Include="AttributeClass\ROIAttribute.cs" />
+    <Compile Include="Tools_BarcodeRecognition\UC_Barcode_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_BarcodeRecognition\UC_Barcode_Tools.Designer.cs">
+      <DependentUpon>UC_Barcode_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\FrmConfigCommun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\FrmConfigCommun.Designer.cs">
+      <DependentUpon>FrmConfigCommun.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\ReadDI\Tools_Read_DI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\ReadDI\Tools_Read_DI.Designer.cs">
+      <DependentUpon>Tools_Read_DI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\TCP\AnsyncTCPServer\AsyncSocketEveentArgs.cs" />
+    <Compile Include="Tools_CommunControl\TCP\AnsyncTCPServer\AsyncSocketState.cs" />
+    <Compile Include="Tools_CommunControl\TCP\TCP_IP_Class.cs" />
+    <Compile Include="Tools_CommunControl\TCP\Tools_TCP_IP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\TCP\Tools_TCP_IP.Designer.cs">
+      <DependentUpon>Tools_TCP_IP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\TCP\UC_TCPSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\TCP\UC_TCPSet.Designer.cs">
+      <DependentUpon>UC_TCPSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_CommunControl\UC_Commun_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_CommunControl\UC_Commun_Tools.Designer.cs">
+      <DependentUpon>UC_Commun_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\UC_Image_Enhancement_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\UC_Image_Enhancement_Tools.Designer.cs">
+      <DependentUpon>UC_Image_Enhancement_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\AutoCalibClass.cs" />
+    <Compile Include="Tools_Image_IO\AutoCalib\FrmCalib.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\FrmCalib.Designer.cs">
+      <DependentUpon>FrmCalib.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\FrmNewCalib.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\FrmNewCalib.Designer.cs">
+      <DependentUpon>FrmNewCalib.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\Tools_AutoCalib.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\Tools_AutoCalib.Designer.cs">
+      <DependentUpon>Tools_AutoCalib.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\UC_Calib_ImageSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\UC_Calib_ImageSet.Designer.cs">
+      <DependentUpon>UC_Calib_ImageSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\UC_Calib_MachineSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AutoCalib\UC_Calib_MachineSet.Designer.cs">
+      <DependentUpon>UC_Calib_MachineSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\CacheImage\Tools_CacheImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\CacheImage\Tools_CacheImage.Designer.cs">
+      <DependentUpon>Tools_CacheImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\ExportImage\Tools_ExportImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\ExportImage\Tools_ExportImage.Designer.cs">
+      <DependentUpon>Tools_ExportImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\ImportImage\Tools_ImportImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\ImportImage\Tools_ImportImage.Designer.cs">
+      <DependentUpon>Tools_ImportImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\UC_Image_IO_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\UC_Image_IO_Tools.Designer.cs">
+      <DependentUpon>UC_Image_IO_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\CreateROI\CreateROIClass.cs" />
+    <Compile Include="Tools_Location\CalibROI\Tools_CalibROI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\CalibROI\Tools_CalibROI.Designer.cs">
+      <DependentUpon>Tools_CalibROI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\ContourMatching\ContourMatchingClass.cs" />
+    <Compile Include="Tools_Location\ContourMatching\FrmContourMathing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\ContourMatching\FrmContourMathing.Designer.cs">
+      <DependentUpon>FrmContourMathing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\ContourMatching\FrmEditTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\ContourMatching\FrmEditTemplate.Designer.cs">
+      <DependentUpon>FrmEditTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\ContourMatching\Tools_ContourMatching.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\ContourMatching\Tools_ContourMatching.Designer.cs">
+      <DependentUpon>Tools_ContourMatching.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\CalibROI\RevisesROIClass.cs" />
+    <Compile Include="Tools_Location\CreateROI\FrmCreateROI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\CreateROI\FrmCreateROI.Designer.cs">
+      <DependentUpon>FrmCreateROI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\CreateROI\Tools_CreateROI.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\CreateROI\Tools_CreateROI.Designer.cs">
+      <DependentUpon>Tools_CreateROI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\FindLine\FindLineClass.cs" />
+    <Compile Include="Tools_Location\FindLine\FrmFindLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\FindLine\FrmFindLine.Designer.cs">
+      <DependentUpon>FrmFindLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\FindLine\Tools_FindLine.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\FindLine\Tools_FindLine.Designer.cs">
+      <DependentUpon>Tools_FindLine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Location\UC_Location_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Location\UC_Location_Tools.Designer.cs">
+      <DependentUpon>UC_Location_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Measure\GeometricalRelation\GeometericalRelationClass.cs" />
+    <Compile Include="Tools_Measure\GeometricalRelation\Tools_GeometricalRelation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Measure\GeometricalRelation\Tools_GeometricalRelation.Designer.cs">
+      <DependentUpon>Tools_GeometricalRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Measure\UC_Measure_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Measure\UC_Measure_Tools.Designer.cs">
+      <DependentUpon>UC_Measure_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\CalibNeedle\CalibNeedleClass.cs" />
+    <Compile Include="Tools_MotionControl\CalibNeedle\FrmCalibNeedle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\CalibNeedle\FrmCalibNeedle.Designer.cs">
+      <DependentUpon>FrmCalibNeedle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\CalibNeedle\Tools_CalibNeedle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\CalibNeedle\Tools_CalibNeedle.Designer.cs">
+      <DependentUpon>Tools_CalibNeedle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureGlueWeight\Tools_MeasureGlueWeight.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\MeasureGlueWeight\Tools_MeasureGlueWeight.Designer.cs">
+      <DependentUpon>Tools_MeasureGlueWeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\Tools_PathProgram.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\Tools_PathProgram.Designer.cs">
+      <DependentUpon>Tools_PathProgram.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\UC_MotionControl_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_MotionControl\UC_MotionControl_Tools.Designer.cs">
+      <DependentUpon>UC_MotionControl_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\DelayTime\DelayTimeClass.cs" />
+    <Compile Include="Tools_Other\DelayTime\Tools_DelayTime.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\DelayTime\Tools_DelayTime.Designer.cs">
+      <DependentUpon>Tools_DelayTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\LogicOperation\FrmLogicOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\LogicOperation\FrmLogicOperation.Designer.cs">
+      <DependentUpon>FrmLogicOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\LogicOperation\LogicOperationClass.cs" />
+    <Compile Include="Tools_Other\LogicOperation\Tools_Logic_Operation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\LogicOperation\Tools_Logic_Operation.Designer.cs">
+      <DependentUpon>Tools_Logic_Operation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\Script\FrmScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\Script\FrmScript.Designer.cs">
+      <DependentUpon>FrmScript.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\Script\ScriptClass.cs" />
+    <Compile Include="Tools_Other\Script\Tools_Script.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\Script\Tools_Script.Designer.cs">
+      <DependentUpon>Tools_Script.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmEditVars.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmEditVars.Designer.cs">
+      <DependentUpon>FrmEditVars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\Tools_VarSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\Tools_VarSet.Designer.cs">
+      <DependentUpon>Tools_VarSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\UC_Other_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\UC_Other_Tools.Designer.cs">
+      <DependentUpon>UC_Other_Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\VarSetClass.cs" />
+    <Compile Include="FlowChart\UC_FlowChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FlowChart\UC_FlowChart.Designer.cs">
+      <DependentUpon>UC_FlowChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\AxisStateAndMotion\UC_AxisPositionState.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\AxisStateAndMotion\UC_AxisPositionState.Designer.cs">
+      <DependentUpon>UC_AxisPositionState.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowChart\LineClass\SecondLine.cs" />
+    <Compile Include="FlowChart\LineClass\StartLine.cs" />
+    <Compile Include="FlowChart\LineClass\LineParent.cs" />
+    <Compile Include="FlowChart\LineClass\ThirdLine.cs" />
+    <Compile Include="FlowChart\LineClass\ChartLine.cs" />
+    <Compile Include="FlowChart\ArrowClass\ArrowClass.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\CutCommand.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\DelCommand.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\EditCommand.cs" />
+    <Compile Include="MyStyleControl\ButtonM.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyStyleControl\ButtonM.Designer.cs">
+      <DependentUpon>ButtonM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyStyleControl\FormM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MyStyleControl\FormM.Designer.cs">
+      <DependentUpon>FormM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowChart\FrmRenameBlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FlowChart\FrmRenameBlock.Designer.cs">
+      <DependentUpon>FrmRenameBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FlowChart\BlockClass\ThreadEndBlock.cs" />
+    <Compile Include="FlowChart\BlockClass\ThreadStartBlock.cs" />
+    <Compile Include="FlowChart\BlockClass\StartBlock.cs" />
+    <Compile Include="FlowChart\Element.cs" />
+    <Compile Include="FlowChart\FlowChartCommand.cs" />
+    <Compile Include="FlowChart\BlockClass\IfElseBlock.cs" />
+    <Compile Include="FlowChart\BlockClass\NormalBlock.cs" />
+    <Compile Include="FlowChart\BlockClass\SwitchBlock.cs" />
+    <Compile Include="FlowChart\CanvaClass.cs" />
+    <Compile Include="FrmList\FrmEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmList\FrmEdit.Designer.cs">
+      <DependentUpon>FrmEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\InsertCommand.cs" />
+    <Compile Include="MotionCardClass\GTSMC\GTSClass.cs" />
+    <Compile Include="MotionCardClass\GTSMC\gts.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\MoveDownCommand.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\MoveUpCommand.cs" />
+    <Compile Include="Tools_Other\VarSet\FrmAddEditVar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmAddEditVar.Designer.cs">
+      <DependentUpon>FrmAddEditVar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmVarList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmVarList.Designer.cs">
+      <DependentUpon>FrmVarList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmVarSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_Other\VarSet\FrmVarSet.Designer.cs">
+      <DependentUpon>FrmVarSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\PastCommand.cs" />
+    <Compile Include="MotionCardClass\ZMC\Zmcaux.cs" />
+    <Compile Include="MotionCardClass\ZMC\ZMClass.cs" />
+    <Compile Include="WindowControl\WindowControlClass.cs" />
+    <Compile Include="MotionCardClass\IMotionCard.cs" />
+    <Compile Include="AboutData\LocalParamClass.cs" />
+    <Compile Include="AboutData\MyDataBindingsClass.cs" />
+    <Compile Include="接口\IEvent.cs" />
+    <Compile Include="接口\ITools.cs" />
+    <Compile Include="AboutData\ProjectParamClass.cs" />
+    <Compile Include="相机\MvCamera.cs" />
+    <Compile Include="Tools_Image_IO\AcqImage\Tools_AcqImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AcqImage\Tools_AcqImage.Designer.cs">
+      <DependentUpon>Tools_AcqImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AcqImage\AcqImageClass.cs" />
+    <Compile Include="Tools_Image_IO\AcqSet\Tools_AcqSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AcqSet\Tools_AcqSet.Designer.cs">
+      <DependentUpon>Tools_AcqSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\AcqSet\AcqSetClass.cs" />
+    <Compile Include="相机\BaslerCamera.cs" />
+    <Compile Include="相机\CameraFactory.cs" />
+    <Compile Include="接口\ICameraable.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\Deque.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\Command.cs" />
+    <Compile Include="Tools_MotionControl\ProgramDispensePath\CommandClass\CommandPool.cs" />
+    <Compile Include="静态类\CommonClass.cs" />
+    <Compile Include="Tools_Image_IO\ExportImage\ExportImageClass.cs" />
+    <Compile Include="相机\FrmConfigCamera.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="相机\FrmConfigCamera.Designer.cs">
+      <DependentUpon>FrmConfigCamera.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\IOSet\FrmIOSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\IOSet\FrmIOSet.Designer.cs">
+      <DependentUpon>FrmIOSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\FrmAxisSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutMotionCard\ConfigMotionCard\FrmAxisSet.Designer.cs">
+      <DependentUpon>FrmAxisSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_Image_IO\CacheImage\ImageCacheClass.cs" />
+    <Compile Include="Tools_Image_IO\ImportImage\ImportImageClass.cs" />
+    <Compile Include="INI\INIClass.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\x86\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools_CommunControl\TCP\AnsyncTCPServer\AsyncSocketTCPServer.cs" />
+    <Compile Include="静态类\QueryDifferenceName.cs" />
+    <EmbeddedResource Include="AboutMotionCard\ConfigCardClass\FrmConfig\FrmConfigFileID.resx">
+      <DependentUpon>FrmConfigFileID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\ConfigCardClass\FrmConfig\FrmConfigIPAddress.resx">
+      <DependentUpon>FrmConfigIPAddress.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\ConfigMotionCard\IOSet\FrmAutoSetInput.resx">
+      <DependentUpon>FrmAutoSetInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\ConfigMotionCard\FrmLimitSet.resx">
+      <DependentUpon>FrmLimitSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList\FrmSystemSet.resx">
+      <DependentUpon>FrmSystemSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.en.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\Modbus\Tools_Modbus.resx">
+      <DependentUpon>Tools_Modbus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\PLC\Tools_PLC.resx">
+      <DependentUpon>Tools_PLC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\PLC\UC_PLCSet.resx">
+      <DependentUpon>UC_PLCSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\Serial\Tools_Serial.resx">
+      <DependentUpon>Tools_Serial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\Serial\UC_SerialSet.resx">
+      <DependentUpon>UC_SerialSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureHeight\CommunType\Serial\MeasureHeight_Serial.resx">
+      <DependentUpon>MeasureHeight_Serial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureHeight\FrmHeightIndicatorCalib.resx">
+      <DependentUpon>FrmHeightIndicatorCalib.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureHeight\FrmMeasureHeightSet.resx">
+      <DependentUpon>FrmMeasureHeightSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureHeight\CommunType\ADChannel\MeasureHeight_ADChannelRead.resx">
+      <DependentUpon>MeasureHeight_ADChannelRead.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureHeight\Tools_MeasureHeight.resx">
+      <DependentUpon>Tools_MeasureHeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureHeight\UC_Save.resx">
+      <DependentUpon>UC_Save.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\FrmSetCrossParam.resx">
+      <DependentUpon>FrmSetCrossParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\FrmSetRoadMapParam.resx">
+      <DependentUpon>FrmSetRoadMapParam.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\DisplayPath\RoadMap.resx">
+      <DependentUpon>RoadMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\FrmDispenseParamSet.resx">
+      <DependentUpon>FrmDispenseParamSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\FrmDispensePathSet.resx">
+      <DependentUpon>FrmDispensePathSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\FrmSelectCommand.resx">
+      <DependentUpon>FrmSelectCommand.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlowChart\FrmIfSwitchPort.resx">
+      <DependentUpon>FrmIfSwitchPort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\ConfigCardClass\FrmConfigMotionCard.resx">
+      <DependentUpon>FrmConfigMotionCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList\FrmConfigWindow.resx">
+      <DependentUpon>FrmConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyStyleControl\ButtonM.resx">
+      <DependentUpon>ButtonM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyStyleControl\ComboBoxCombinNumericUpDown.resx">
+      <DependentUpon>ComboBoxCombinNumericUpDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyStyleControl\FormM.resx">
+      <DependentUpon>FormM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList\FrmDebug.resx">
+      <DependentUpon>FrmDebug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList\FrmPrimary.resx">
+      <DependentUpon>FrmPrimary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList\FrmRun.resx">
+      <DependentUpon>FrmRun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_BarcodeRecognition\UC_Barcode_Tools.resx">
+      <DependentUpon>UC_Barcode_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\FrmConfigCommun.resx">
+      <DependentUpon>FrmConfigCommun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\ReadDI\Tools_Read_DI.resx">
+      <DependentUpon>Tools_Read_DI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\TCP\Tools_TCP_IP.resx">
+      <DependentUpon>Tools_TCP_IP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\TCP\UC_TCPSet.resx">
+      <DependentUpon>UC_TCPSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_CommunControl\UC_Commun_Tools.resx">
+      <DependentUpon>UC_Commun_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\UC_Image_Enhancement_Tools.resx">
+      <DependentUpon>UC_Image_Enhancement_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AutoCalib\FrmCalib.resx">
+      <DependentUpon>FrmCalib.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AutoCalib\FrmNewCalib.resx">
+      <DependentUpon>FrmNewCalib.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AutoCalib\Tools_AutoCalib.resx">
+      <DependentUpon>Tools_AutoCalib.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AutoCalib\UC_Calib_ImageSet.resx">
+      <DependentUpon>UC_Calib_ImageSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AutoCalib\UC_Calib_MachineSet.resx">
+      <DependentUpon>UC_Calib_MachineSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\CacheImage\Tools_CacheImage.resx">
+      <DependentUpon>Tools_CacheImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\ExportImage\Tools_ExportImage.resx">
+      <DependentUpon>Tools_ExportImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\ImportImage\Tools_ImportImage.resx">
+      <DependentUpon>Tools_ImportImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\UC_Image_IO_Tools.resx">
+      <DependentUpon>UC_Image_IO_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\CalibROI\Tools_CalibROI.resx">
+      <DependentUpon>Tools_CalibROI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\ContourMatching\FrmContourMathing.resx">
+      <DependentUpon>FrmContourMathing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\ContourMatching\FrmEditTemplate.resx">
+      <DependentUpon>FrmEditTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\ContourMatching\Tools_ContourMatching.resx">
+      <DependentUpon>Tools_ContourMatching.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\CreateROI\FrmCreateROI.resx">
+      <DependentUpon>FrmCreateROI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\CreateROI\Tools_CreateROI.resx">
+      <DependentUpon>Tools_CreateROI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\FindLine\FrmFindLine.resx">
+      <DependentUpon>FrmFindLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\FindLine\Tools_FindLine.resx">
+      <DependentUpon>Tools_FindLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Location\UC_Location_Tools.resx">
+      <DependentUpon>UC_Location_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Measure\GeometricalRelation\Tools_GeometricalRelation.resx">
+      <DependentUpon>Tools_GeometricalRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Measure\UC_Measure_Tools.resx">
+      <DependentUpon>UC_Measure_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\CalibNeedle\FrmCalibNeedle.resx">
+      <DependentUpon>FrmCalibNeedle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\CalibNeedle\Tools_CalibNeedle.resx">
+      <DependentUpon>Tools_CalibNeedle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\MeasureGlueWeight\Tools_MeasureGlueWeight.resx">
+      <DependentUpon>Tools_MeasureGlueWeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\ProgramDispensePath\Tools_PathProgram.resx">
+      <DependentUpon>Tools_PathProgram.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_MotionControl\UC_MotionControl_Tools.resx">
+      <DependentUpon>UC_MotionControl_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\DelayTime\Tools_DelayTime.resx">
+      <DependentUpon>Tools_DelayTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\LogicOperation\FrmLogicOperation.resx">
+      <DependentUpon>FrmLogicOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\LogicOperation\Tools_Logic_Operation.resx">
+      <DependentUpon>Tools_Logic_Operation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\Script\FrmScript.resx">
+      <DependentUpon>FrmScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\Script\Tools_Script.resx">
+      <DependentUpon>Tools_Script.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\VarSet\FrmEditVars.resx">
+      <DependentUpon>FrmEditVars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\VarSet\Tools_VarSet.resx">
+      <DependentUpon>Tools_VarSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\UC_Other_Tools.resx">
+      <DependentUpon>UC_Other_Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlowChart\UC_FlowChart.resx">
+      <DependentUpon>UC_FlowChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\AxisStateAndMotion\UC_AxisPositionState.resx">
+      <DependentUpon>UC_AxisPositionState.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FlowChart\FrmRenameBlock.resx">
+      <DependentUpon>FrmRenameBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmList\FrmEdit.resx">
+      <DependentUpon>FrmEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\VarSet\FrmAddEditVar.resx">
+      <DependentUpon>FrmAddEditVar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\VarSet\FrmVarList.resx">
+      <DependentUpon>FrmVarList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Other\VarSet\FrmVarSet.resx">
+      <DependentUpon>FrmVarSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AcqImage\Tools_AcqImage.resx">
+      <DependentUpon>Tools_AcqImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_Image_IO\AcqSet\Tools_AcqSet.resx">
+      <DependentUpon>Tools_AcqSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="相机\FrmConfigCamera.resx">
+      <DependentUpon>FrmConfigCamera.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\ConfigMotionCard\IOSet\FrmIOSet.resx">
+      <DependentUpon>FrmIOSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AboutMotionCard\ConfigMotionCard\FrmAxisSet.resx">
+      <DependentUpon>FrmAxisSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="obj\x86\Debug\DispenseAPP.FrmMain.en.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\DispenseAPP.FrmMain.resources" />
+    <EmbeddedResource Include="obj\x86\Debug\DispenseAPP.Properties.Resources.resources" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="bin\Debug\DispenseAPP.exe.config" />
+    <None Include="bin\Debug\DispenseAPP.vshost.exe.config" />
+    <None Include="bin\Debug\DispenseAPP.vshost.exe.manifest" />
+    <None Include="bin\Debug\INIFiles\Dispense.ini" />
+    <None Include="bin\Debug\Language\en\Basic.json" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferences.cache" />
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\DispenseAPP.csproj.GenerateResource.Cache" />
+    <None Include="obj\x86\Debug\DispenseAPP.csprojResolveAssemblyReference.cache" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\DispenseAPP.Tools_Location.FindLine.FindLineClass.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationsFolder.ico" />
+    <Content Include="bin\Debug\DispenseAPP.exe" />
+    <Content Include="bin\Debug\DispenseAPP.pdb" />
+    <Content Include="bin\Debug\DispenseAPP.vshost.exe" />
+    <Content Include="bin\Debug\en\DispenseAPP.resources.dll" />
+    <Content Include="bin\Debug\Language\Chinese.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Debug\Language\DefaultLanguage.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Debug\Language\English.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\PhoneUI\1-HomeDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\1-HomeEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\10-Open ExcelDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\10-Open ExcelEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\11-Open ImageDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\11-Open ImageEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\12-User.png" />
+    <Content Include="bin\Debug\PhoneUI\12-UserDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\12-UserEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\2-SetingDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\2-SetingEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\3-VisionDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\3-VisionEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\4-AlarmDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\4-AlarmEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\5-DataDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\5-DataEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\7-StartDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\7-StartEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\8-PauseDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\8-PauseEnable.png" />
+    <Content Include="bin\Debug\PhoneUI\9-StopDisable.png" />
+    <Content Include="bin\Debug\PhoneUI\9-StopEnable.png" />
+    <Content Include="bin\Debug\Project\ProjectInfo.xml" />
+    <None Include="bin\Debug\PhoneUI\ConnectCamera.gif" />
+    <None Include="bin\Debug\PhoneUI\OpenImage.gif" />
+    <Content Include="bin\Debug\PhoneUI\SaveAlarmLog.png" />
+    <None Include="bin\Debug\PhoneUI\title_bar_max3.png" />
+    <None Include="bin\Debug\PhoneUI\title_bar_max4.png" />
+    <None Include="bin\Debug\PhoneUI\title_bar_max1.png" />
+    <None Include="bin\Debug\PhoneUI\title_bar_max2.png" />
+    <Content Include="bin\Debug\PhoneUI\圆形添加按钮.ico" />
+    <Content Include="obj\x86\Debug\DispenseAPP.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\DispenseAPP.exe" />
+    <Content Include="obj\x86\Debug\DispenseAPP.pdb" />
+    <Content Include="obj\x86\Debug\en\DispenseAPP.resources.dll" />
+    <Content Include="obj\x86\Debug\TempPE\Properties.Resources.Designer.cs.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
+    <Folder Include="obj\x86\Release\" />
+    <Folder Include="Tools_ImageDetectionAndAnalysis\" />
+    <Folder Include="Tools_MotionControl\MeasureHeight\CommunType\USB\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSScriptControl">
+      <Guid>{0E59F1D2-1FBE-11D0-8FF2-00A0D10038BC}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GDILibrary\GDILibrary.csproj">
+      <Project>{FB46C40E-AC7C-4F63-80A8-96A87CFAB97C}</Project>
+      <Name>GDILibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VisionLibrary\VisionLibrary.csproj">
+      <Project>{b8050937-b4ba-4274-b41e-268d33394cce}</Project>
+      <Name>VisionLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
