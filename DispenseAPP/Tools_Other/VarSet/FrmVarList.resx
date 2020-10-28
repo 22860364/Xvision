@@ -129,4 +129,33 @@
   <metadata name="ColRemark.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="toolStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="toolStripButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABgSURBVDhPtYzLDYAwDMUyBfuvwISgCEdtJRcuwZJP7xO/
+        cJxxmcR7bGRSX7Him8wGViosY/ZghbSwLGXefPDF3GXefDBbWJYybzhIrFBYxmxgpTeZrVjRpL7HRilx
+        JxE3KVxg0LhGidoAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButton2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACiSURBVDhPxZBBCsIwEEX/GdSIi16jlxYqjS7tuitX3qAU
+        XHkBVzpPJkXUReKifhhCknlvSDRr1lHbRaPKt2UBXkUdbT0VSWhOk4GXUedsSYJ88iQJOw3sve17XidS
+        b5IyeJK06n6GKc6599bP/A8m1jTyRj6rGDboutmrNkEfWh2SJAsm1ni3uiSJ/3YeTBD4xKfE1jEbJiHq
+        hoTiOX48R6QHqbeIu9joiaQAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="toolStripButton3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABoSURBVDhPtY3BCYBAEAOvCvtvwQr1k0BcJnofB0ICznqL
+        OM51zejTHvNg6wf52ld08oTEFp38AL02I5WhgxmpTErU3pWUqL0rKVF7V1Ki9q6kRO1dSYnau5IStXfF
+        0lukMnQwI1WsdQMRW73DS7JcGgAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

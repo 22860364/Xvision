@@ -2,7 +2,7 @@
 namespace DispenseAPP
 {
     [Serializable]
-    public class EndLine:LineParent
+    public class EndLine:LineBase
     {
     }
 }

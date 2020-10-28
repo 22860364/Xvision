@@ -42,12 +42,6 @@
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lbl_ProjectName
-            // 
-            this.lbl_ProjectName.Location = new System.Drawing.Point(3, 1);
-            this.lbl_ProjectName.Size = new System.Drawing.Size(65, 20);
-            this.lbl_ProjectName.Text = "流程控制";
-            // 
             // label1
             // 
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -103,8 +97,8 @@
             this.cmb_BlockName.Name = "cmb_BlockName";
             this.cmb_BlockName.Size = new System.Drawing.Size(197, 25);
             this.cmb_BlockName.TabIndex = 5;
-            this.cmb_BlockName.DropDown += new System.EventHandler(this.cmb_BlockName_DropDown);
-            this.cmb_BlockName.SelectedIndexChanged += new System.EventHandler(this.cmb_BlockName_SelectedIndexChanged);
+            this.cmb_BlockName.DropDown += new System.EventHandler(this.Cmb_BlockName_DropDown);
+            this.cmb_BlockName.SelectedIndexChanged += new System.EventHandler(this.Cmb_BlockName_SelectedIndexChanged);
             // 
             // cmb_MeasureValue
             // 
@@ -116,7 +110,7 @@
             this.cmb_MeasureValue.Name = "cmb_MeasureValue";
             this.cmb_MeasureValue.Size = new System.Drawing.Size(197, 25);
             this.cmb_MeasureValue.TabIndex = 6;
-            this.cmb_MeasureValue.DropDown += new System.EventHandler(this.cmb_MeasureValue_DropDown);
+            this.cmb_MeasureValue.DropDown += new System.EventHandler(this.Cmb_MeasureValue_DropDown);
             // 
             // label4
             // 
@@ -176,7 +170,7 @@
             this.btn_Ok.TabIndex = 11;
             this.btn_Ok.Text = "确定";
             this.btn_Ok.UseVisualStyleBackColor = true;
-            this.btn_Ok.Click += new System.EventHandler(this.btn_Ok_Click);
+            this.btn_Ok.Click += new System.EventHandler(this.Btn_Ok_Click);
             // 
             // btn_Cancel
             // 
@@ -188,7 +182,7 @@
             this.btn_Cancel.TabIndex = 12;
             this.btn_Cancel.Text = "取消";
             this.btn_Cancel.UseVisualStyleBackColor = true;
-            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            this.btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
             // FrmIfSwitchPort
             // 
@@ -207,10 +201,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmb_MeasureValue);
-            this.MaxVisible = false;
             this.Name = "FrmIfSwitchPort";
             this.Text = "流程控制";
-            this.TitleVisiable = false;
             this.Controls.SetChildIndex(this.cmb_MeasureValue, 0);
             this.Controls.SetChildIndex(this.label1, 0);
             this.Controls.SetChildIndex(this.label2, 0);

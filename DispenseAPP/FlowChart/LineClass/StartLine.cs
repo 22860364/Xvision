@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DispenseAPP
 {
     [Serializable]
-    public class StartLine:LineParent 
+    public class StartLine:LineBase 
     {
 
     }

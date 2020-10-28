@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Lb_BlockName = new System.Windows.Forms.ListBox();
             this.Btn_Cancel = new System.Windows.Forms.Button();
             this.Btn_OK = new System.Windows.Forms.Button();
@@ -66,14 +66,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.DG_Name_Value)).BeginInit();
             this.SuspendLayout();
             // 
-            // lbl_ProjectName
+            // lbl_Title
             // 
-            this.lbl_ProjectName.Location = new System.Drawing.Point(3, 1);
-            this.lbl_ProjectName.Size = new System.Drawing.Size(65, 20);
-            this.lbl_ProjectName.Text = "逻辑运算";
+            this.lbl_Title.Size = new System.Drawing.Size(65, 20);
+            this.lbl_Title.Text = "逻辑运算";
             // 
             // Lb_BlockName
             // 
+            this.Lb_BlockName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
             this.Lb_BlockName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Lb_BlockName.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Lb_BlockName.FormattingEnabled = true;
@@ -113,6 +113,7 @@
             // 
             // Txt_Code
             // 
+            this.Txt_Code.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
             this.Txt_Code.Location = new System.Drawing.Point(1, 30);
             this.Txt_Code.Multiline = true;
             this.Txt_Code.Name = "Txt_Code";
@@ -121,7 +122,9 @@
             // 
             // txt_Result
             // 
-            this.txt_Result.Location = new System.Drawing.Point(1, 328);
+            this.txt_Result.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.txt_Result.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_Result.Location = new System.Drawing.Point(2, 328);
             this.txt_Result.Multiline = true;
             this.txt_Result.Name = "txt_Result";
             this.txt_Result.ReadOnly = true;
@@ -504,15 +507,15 @@
             this.DG_Name_Value.AllowUserToResizeColumns = false;
             this.DG_Name_Value.AllowUserToResizeRows = false;
             this.DG_Name_Value.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.DG_Name_Value.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DG_Name_Value.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.DG_Name_Value.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DG_Name_Value.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.DG_Name_Value.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DG_Name_Value.Location = new System.Drawing.Point(466, 227);
             this.DG_Name_Value.Name = "DG_Name_Value";
@@ -563,10 +566,8 @@
             this.Controls.Add(this.Btn_OK);
             this.Controls.Add(this.Lb_BlockName);
             this.Controls.Add(this.DG_Name_Value);
-            this.MaxVisible = false;
             this.Name = "FrmLogicOperation";
             this.Text = "逻辑运算";
-            this.TitleVisiable = false;
             this.Load += new System.EventHandler(this.FrmLogicOperation_Load);
             this.Controls.SetChildIndex(this.DG_Name_Value, 0);
             this.Controls.SetChildIndex(this.Lb_BlockName, 0);

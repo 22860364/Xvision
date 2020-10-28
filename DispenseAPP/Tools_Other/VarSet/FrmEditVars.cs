@@ -1,10 +1,9 @@
 ﻿using DispenseAPP.CustomControl;
 using System;
-using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using DataGridViewNumericUpDownElements;
 using DispenseAPP.AboutData;
+using static DispenseAPP.CommonClass;
 
 namespace DispenseAPP.Tools_Other.VarSet
 {
@@ -61,54 +60,34 @@ namespace DispenseAPP.Tools_Other.VarSet
             switch (type)
             {
                 case "N[]":
-                    DataGridViewNumericUpDownColumn numCol = new DataGridViewNumericUpDownColumn();
-                    numCol.HeaderText = "数值";
-                    numCol.DecimalPlaces = 8;
-                    numCol.Maximum = 100000000;
-                    numCol.Minimum = -100000000;
-                    numCol.Increment = 1;
-                    DG_EditVars.Columns.Add(numCol);
                     break;
                 case "S[]":
-                    DataGridViewTextBoxColumn textCol = new DataGridViewTextBoxColumn();
-                    textCol.HeaderText = "字符串";
+                    DataGridViewTextBoxColumn textCol = new DataGridViewTextBoxColumn
+                    {
+                        HeaderText = "字符串"
+                    };
                     DG_EditVars.Columns.Add(textCol);
                     break;
                 case "B[]":
-                    DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
-                    checkBoxColumn.HeaderText = "布尔值";
-                    checkBoxColumn.TrueValue = true;
-                    checkBoxColumn.FalseValue = false;
+                    DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn
+                    {
+                        HeaderText = "布尔值",
+                        TrueValue = true,
+                        FalseValue = false
+                    };
                     DG_EditVars.Columns.Add(checkBoxColumn);
                     break;
                 case "P[]":
-                    DataGridViewNumericUpDownColumn numColX = new DataGridViewNumericUpDownColumn
-                    {
-                        HeaderText = "X",
-                        DecimalPlaces = 4,
-                        Minimum = -100000,
-                        Maximum = 100000
-                    };
-                    DG_EditVars.Columns.Add(numColX);
-                    DataGridViewNumericUpDownColumn numColY = new DataGridViewNumericUpDownColumn
-                    {
-                        HeaderText = "Y",
-                        DecimalPlaces = 4,
-                        Minimum = -100000,
-                        Maximum = 100000
-                    };
-                    DG_EditVars.Columns.Add(numColY);
                     break;
             }
         }
 
         private void DG_EditVars_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)//执行绘制行时触发
         {
-            Rectangle rct = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, DG_EditVars.RowHeadersWidth - 4, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex).ToString(), DG_EditVars.RowHeadersDefaultCellStyle.Font, rct, DG_EditVars.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter);
+            Draw_DGV_LineNumber(sender, e);
         }
 
-        private void num_ArraySize_ValueChanged(object sender, EventArgs e)//当数组的大小发生改变时
+        private void Num_ArraySize_ValueChanged(object sender, EventArgs e)//当数组的大小发生改变时
         {
             int deleteRowCount = Math.Abs(DG_EditVars.Rows.Count - (int)num_ArraySize.Value);
             if (num_ArraySize.Value > DG_EditVars.Rows.Count)
@@ -135,7 +114,7 @@ namespace DispenseAPP.Tools_Other.VarSet
             }
         }
 
-        private void btn_OK_Click(object sender, EventArgs e)//点击确定按钮 将数组的所有值传回去
+        private void Btn_OK_Click(object sender, EventArgs e)//点击确定按钮 将数组的所有值传回去
         {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < DG_EditVars.Rows.Count; i++)//再遍历行
@@ -198,7 +177,7 @@ namespace DispenseAPP.Tools_Other.VarSet
             Close();
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }

@@ -17,7 +17,7 @@ namespace DispenseAPP.Tools_ImageEnhancement
             InitializeComponent();
         }
 
-        private void UC_Image_Enhancement_Tools_Load(object sender, EventArgs e)
+        private void Lbl_RotateShiftImage_Click(object sender, EventArgs e)//旋转平移图像
         {
 
         }

@@ -63,9 +63,9 @@ namespace DispenseAPP.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap title_bar_max1 {
+        internal static System.Drawing.Bitmap 上箭头 {
             get {
-                object obj = ResourceManager.GetObject("title_bar_max1", resourceCulture);
+                object obj = ResourceManager.GetObject("上箭头", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace DispenseAPP.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap title_bar_max2 {
+        internal static System.Drawing.Bitmap 下 {
             get {
-                object obj = ResourceManager.GetObject("title_bar_max2", resourceCulture);
+                object obj = ResourceManager.GetObject("下", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace DispenseAPP.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap title_bar_max3 {
+        internal static System.Drawing.Bitmap 反馈 {
             get {
-                object obj = ResourceManager.GetObject("title_bar_max3", resourceCulture);
+                object obj = ResourceManager.GetObject("反馈", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,89 @@ namespace DispenseAPP.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap title_bar_max4 {
+        internal static System.Drawing.Bitmap 右箭头 {
             get {
-                object obj = ResourceManager.GetObject("title_bar_max4", resourceCulture);
+                object obj = ResourceManager.GetObject("右箭头", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 启用 {
+            get {
+                object obj = ResourceManager.GetObject("启用", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 左箭头 {
+            get {
+                object obj = ResourceManager.GetObject("左箭头", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 帮_助 {
+            get {
+                object obj = ResourceManager.GetObject("帮_助", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 最大化 {
+            get {
+                object obj = ResourceManager.GetObject("最大化", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 最小化 {
+            get {
+                object obj = ResourceManager.GetObject("最小化", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 禁用 {
+            get {
+                object obj = ResourceManager.GetObject("禁用", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 逆时针 {
+            get {
+                object obj = ResourceManager.GetObject("逆时针", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap 顺时针 {
+            get {
+                object obj = ResourceManager.GetObject("顺时针", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

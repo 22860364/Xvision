@@ -10,6 +10,9 @@ namespace DispenseAPP.CustomControl
         public FormM()
         {
             InitializeComponent();
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.StandardDoubleClick, true);
         }
 
         public enum FormSize
@@ -18,21 +21,101 @@ namespace DispenseAPP.CustomControl
             Max = 1,//最大化
         };
 
-         private bool maxVisible = true;
-         [Description("是否允许最大化")]
-         public bool MaxVisible
-         {
-             get { return maxVisible; }
-             set
-             {
-                 maxVisible = value;
-                 if (!maxVisible)                                 
-                 {
-                    btnM_Max.Enabled = false;
-                 }
-             }
+        private bool closeVisible = true;
+        [Description("是否允许使用关闭按钮")]
+        public bool CloseVisible
+        {
+            get
+            {
+                return closeVisible;
+            }
+            set
+            {
+                closeVisible = value;
+                Lbl_Close.Visible = value;
+            }
         }
 
+        #region 关闭按钮
+        private void Lbl_Close_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void Lbl_Close_MouseEnter(object sender, EventArgs e)
+        {
+            Lbl_Close.BackColor = Color.FromArgb(255, 0, 0);
+        }
+
+        private void Lbl_Close_MouseLeave(object sender, EventArgs e)
+        {
+            Lbl_Close.BackColor = Color.Transparent;
+        }
+        #endregion
+
+        #region Lable图片和颜色
+        private Color titleForeColor = Color.Black;
+        [Description("窗体文本的文字颜色")]
+        public Color TitleForeColor
+        {
+            get
+            {
+                return titleForeColor;
+            }
+            set
+            {
+                titleForeColor = value;
+                lbl_Title.ForeColor = value;
+            }
+        }
+
+
+        private Image titleImage = null;
+        [Description("窗体图标")]
+        public Image TitleImage
+        {
+            get
+            {
+                return titleImage;
+            }
+            set
+            {
+                titleImage = value;
+                lbl_Title.Image = value;
+            }
+        }
+
+        private Color titleColor = Color.White;
+        [Description("窗体文本的背景颜色")]
+        public Color TitleColor
+        {
+            get
+            {
+                return titleColor;
+            }
+            set
+            {
+                titleColor = value;
+                lbl_Title.BackColor = value;
+            }
+        }
+        
+        #endregion
+
+        private Color myBackColor = SystemColors.Control;
+        [Description("窗体顶部颜色")]
+        public Color MyBackColor
+        {
+            get
+            {
+                return myBackColor;
+            }
+            set
+            {
+                myBackColor = value;
+                panel_Title.BackColor = myBackColor;
+            }
+        }      
 
         private string _titleText;
         [Description("窗体标题")]
@@ -42,49 +125,7 @@ namespace DispenseAPP.CustomControl
             set
             {
                 _titleText = value;
-                lbl_ProjectName.Text = _titleText;
-            }
-        }
-
-        private bool _titleVisiable = true;
-        [Description("窗体标题是否显示")]
-        public bool TitleVisiable
-        {
-            get { return _titleVisiable; }
-            set
-            {
-                _titleVisiable = value;
-                if(!_titleVisiable)
-                {
-                    lbl_Title.Visible = false;
-                    lbl_ProjectName.Location = new Point(3, 1);
-                }
-                else
-                {
-                    lbl_Title.Visible = true;
-                    lbl_ProjectName.Location = new Point(115, 1);
-                }
-            }
-        }
-
-        private FormSize _defaultFormSize = FormSize.Normal;
-        [Description("窗口默认大小")]
-        public FormSize DefaultFormSize
-        {
-            get { return _defaultFormSize; }
-            set
-            {
-                _defaultFormSize = value;
-                if (_defaultFormSize == FormSize.Max)
-                {
-                    //防止遮挡任务栏
-                    this.MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);//调整窗体可调整到的最大大小
-                    this.WindowState = FormWindowState.Maximized;
-                    //重置最大化图标
-                    this.btnM_Max.ImageDefault = Properties.Resources.title_bar_max3;
-                    this.btnM_Max.ImageLeave = Properties.Resources.title_bar_max3;
-                    this.btnM_Max.ImageMove = Properties.Resources.title_bar_max4;
-                }
+                lbl_Title.Text = _titleText;
             }
         }
 
@@ -96,7 +137,7 @@ namespace DispenseAPP.CustomControl
         /// <summary>
         /// 当鼠标指针在组件上方并按下鼠标按钮时发生
         /// </summary>
-        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        private void Panel1_MouseDown(object sender, MouseEventArgs e)
         {
             _downPoint = new Point(e.X, e.Y);
         }
@@ -104,11 +145,11 @@ namespace DispenseAPP.CustomControl
         /// <summary>
         /// 鼠标指针移过组件时发生
         /// </summary>
-        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        private void Panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
-                Location = new Point(this.Location.X + e.X - _downPoint.X, this.Location.Y + e.Y - _downPoint.Y);
+                Location = new Point(Location.X + e.X - _downPoint.X, Location.Y + e.Y - _downPoint.Y);
             }
         }
 
@@ -121,7 +162,7 @@ namespace DispenseAPP.CustomControl
         const int Guying_HTBOTTOMLEFT = 0x10;
         const int Guying_HTBOTTOMRIGHT = 17;
 
-        protected override void WndProc(ref Message m)
+        protected override void WndProc(ref System.Windows.Forms.Message m)
         {
             switch (m.Msg)
             {
@@ -151,47 +192,6 @@ namespace DispenseAPP.CustomControl
                     base.WndProc(ref m);
                     break;
             }
-        }
-
-        /// <summary>
-        /// 最小化事件
-        /// </summary>
-        private void BtnM_Min_ButtonClick(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-
-        /// <summary>
-        /// 最大化事件
-        /// </summary>
-        private void btnM_Max_ButtonClick(object sender, EventArgs e)
-        {
-            if (WindowState == FormWindowState.Maximized)//如果当前是最大化
-            {
-                WindowState = FormWindowState.Normal;
-                //重置最大化图标
-                btnM_Max.ImageDefault = Properties.Resources.title_bar_max1;
-                btnM_Max.ImageLeave = Properties.Resources.title_bar_max1;
-                btnM_Max.ImageMove = Properties.Resources.title_bar_max2;
-            }
-            else
-            {
-                //防止遮挡任务栏
-                MaximumSize = new Size(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height);
-                WindowState = FormWindowState.Maximized;
-                //重置最大化图标
-                btnM_Max.ImageDefault = Properties.Resources.title_bar_max3;
-                btnM_Max.ImageLeave = Properties.Resources.title_bar_max3;
-                btnM_Max.ImageMove = Properties.Resources.title_bar_max4;
-            }
-        }
-
-        /// <summary>
-        /// 关闭事件
-        /// </summary>
-        private void btnM_Close_ButtonClick(object sender, EventArgs e)
-        {
-            Close();
         }
     }
 }

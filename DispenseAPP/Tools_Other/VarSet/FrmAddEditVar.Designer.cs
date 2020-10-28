@@ -32,18 +32,17 @@
             this.lbl_Type = new System.Windows.Forms.Label();
             this.lbl_Value = new System.Windows.Forms.Label();
             this.lbl_Remark = new System.Windows.Forms.Label();
-            this.txt_Name = new System.Windows.Forms.TextBox();
+            this.Txt_Name = new System.Windows.Forms.TextBox();
             this.cmb_Type = new System.Windows.Forms.ComboBox();
             this.txt_Remark = new System.Windows.Forms.TextBox();
-            this.btn_Cancel = new System.Windows.Forms.Button();
-            this.btn_OK = new System.Windows.Forms.Button();
+            this.Btn_Cancel = new System.Windows.Forms.Button();
+            this.Btn_OK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lbl_ProjectName
+            // lbl_Title
             // 
-            this.lbl_ProjectName.Location = new System.Drawing.Point(3, 1);
-            this.lbl_ProjectName.Size = new System.Drawing.Size(74, 21);
-            this.lbl_ProjectName.Text = "增加变量";
+            this.lbl_Title.Size = new System.Drawing.Size(65, 20);
+            this.lbl_Title.Text = "增加变量";
             // 
             // lbl_Name
             // 
@@ -89,15 +88,15 @@
             this.lbl_Remark.Text = "备注";
             this.lbl_Remark.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txt_Name
+            // Txt_Name
             // 
-            this.txt_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_Name.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_Name.Location = new System.Drawing.Point(83, 32);
-            this.txt_Name.Multiline = true;
-            this.txt_Name.Name = "txt_Name";
-            this.txt_Name.Size = new System.Drawing.Size(208, 26);
-            this.txt_Name.TabIndex = 4;
+            this.Txt_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Txt_Name.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Txt_Name.Location = new System.Drawing.Point(83, 32);
+            this.Txt_Name.Multiline = true;
+            this.Txt_Name.Name = "Txt_Name";
+            this.Txt_Name.Size = new System.Drawing.Size(208, 26);
+            this.Txt_Name.TabIndex = 4;
             // 
             // cmb_Type
             // 
@@ -118,7 +117,7 @@
             this.cmb_Type.Name = "cmb_Type";
             this.cmb_Type.Size = new System.Drawing.Size(74, 25);
             this.cmb_Type.TabIndex = 5;
-            this.cmb_Type.SelectedIndexChanged += new System.EventHandler(this.cmb_Type_SelectedIndexChanged);
+            this.cmb_Type.SelectedIndexChanged += new System.EventHandler(this.Cmb_Type_SelectedIndexChanged);
             // 
             // txt_Remark
             // 
@@ -130,57 +129,55 @@
             this.txt_Remark.Size = new System.Drawing.Size(208, 26);
             this.txt_Remark.TabIndex = 6;
             // 
-            // btn_Cancel
+            // Btn_Cancel
             // 
-            this.btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Cancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Cancel.Location = new System.Drawing.Point(228, 211);
-            this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(77, 29);
-            this.btn_Cancel.TabIndex = 43;
-            this.btn_Cancel.Text = "取消";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
-            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            this.Btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Cancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_Cancel.Location = new System.Drawing.Point(214, 211);
+            this.Btn_Cancel.Name = "Btn_Cancel";
+            this.Btn_Cancel.Size = new System.Drawing.Size(77, 29);
+            this.Btn_Cancel.TabIndex = 43;
+            this.Btn_Cancel.Text = "取消";
+            this.Btn_Cancel.UseVisualStyleBackColor = true;
+            this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
-            // btn_OK
+            // Btn_OK
             // 
-            this.btn_OK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_OK.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_OK.Location = new System.Drawing.Point(97, 211);
-            this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(77, 29);
-            this.btn_OK.TabIndex = 42;
-            this.btn_OK.Text = "确定";
-            this.btn_OK.UseVisualStyleBackColor = true;
-            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
+            this.Btn_OK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_OK.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_OK.Location = new System.Drawing.Point(83, 211);
+            this.Btn_OK.Name = "Btn_OK";
+            this.Btn_OK.Size = new System.Drawing.Size(77, 29);
+            this.Btn_OK.TabIndex = 42;
+            this.Btn_OK.Text = "确定";
+            this.Btn_OK.UseVisualStyleBackColor = true;
+            this.Btn_OK.Click += new System.EventHandler(this.Btn_OK_Click);
             // 
             // FrmAddEditVar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(335, 249);
-            this.Controls.Add(this.btn_Cancel);
-            this.Controls.Add(this.btn_OK);
+            this.ClientSize = new System.Drawing.Size(324, 249);
+            this.Controls.Add(this.Btn_Cancel);
+            this.Controls.Add(this.Btn_OK);
             this.Controls.Add(this.txt_Remark);
-            this.Controls.Add(this.txt_Name);
+            this.Controls.Add(this.Txt_Name);
             this.Controls.Add(this.lbl_Remark);
             this.Controls.Add(this.lbl_Value);
             this.Controls.Add(this.lbl_Type);
             this.Controls.Add(this.lbl_Name);
             this.Controls.Add(this.cmb_Type);
-            this.MaxVisible = false;
             this.Name = "FrmAddEditVar";
             this.Text = "增加变量";
-            this.TitleVisiable = false;
             this.Controls.SetChildIndex(this.cmb_Type, 0);
             this.Controls.SetChildIndex(this.lbl_Name, 0);
             this.Controls.SetChildIndex(this.lbl_Type, 0);
             this.Controls.SetChildIndex(this.lbl_Value, 0);
             this.Controls.SetChildIndex(this.lbl_Remark, 0);
-            this.Controls.SetChildIndex(this.txt_Name, 0);
+            this.Controls.SetChildIndex(this.Txt_Name, 0);
             this.Controls.SetChildIndex(this.txt_Remark, 0);
-            this.Controls.SetChildIndex(this.btn_OK, 0);
-            this.Controls.SetChildIndex(this.btn_Cancel, 0);
+            this.Controls.SetChildIndex(this.Btn_OK, 0);
+            this.Controls.SetChildIndex(this.Btn_Cancel, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,10 +188,10 @@
         private System.Windows.Forms.Label lbl_Type;
         private System.Windows.Forms.Label lbl_Value;
         private System.Windows.Forms.Label lbl_Remark;
-        private System.Windows.Forms.TextBox txt_Name;
+        private System.Windows.Forms.TextBox Txt_Name;
         private System.Windows.Forms.ComboBox cmb_Type;
         private System.Windows.Forms.TextBox txt_Remark;
-        private System.Windows.Forms.Button btn_Cancel;
-        private System.Windows.Forms.Button btn_OK;
+        private System.Windows.Forms.Button Btn_Cancel;
+        private System.Windows.Forms.Button Btn_OK;
     }
 }

@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UC_FlowChart));
-            this.PictureBox_FlowChart = new System.Windows.Forms.PictureBox();
+            this.picFlowChart = new System.Windows.Forms.PictureBox();
             this.CM_Add = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_创建普通算子块 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_创建单条件算子块 = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,38 +42,35 @@
             this.tsmi_删除算子 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_添加连接端口 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_删除连接端口 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_设为开始算子 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_设为运行一次 = new System.Windows.Forms.ToolStripMenuItem();
             this.CM_Selected = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_复制 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_粘贴 = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmi_删除所有 = new System.Windows.Forms.ToolStripMenuItem();
             this.CM_Delete = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_删除直线 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Panle_FlowChart = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_FlowChart)).BeginInit();
+            this.Panel_FlowChart = new DispenseAPP.MyStyleControl.TestPanel();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlowChart)).BeginInit();
             this.CM_Add.SuspendLayout();
             this.CM_Set.SuspendLayout();
             this.CM_Selected.SuspendLayout();
             this.CM_Delete.SuspendLayout();
-            this.Panle_FlowChart.SuspendLayout();
+            this.Panel_FlowChart.SuspendLayout();
             this.SuspendLayout();
             // 
-            // PictureBox_FlowChart
+            // picFlowChart
             // 
-            this.PictureBox_FlowChart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PictureBox_FlowChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBox_FlowChart.Location = new System.Drawing.Point(0, 0);
-            this.PictureBox_FlowChart.Name = "PictureBox_FlowChart";
-            this.PictureBox_FlowChart.Size = new System.Drawing.Size(882, 681);
-            this.PictureBox_FlowChart.TabIndex = 1;
-            this.PictureBox_FlowChart.TabStop = false;
-            this.PictureBox_FlowChart.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_FlowChart_Paint);
-            this.PictureBox_FlowChart.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseDoubleClick);
-            this.PictureBox_FlowChart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseDown);
-            this.PictureBox_FlowChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseMove);
-            this.PictureBox_FlowChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseUp);
-            this.PictureBox_FlowChart.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.PictureBox_FlowChart_PreviewKeyDown);
+            this.picFlowChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picFlowChart.Location = new System.Drawing.Point(0, 0);
+            this.picFlowChart.Name = "picFlowChart";
+            this.picFlowChart.Size = new System.Drawing.Size(882, 681);
+            this.picFlowChart.TabIndex = 1;
+            this.picFlowChart.TabStop = false;
+            this.picFlowChart.Paint += new System.Windows.Forms.PaintEventHandler(this.PictureBox_FlowChart_Paint);
+            this.picFlowChart.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseDoubleClick);
+            this.picFlowChart.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseDown);
+            this.picFlowChart.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseMove);
+            this.picFlowChart.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PictureBox_FlowChart_MouseUp);
+            this.picFlowChart.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.PictureBox_FlowChart_PreviewKeyDown);
             // 
             // CM_Add
             // 
@@ -86,7 +83,7 @@
             this.tsmi_创建线程开始算子块,
             this.tsmi_创建线程结束算子块});
             this.CM_Add.Name = "CM_FlowChart";
-            this.CM_Add.Size = new System.Drawing.Size(205, 146);
+            this.CM_Add.Size = new System.Drawing.Size(205, 124);
             // 
             // tsmi_创建普通算子块
             // 
@@ -131,11 +128,9 @@
             this.tsmi_设置名称,
             this.tsmi_删除算子,
             this.tsmi_添加连接端口,
-            this.tsmi_删除连接端口,
-            this.tsmi_设为开始算子,
-            this.tsmi_设为运行一次});
+            this.tsmi_删除连接端口});
             this.CM_Set.Name = "CM_Set";
-            this.CM_Set.Size = new System.Drawing.Size(163, 148);
+            this.CM_Set.Size = new System.Drawing.Size(163, 100);
             // 
             // tsmi_设置名称
             // 
@@ -168,22 +163,6 @@
             this.tsmi_删除连接端口.Size = new System.Drawing.Size(162, 24);
             this.tsmi_删除连接端口.Text = "删除连接端口";
             this.tsmi_删除连接端口.Click += new System.EventHandler(this.删除连接端口ToolStripMenuItem_Click);
-            // 
-            // tsmi_设为开始算子
-            // 
-            this.tsmi_设为开始算子.Image = ((System.Drawing.Image)(resources.GetObject("tsmi_设为开始算子.Image")));
-            this.tsmi_设为开始算子.Name = "tsmi_设为开始算子";
-            this.tsmi_设为开始算子.Size = new System.Drawing.Size(162, 24);
-            this.tsmi_设为开始算子.Text = "设为开始算子";
-            this.tsmi_设为开始算子.Click += new System.EventHandler(this.设为开始算子ToolStripMenuItem_Click);
-            // 
-            // tsmi_设为运行一次
-            // 
-            this.tsmi_设为运行一次.Image = ((System.Drawing.Image)(resources.GetObject("tsmi_设为运行一次.Image")));
-            this.tsmi_设为运行一次.Name = "tsmi_设为运行一次";
-            this.tsmi_设为运行一次.Size = new System.Drawing.Size(162, 24);
-            this.tsmi_设为运行一次.Text = "设为运行一次";
-            this.tsmi_设为运行一次.Click += new System.EventHandler(this.设为运行一次ToolStripMenuItem_Click);
             // 
             // CM_Selected
             // 
@@ -237,42 +216,42 @@
             this.tsmi_删除直线.Text = "删除直线";
             this.tsmi_删除直线.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
             // 
-            // Panle_FlowChart
+            // Panel_FlowChart
             // 
-            this.Panle_FlowChart.AutoScroll = true;
-            this.Panle_FlowChart.Controls.Add(this.PictureBox_FlowChart);
-            this.Panle_FlowChart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panle_FlowChart.Location = new System.Drawing.Point(0, 0);
-            this.Panle_FlowChart.Name = "Panle_FlowChart";
-            this.Panle_FlowChart.Size = new System.Drawing.Size(882, 681);
-            this.Panle_FlowChart.TabIndex = 4;
-            this.Panle_FlowChart.Resize += new System.EventHandler(this.Panle_FlowChart_Resize);
+            this.Panel_FlowChart.AutoScroll = true;
+            this.Panel_FlowChart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel_FlowChart.Controls.Add(this.picFlowChart);
+            this.Panel_FlowChart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_FlowChart.Location = new System.Drawing.Point(0, 0);
+            this.Panel_FlowChart.Name = "Panel_FlowChart";
+            this.Panel_FlowChart.Size = new System.Drawing.Size(884, 683);
+            this.Panel_FlowChart.TabIndex = 5;
+            this.Panel_FlowChart.Resize += new System.EventHandler(this.Panel_FlowChart_Resize);
             // 
             // UC_FlowChart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.Panle_FlowChart);
+            this.Controls.Add(this.Panel_FlowChart);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "UC_FlowChart";
-            this.Size = new System.Drawing.Size(882, 681);
+            this.Size = new System.Drawing.Size(884, 683);
             this.Load += new System.EventHandler(this.UC_FlowChart_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_FlowChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picFlowChart)).EndInit();
             this.CM_Add.ResumeLayout(false);
             this.CM_Set.ResumeLayout(false);
             this.CM_Selected.ResumeLayout(false);
             this.CM_Delete.ResumeLayout(false);
-            this.Panle_FlowChart.ResumeLayout(false);
+            this.Panel_FlowChart.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.PictureBox PictureBox_FlowChart;
+        private System.Windows.Forms.PictureBox picFlowChart;
         private System.Windows.Forms.ContextMenuStrip CM_Add;
         private System.Windows.Forms.ToolStripMenuItem tsmi_创建普通算子块;
         private System.Windows.Forms.ToolStripMenuItem tsmi_创建单条件算子块;
@@ -284,14 +263,12 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_删除算子;
         private System.Windows.Forms.ToolStripMenuItem tsmi_添加连接端口;
         private System.Windows.Forms.ToolStripMenuItem tsmi_删除连接端口;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_设为开始算子;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_设为运行一次;
         private System.Windows.Forms.ContextMenuStrip CM_Selected;
         private System.Windows.Forms.ToolStripMenuItem tsmi_复制;
         private System.Windows.Forms.ToolStripMenuItem tsmi_粘贴;
         private System.Windows.Forms.ToolStripMenuItem tsmi_删除所有;
         private System.Windows.Forms.ContextMenuStrip CM_Delete;
         private System.Windows.Forms.ToolStripMenuItem tsmi_删除直线;
-        private System.Windows.Forms.Panel Panle_FlowChart;
+        private MyStyleControl.TestPanel Panel_FlowChart;
     }
 }

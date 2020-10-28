@@ -1,37 +1,36 @@
 ﻿using DispenseAPP.CustomControl;
+using System;
 using System.Windows.Forms;
+using static DispenseAPP.CommonClass;
 
 namespace DispenseAPP
 {
     public partial class FrmRenameBlock : FormM
     {
-        public FrmRenameBlock(string name,ProjectParamClass projectParam)
+        public FrmRenameBlock(string name)
         {
             InitializeComponent();
-            _projectParamClass = projectParam;
             _name = name;
             txt_blockName.Text = name;            
         }
 
-        private string _name;
+        string _name;
 
-        public event EditConfirmDelegate EditConfirmEvent;
+        public event Action<object> EditConfirmEvent;
 
-        private ProjectParamClass _projectParamClass ;
-
-        private void btn_OK_Click(object sender, System.EventArgs e)//将修改后的值回传回去
+        private void Btn_OK_Click(object sender, EventArgs e)//将修改后的值回传回去
         {
             EditConfirmEvent(txt_blockName.Text.Trim());
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void btn_Cancel_Click(object sender, System.EventArgs e)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void txt_blockName_TextChanged(object sender, System.EventArgs e)
+        private void Txt_blockName_TextChanged(object sender, EventArgs e)
         {
             if(txt_blockName.Text == _name || QueryFlowChartExitsName(txt_blockName.Text) == true)
             {
@@ -43,14 +42,9 @@ namespace DispenseAPP
             }
         }
 
-        /// <summary>
-        /// 查询算子块名称是否已经存在
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private bool QueryFlowChartExitsName(string name)
+        private bool QueryFlowChartExitsName(string name)// 查询算子块名称是否已经存在
         {
-            Element element = _projectParamClass._flowChartList.Find(c => c.Name == name);
+            BlockItem element = StaticPublicData.BlockItems[NameType.CustomName, name];
             if(element != null)
             {
                 return true;
@@ -61,7 +55,7 @@ namespace DispenseAPP
             }
         }
 
-        private void txt_blockName_KeyPress(object sender, KeyPressEventArgs e)//用户按下并释放某个键后触发
+        private void Txt_blockName_KeyPress(object sender, KeyPressEventArgs e)//用户按下并释放某个键后触发
         {
             //不允许输入空格
         }

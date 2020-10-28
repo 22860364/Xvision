@@ -39,12 +39,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.num_ArraySize)).BeginInit();
             this.SuspendLayout();
             // 
-            // lbl_ProjectName
-            // 
-            this.lbl_ProjectName.Location = new System.Drawing.Point(3, 1);
-            this.lbl_ProjectName.Size = new System.Drawing.Size(74, 21);
-            this.lbl_ProjectName.Text = "编辑变量";
-            // 
             // DG_EditVars
             // 
             this.DG_EditVars.AllowUserToAddRows = false;
@@ -82,7 +76,7 @@
             this.btn_Cancel.TabIndex = 45;
             this.btn_Cancel.Text = "取消";
             this.btn_Cancel.UseVisualStyleBackColor = true;
-            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            this.btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
             // btn_OK
             // 
@@ -94,7 +88,7 @@
             this.btn_OK.TabIndex = 44;
             this.btn_OK.Text = "确定";
             this.btn_OK.UseVisualStyleBackColor = true;
-            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
+            this.btn_OK.Click += new System.EventHandler(this.Btn_OK_Click);
             // 
             // num_ArraySize
             // 
@@ -103,7 +97,7 @@
             this.num_ArraySize.Name = "num_ArraySize";
             this.num_ArraySize.Size = new System.Drawing.Size(120, 26);
             this.num_ArraySize.TabIndex = 46;
-            this.num_ArraySize.ValueChanged += new System.EventHandler(this.num_ArraySize_ValueChanged);
+            this.num_ArraySize.ValueChanged += new System.EventHandler(this.Num_ArraySize_ValueChanged);
             // 
             // lbl_Type
             // 
@@ -127,10 +121,8 @@
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_OK);
             this.Controls.Add(this.DG_EditVars);
-            this.MaxVisible = false;
             this.Name = "FrmEditVars";
             this.Text = "编辑变量";
-            this.TitleVisiable = false;
             this.Controls.SetChildIndex(this.DG_EditVars, 0);
             this.Controls.SetChildIndex(this.btn_OK, 0);
             this.Controls.SetChildIndex(this.btn_Cancel, 0);

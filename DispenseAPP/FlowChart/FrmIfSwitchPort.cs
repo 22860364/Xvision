@@ -4,49 +4,48 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Windows.Forms;
+using static DispenseAPP.CommonClass;
 
 namespace DispenseAPP
 {
     public partial class FrmIfSwitchPort : FormM
     {
-        public FrmIfSwitchPort(IfSwitchJudgeClass ifSwitchJudge, ProjectParamClass projectParm)
+        public FrmIfSwitchPort(ConditionalJudgment ifSwitchJudge)
         {
-            InitializeComponent();//注意：这里的下拉列表要使用数据绑定 手动赋值比较麻烦          
-            _projectParam = projectParm;
+            InitializeComponent();
             _ifSwitchJudgeClass = ifSwitchJudge;
             InitialControl();
         }
 
-        private ProjectParamClass _projectParam;
+        ConditionalJudgment _ifSwitchJudgeClass;
 
-        private IfSwitchJudgeClass _ifSwitchJudgeClass;
-
-        private Dictionary<string, List<string>> BlockNameMeasureValueDic = new Dictionary<string, List<string>>();//存放算子块和测量值的键值对集合
+        Dictionary<string, List<string>> BlockNameMeasureValueDic = new Dictionary<string, List<string>>();//存放算子块和测量值的键值对集合
 
         private void InitialControl()
         {
             txt_Port.Text = "Port" + _ifSwitchJudgeClass.Port.ToString();
-            foreach (Element item in _projectParam._flowChartList)//通过遍历 向键值对集合中添加算子名称和对应的测量值
+            foreach (BlockItem item in StaticPublicData.BlockItems)//通过遍历 向键值对集合中添加算子名称和对应的测量值
             {
-                if (item is NormalBlock)//如果是普通算子
+                if (item is OperatorBlock)//如果是普通算子
                 {
-                    NormalBlock normalBlock = item as NormalBlock;
-                    if (normalBlock.ToolsList.Count > 0)
+                    OperatorBlock normalBlock = item as OperatorBlock;
+                    List<string> list = new List<string>();
+                    if (normalBlock.ToolList.Count > 0)
                     {
-                        List<string> list = new List<string>();
-                        foreach (ITools items in normalBlock.ToolsList)
+                        
+                        foreach (IToolable items in normalBlock.ToolList)
                         {
                             foreach (PropertyInfo itemss in items.GetType().GetProperties())
                             {
                                 if(itemss.IsDefined(typeof(ConditionJudgeAttribute)))
                                 {
-                                    list.Add(items.BlockName + "-" + itemss.Name);
+                                    list.Add(items.StepCustomName + "-" + itemss.Name);
                                 }
                             }                      
-                        }
-                        BlockNameMeasureValueDic.Add(item.Name, list);
+                        }                
                     }
+                    list.Add("执行状态");
+                    BlockNameMeasureValueDic.Add(item.CustomName, list);
                 }
             }
             foreach (KeyValuePair<string,List<string>> item in BlockNameMeasureValueDic)
@@ -55,9 +54,9 @@ namespace DispenseAPP
             }
             if (BlockNameMeasureValueDic.Count > 0 )//如果有键值对
             {
-                if(_ifSwitchJudgeClass.BlockName != null && BlockNameMeasureValueDic.Keys.Contains(_ifSwitchJudgeClass.BlockName))//键值对集合中包含算子块名称
+                if(_ifSwitchJudgeClass.MeasureBlockName != null && BlockNameMeasureValueDic.Keys.Contains(_ifSwitchJudgeClass.MeasureBlockName))//键值对集合中包含算子块名称
                 {
-                    cmb_BlockName.SelectedItem = _ifSwitchJudgeClass.BlockName;                
+                    cmb_BlockName.SelectedItem = _ifSwitchJudgeClass.MeasureBlockName;                
                 }
                 else
                 {
@@ -78,7 +77,7 @@ namespace DispenseAPP
                 case "True":
                     rbtn_True.Checked = true;
                     break;
-                case "Talse":
+                case "False":
                     rbtn_False.Checked = true;
                     break;
                 case "Invalid":
@@ -87,7 +86,7 @@ namespace DispenseAPP
             }             
         }
 
-        private void cmb_BlockName_DropDown(object sender, EventArgs e)//显示组合框的下拉部分时发生
+        private void Cmb_BlockName_DropDown(object sender, EventArgs e)//显示组合框的下拉部分时发生
         {
             if (cmb_BlockName.Items.Count == 0)
             {
@@ -95,7 +94,7 @@ namespace DispenseAPP
             }
         }
 
-        private void cmb_MeasureValue_DropDown(object sender, EventArgs e)//显示组合框的下拉部分时发生
+        private void Cmb_MeasureValue_DropDown(object sender, EventArgs e)//显示组合框的下拉部分时发生
         {
             if (cmb_MeasureValue.Items.Count == 0)
             {
@@ -103,16 +102,16 @@ namespace DispenseAPP
             }
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btn_Ok_Click(object sender, EventArgs e)
+        private void Btn_Ok_Click(object sender, EventArgs e)
         {
             if(cmb_BlockName.SelectedItem != null && cmb_MeasureValue.SelectedItem != null)
             {
-                _ifSwitchJudgeClass.BlockName = cmb_BlockName.SelectedItem.ToString();
+                _ifSwitchJudgeClass.MeasureBlockName = cmb_BlockName.SelectedItem.ToString();
                 _ifSwitchJudgeClass.MeasureValue = cmb_MeasureValue.SelectedItem.ToString();
             }
             if(rbtn_True.Checked)
@@ -130,7 +129,7 @@ namespace DispenseAPP
             Close();
         }
 
-        private void cmb_BlockName_SelectedIndexChanged(object sender, EventArgs e)
+        private void Cmb_BlockName_SelectedIndexChanged(object sender, EventArgs e)
         {
             cmb_MeasureValue.DataSource = BlockNameMeasureValueDic[cmb_BlockName.SelectedItem.ToString()];
         }

@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DispenseAPP.CustomControl
@@ -25,25 +20,14 @@ namespace DispenseAPP.CustomControl
             set
             {
                 _imageDefault = value;
-                this.label1.Image = _imageDefault;
+                label1.Image = _imageDefault;
             }
         }
-
-        private Image _imageMove = null;
         [Description("光标移动到控件上方显示图片")]
-        public Image ImageMove
-        {
-            get { return _imageMove; }
-            set { _imageMove = value; }
-        }
+        public Image ImageMove { get; set; } = null;
 
-        private Image _imageLeave = null;
         [Description("光标离开控件上方显示图片")]
-        public Image ImageLeave
-        {
-            get { return _imageLeave; }
-            set { _imageLeave = value; }
-        }
+        public Image ImageLeave { get; set; } = null;
 
         private Color _backColorM = Color.Transparent;
         [Description("控件的背景色")]
@@ -56,22 +40,10 @@ namespace DispenseAPP.CustomControl
                 label1.BackColor = _backColorM;
             }
         }
-
-        private Color _backColorMove = Color.Transparent;
         [Description("光标移动到控件上方显示的背景色")]
-        public Color BackColorMove
-        {
-            get { return _backColorMove; }
-            set { _backColorMove = value; }
-        }
-
-        private Color _backColorLeave = Color.Transparent;
+        public Color BackColorMove { get; set; } = Color.Transparent;
         [Description("光标离开控件显示的背景色")]
-        public Color BackColorLeave
-        {
-            get { return _backColorLeave; }
-            set { _backColorLeave = value; }
-        }
+        public Color BackColorLeave { get; set; } = Color.Transparent;
 
         private string _textM = "";
         [Description("显示的文字")]
@@ -81,7 +53,7 @@ namespace DispenseAPP.CustomControl
             set
             {
                 _textM = value;
-                this.label1.Text = _textM;
+                label1.Text = _textM;
             }
         }
 
@@ -94,7 +66,7 @@ namespace DispenseAPP.CustomControl
             set
             {
                 _textColor = value;
-                this.label1.ForeColor = _textColor;
+                label1.ForeColor = _textColor;
             }
         }
 
@@ -106,7 +78,7 @@ namespace DispenseAPP.CustomControl
             set
             {
                 _fontM = value;
-                this.label1.Font = _fontM;
+                label1.Font = _fontM;
             }
         }
 
@@ -114,10 +86,7 @@ namespace DispenseAPP.CustomControl
 
         private void label1_Click(object sender, EventArgs e)
         {
-            if (ButtonClick != null)
-            {
-                ButtonClick(sender, e);
-            }
+            ButtonClick?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -125,13 +94,13 @@ namespace DispenseAPP.CustomControl
         /// </summary>
         private void label1_MouseLeave(object sender, EventArgs e)
         {
-            if(_imageLeave != null)
+            if(ImageLeave != null)
             {
-                ImageDefault = _imageLeave;
+                ImageDefault = ImageLeave;
             }
-            if(_backColorLeave != Color.Transparent)
+            if(BackColorLeave != Color.Transparent)
             {
-                BackColorLeave = _backColorLeave;
+                BackColorLeave = BackColorLeave;
             }
         }
 
@@ -140,13 +109,13 @@ namespace DispenseAPP.CustomControl
         /// </summary>
         private void label1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_imageMove != null)
+            if (ImageMove != null)
             {
-                ImageDefault = _imageMove;
+                ImageDefault = ImageMove;
             }
-            if (_backColorMove != Color.Transparent)
+            if (BackColorMove != Color.Transparent)
             {
-                BackColorMove = _backColorMove;
+                BackColorMove = BackColorMove;
             }
         }
     }

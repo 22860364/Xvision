@@ -8,5 +8,9 @@ namespace DispenseAPP
 {
     public class ReviseROIAttribute:Attribute //校正ROI特性
     {
+        public ReviseROIAttribute()
+        {
+
+        }
     }
 }

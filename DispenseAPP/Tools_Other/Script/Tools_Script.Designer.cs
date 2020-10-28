@@ -30,11 +30,11 @@
         {
             this.tabControl_FindLine = new System.Windows.Forms.TabControl();
             this.tab_Basic = new System.Windows.Forms.TabPage();
-            this.btn_Set = new System.Windows.Forms.Button();
-            this.txt_Name = new System.Windows.Forms.TextBox();
+            this.Btn_Set = new System.Windows.Forms.Button();
+            this.Txt_Name = new System.Windows.Forms.TextBox();
             this.lbl_BlockName = new System.Windows.Forms.Label();
-            this.btn_Cancel = new System.Windows.Forms.Button();
-            this.btn_OK = new System.Windows.Forms.Button();
+            this.Btn_Cancel = new System.Windows.Forms.Button();
+            this.Btn_OK = new System.Windows.Forms.Button();
             this.tabControl_FindLine.SuspendLayout();
             this.tab_Basic.SuspendLayout();
             this.SuspendLayout();
@@ -50,45 +50,47 @@
             this.tabControl_FindLine.Multiline = true;
             this.tabControl_FindLine.Name = "tabControl_FindLine";
             this.tabControl_FindLine.SelectedIndex = 0;
-            this.tabControl_FindLine.Size = new System.Drawing.Size(330, 363);
+            this.tabControl_FindLine.Size = new System.Drawing.Size(328, 361);
             this.tabControl_FindLine.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl_FindLine.TabIndex = 16;
             // 
             // tab_Basic
             // 
-            this.tab_Basic.BackColor = System.Drawing.SystemColors.Control;
-            this.tab_Basic.Controls.Add(this.btn_Set);
-            this.tab_Basic.Controls.Add(this.txt_Name);
+            this.tab_Basic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.tab_Basic.Controls.Add(this.Btn_Set);
+            this.tab_Basic.Controls.Add(this.Txt_Name);
             this.tab_Basic.Controls.Add(this.lbl_BlockName);
             this.tab_Basic.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tab_Basic.Location = new System.Drawing.Point(4, 22);
             this.tab_Basic.Name = "tab_Basic";
             this.tab_Basic.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Basic.Size = new System.Drawing.Size(322, 337);
+            this.tab_Basic.Size = new System.Drawing.Size(320, 335);
             this.tab_Basic.TabIndex = 0;
             this.tab_Basic.Text = "基本";
             // 
-            // btn_Set
+            // Btn_Set
             // 
-            this.btn_Set.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Set.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Set.Location = new System.Drawing.Point(76, 77);
-            this.btn_Set.Name = "btn_Set";
-            this.btn_Set.Size = new System.Drawing.Size(75, 28);
-            this.btn_Set.TabIndex = 12;
-            this.btn_Set.Text = "设置";
-            this.btn_Set.UseVisualStyleBackColor = true;
-            this.btn_Set.Click += new System.EventHandler(this.btn_Set_Click);
+            this.Btn_Set.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Btn_Set.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Set.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_Set.Location = new System.Drawing.Point(76, 61);
+            this.Btn_Set.Name = "Btn_Set";
+            this.Btn_Set.Size = new System.Drawing.Size(75, 28);
+            this.Btn_Set.TabIndex = 12;
+            this.Btn_Set.Text = "设置";
+            this.Btn_Set.UseVisualStyleBackColor = true;
+            this.Btn_Set.Click += new System.EventHandler(this.Btn_Set_Click);
             // 
-            // txt_Name
+            // Txt_Name
             // 
-            this.txt_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_Name.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_Name.Location = new System.Drawing.Point(76, 16);
-            this.txt_Name.Multiline = true;
-            this.txt_Name.Name = "txt_Name";
-            this.txt_Name.Size = new System.Drawing.Size(213, 23);
-            this.txt_Name.TabIndex = 10;
+            this.Txt_Name.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Txt_Name.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Txt_Name.Location = new System.Drawing.Point(76, 16);
+            this.Txt_Name.Multiline = true;
+            this.Txt_Name.Name = "Txt_Name";
+            this.Txt_Name.Size = new System.Drawing.Size(213, 23);
+            this.Txt_Name.TabIndex = 10;
             // 
             // lbl_BlockName
             // 
@@ -99,44 +101,47 @@
             this.lbl_BlockName.Text = "算子名：";
             this.lbl_BlockName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // btn_Cancel
+            // Btn_Cancel
             // 
-            this.btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.Btn_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_Cancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_Cancel.Location = new System.Drawing.Point(223, 369);
-            this.btn_Cancel.Name = "btn_Cancel";
-            this.btn_Cancel.Size = new System.Drawing.Size(75, 28);
-            this.btn_Cancel.TabIndex = 19;
-            this.btn_Cancel.Text = "取消";
-            this.btn_Cancel.UseVisualStyleBackColor = true;
-            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
+            this.Btn_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Cancel.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_Cancel.Location = new System.Drawing.Point(263, 367);
+            this.Btn_Cancel.Name = "Btn_Cancel";
+            this.Btn_Cancel.Size = new System.Drawing.Size(61, 28);
+            this.Btn_Cancel.TabIndex = 19;
+            this.Btn_Cancel.Text = "取消";
+            this.Btn_Cancel.UseVisualStyleBackColor = true;
+            this.Btn_Cancel.Click += new System.EventHandler(this.Btn_Cancel_Click);
             // 
-            // btn_OK
+            // Btn_OK
             // 
-            this.btn_OK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.Btn_OK.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_OK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_OK.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_OK.Location = new System.Drawing.Point(125, 369);
-            this.btn_OK.Name = "btn_OK";
-            this.btn_OK.Size = new System.Drawing.Size(75, 28);
-            this.btn_OK.TabIndex = 18;
-            this.btn_OK.Text = "确定";
-            this.btn_OK.UseVisualStyleBackColor = true;
-            this.btn_OK.Click += new System.EventHandler(this.btn_OK_Click);
+            this.Btn_OK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_OK.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Btn_OK.Location = new System.Drawing.Point(193, 367);
+            this.Btn_OK.Name = "Btn_OK";
+            this.Btn_OK.Size = new System.Drawing.Size(62, 28);
+            this.Btn_OK.TabIndex = 18;
+            this.Btn_OK.Text = "确定";
+            this.Btn_OK.UseVisualStyleBackColor = true;
+            this.Btn_OK.Click += new System.EventHandler(this.Btn_OK_Click);
             // 
             // Tools_Script
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.Controls.Add(this.btn_Cancel);
-            this.Controls.Add(this.btn_OK);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.Btn_Cancel);
+            this.Controls.Add(this.Btn_OK);
             this.Controls.Add(this.tabControl_FindLine);
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "Tools_Script";
-            this.Size = new System.Drawing.Size(330, 400);
+            this.Size = new System.Drawing.Size(328, 398);
             this.tabControl_FindLine.ResumeLayout(false);
             this.tab_Basic.ResumeLayout(false);
             this.tab_Basic.PerformLayout();
@@ -148,10 +153,10 @@
 
         private System.Windows.Forms.TabControl tabControl_FindLine;
         private System.Windows.Forms.TabPage tab_Basic;
-        private System.Windows.Forms.TextBox txt_Name;
+        private System.Windows.Forms.TextBox Txt_Name;
         private System.Windows.Forms.Label lbl_BlockName;
-        private System.Windows.Forms.Button btn_Cancel;
-        private System.Windows.Forms.Button btn_OK;
-        private System.Windows.Forms.Button btn_Set;
+        private System.Windows.Forms.Button Btn_Cancel;
+        private System.Windows.Forms.Button Btn_OK;
+        private System.Windows.Forms.Button Btn_Set;
     }
 }

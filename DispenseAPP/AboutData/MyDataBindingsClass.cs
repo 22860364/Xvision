@@ -6,18 +6,18 @@ namespace DispenseAPP.AboutData
 {
     public static class MyDataBindingsClass
     {
-        public static void NotifyPropertyChanged<T>(object dataClass, Expression<Func<T>> property,PropertyChangedEventHandler PropertyChanged)//属性改变后通知控件的属性
+        private static readonly object obj = new object();
+        public static void NotifyPropertyChanged<T>(object dataClass, Expression<Func<T>> property, PropertyChangedEventHandler PropertyChanged)//属性改变后通知控件的属性
         {
-            if(PropertyChanged == null)
+            if (PropertyChanged == null)
             {
                 return;
             }
-            var memberExpression = property.Body as MemberExpression;
-            if(memberExpression == null)
+            if (!(property.Body is MemberExpression memberExpression))
             {
                 return;
             }
-            PropertyChanged.Invoke(dataClass, new PropertyChangedEventArgs(memberExpression.Member.Name));
+            PropertyChanged.Invoke(dataClass, new PropertyChangedEventArgs(memberExpression.Member.Name));//这个地方内存泄漏
         }
     }
 }

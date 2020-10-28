@@ -1,8 +1,6 @@
 ﻿using DispenseAPP.CustomControl;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace DispenseAPP.Tools_Other.LogicOperation
@@ -10,14 +8,13 @@ namespace DispenseAPP.Tools_Other.LogicOperation
     public partial class FrmLogicOperation : FormM
     {
         private Dictionary<string, List<BlockNameValue>> referenceData = new Dictionary<string, List<BlockNameValue>>();
+        private LogicOperationToolEntity _logicOperationClass = new LogicOperationToolEntity();
 
-        private LogicOperationClass _logicOperationClass = new LogicOperationClass();
-
-        public FrmLogicOperation(LogicOperationClass logicOperationClass)
+        public FrmLogicOperation(LogicOperationToolEntity logicOperationClass)
         {
             InitializeComponent();
             _logicOperationClass = logicOperationClass;
-            InitialReference();
+            InitialHelper.LogicOperationInitialReference(_logicOperationClass.SelectedOperatorBlock.ToolList, Lb_BlockName, referenceData,_logicOperationClass.SelectedOperatorBlock.LastIndex);
             Txt_Code.Text = _logicOperationClass.Expression;
         }
 
@@ -33,92 +30,11 @@ namespace DispenseAPP.Tools_Other.LogicOperation
             Txt_Code.ScrollToCaret();//滚动到光标处
         }
 
-        private void InitialReference()//初始化变量引用
-        {
-            List<ITools> toolsList = _logicOperationClass.SelectedNormalBlock.ToolsList.GetRange(0, FrmEdit._currentRowIndex+ 1);
-            if (toolsList != null)
-            {
-                foreach (var item in toolsList)//遍历当前普通算子块中的工具
-                {
-                    Lb_BlockName.Items.Add(item.BlockName);
-                    List<BlockNameValue> blockList = new List<BlockNameValue>();
-                    foreach (PropertyInfo items in item.GetType().GetProperties())//获得当前遍历到的工具的所有的属性
-                    {
-                        if (items.IsDefined(typeof(ReferenceAttribute), true))
-                        {
-                            if (item.StepState == true || (item.StepState == false && (items.GetCustomAttribute(typeof(ReferenceAttribute)) as ReferenceAttribute).ExecuteState == true))//进入if的条件是 执行结果为true 或者 执行结果为false && 标记的特性为true 
-                            {
-                                object obj = items.GetValue(item, null);
-                                if (obj is Array)//当前数据为数组
-                                {
-                                    double[] d = obj as double[];
-                                    if (obj is PointF[] pointF)
-                                    {
-                                        for (int i = 0; i < pointF.Length; i++)
-                                        {
-                                            BlockNameValue PointFNameValueX = new BlockNameValue
-                                            {
-                                                Name = items.Name + "[" + i.ToString() + "].X",
-                                                Type = "N",
-                                                Value = pointF[i].X.ToString("f3")
-                                            };
-                                            blockList.Add(PointFNameValueX);
-                                            BlockNameValue PointFNameValueY = new BlockNameValue
-                                            {
-                                                Name = items.Name + "[" + i.ToString() + "].Y",
-                                                Type = "N",
-                                                Value = pointF[i].Y.ToString("f3")
-                                            };
-                                            blockList.Add(PointFNameValueY);
-                                        }
-                                    }
-                                    else if (d != null)
-                                    {
-                                        for (int i = 0; i < d.Length; i++)
-                                        {
-                                            BlockNameValue PointFNameValueD = new BlockNameValue
-                                            {
-                                                Name = items.Name + "[" + i.ToString() + "]",
-                                                Type = "N",
-                                                Value = d[i].ToString("f3")
-                                            };
-                                            blockList.Add(PointFNameValueD);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    BlockNameValue blockNameVlaue = new BlockNameValue
-                                    {
-                                        Name = items.Name,
-                                        Value = items.GetValue(item).ToString()
-                                    };
-                                    switch (items.PropertyType.ToString())
-                                    {
-                                        case "System.Int32":
-                                        case "System.Int16":
-                                            blockNameVlaue.Type = "N";
-                                            break;
-                                        case "System.String":
-                                            blockNameVlaue.Type = "S";
-                                            break;
-                                        case "System.Boolean":
-                                            blockNameVlaue.Type = "B";
-                                            break;
-                                    }
-                                    blockList.Add(blockNameVlaue);
-                                }
-                            }
-                        }
-                    }
-                    referenceData.Add(item.BlockName, blockList);
-                }
-            }
-        }
-
         private void Btn_OK_Click(object sender, EventArgs e)
         {
+            _logicOperationClass.executor = null;
             _logicOperationClass.Expression = Txt_Code.Text.Trim();
+            _logicOperationClass.ComputerExecuteTime();
             Close();
         }
 
@@ -291,7 +207,9 @@ namespace DispenseAPP.Tools_Other.LogicOperation
 
         private void Btn_Calculate_Click(object sender, EventArgs e)//执行计算 在这里不解析 然后在实例那里解析
         {
-            txt_Result.Text = _logicOperationClass.AnalysisExpress(Txt_Code.Text.Trim()).ToString();
+            _logicOperationClass.executor = null;
+            _logicOperationClass.Execute1(Txt_Code.Text.Trim(), out object result);
+            txt_Result.Text = result.ToString();
         }
 
         private void Lb_BlockName_SelectedIndexChanged(object sender, EventArgs e)//当选择的算子名变化时发生
@@ -317,14 +235,5 @@ namespace DispenseAPP.Tools_Other.LogicOperation
             Txt_Code.Select(Txt_Code.TextLength, 0);//光标定位到文本最后
             Txt_Code.ScrollToCaret();
         }
-    }
-
-    public class BlockNameValue
-    {
-        public string Type { get; set; }
-
-        public string Name { get; set; }
-
-        public string Value { get; set; }
     }
 }

@@ -7,52 +7,51 @@ namespace DispenseAPP.AboutData
     [Serializable]
     public class VarClass : DynamicObject
     {
-
         public List<VarCollectionClass> varList = new List<VarCollectionClass>();
-       
-        public bool ContainsProperty(string propertyName)//是否包含变量名
+
+        public bool ContainsProperty(string propertyName)//变量是否已经存在
         {
-            if(varList.Find(c => c.VarName == propertyName) != null)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }     
+            if (varList.Find(c => c.VarName == propertyName) != null) { return true; }
+            else { return false; }
         }
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)//得到成员
         {
             VarCollectionClass varCollectionClass = varList.Find(c => c.VarName == binder.Name);
             result = varCollectionClass.VarValue;
-            return true; 
+            return true;
         }
 
         public override bool TrySetMember(SetMemberBinder binder, object value)//设置成员
         {
-            VarCollectionClass varCollectionClass = (VarCollectionClass)value;
-            if (binder.Name == "Property")
+            VarCollectionClass varExits = varList.Find(c => c.VarName == binder.Name);
+            if (varExits != null)//代表该变量已经存在 否则不存在
             {
-                varList.Add(varCollectionClass);
+                varExits.VarValue = value;
+                return true;
             }
-            return true;
+            return false;
         }
 
-        public override bool TrySetIndex(SetIndexBinder binder, object[] indexes, object value)
+        public bool SetValue(string varName,object value)
         {
-            return base.TrySetIndex(binder, indexes, value);
+            VarCollectionClass varExits = varList.Find(c => c.VarName == varName);
+            if (varExits != null)//代表该变量已经存在 否则不存在
+            {
+                varExits.VarValue = value;
+                return true;
+            }
+            return false;
         }
-
-        public override bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object result)
-        {
-            return base.TryGetIndex(binder, indexes, out result);
-        }
-
 
         public bool DeleteProperty(string propertyName)//删除属性
         {
             return varList.Remove(varList.Find(c => c.VarName == propertyName));
+        }
+
+        public void AddProperty(VarCollectionClass varCollectionClass)//添加属性
+        {
+            varList.Add(varCollectionClass);
         }
 
         public VarCollectionClass GetVarClass(string varName)
@@ -60,23 +59,46 @@ namespace DispenseAPP.AboutData
             return varList.Find(c => c.VarName == varName);
         }
 
-         public void SetVarInitialValue(string varName)//设为初始值
+        public void SetVarInitialValue(string varName)//设为初始值
         {
             VarCollectionClass getVar = varList.Find(c => c.VarName == varName);
             Type t = getVar.VarValue.GetType();
             getVar.VarValue = t.IsValueType ? Activator.CreateInstance(t) : null;
         }
 
-        public object GetVarInitialValue(string name)
+        public void SetVarValue(Dictionary<string,string> varNameValue)
         {
-            Type t = varList.Find(c => c.VarName == name).GetType();
-            return t.IsValueType ? Activator.CreateInstance(t) : null;
+            foreach (KeyValuePair<string,string> item in varNameValue)
+            {
+                VarCollectionClass varCollectionClass = varList.Find(c => c.VarName == item.Key);
+                switch(varCollectionClass.VarType)
+                {
+                    case "N":
+                        varCollectionClass.VarValue = Convert.ToDecimal(item.Value);
+                        break;
+                    case "S":
+                        varCollectionClass.VarValue = item.Value;
+                        break;
+                    case "B":
+                        varCollectionClass.VarValue = Convert.ToBoolean(item.Value);
+                        break;
+                    case "P":
+                        break;
+                    case "N[]":
+                        break;
+                    case "S[]":
+                        break;
+                    case "B[]":
+                        break;
+                    case "P[]":
+                        break;
+                }
+            }
         }
     }
 
-
     [Serializable]
-    public class VarCollectionClass:ICloneable
+    public class VarCollectionClass : ICloneable
     {
         public string VarName { get; set; }
         public string VarType { get; set; }

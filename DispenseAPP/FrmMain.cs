@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Windows.Forms;
+using static DispenseAPP.CommonClass;
 
 namespace DispenseAPP
 {
@@ -6,7 +8,7 @@ namespace DispenseAPP
     {
         public FrmMain()
         {
-            InitializeComponent();    
+            InitializeComponent();
         }
     }
 }

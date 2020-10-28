@@ -118,16 +118,40 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="title_bar_max1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\UI\title_bar_max1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="顺时针" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\顺时针.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="title_bar_max2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\UI\title_bar_max2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="左箭头" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\左箭头.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="title_bar_max3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\UI\title_bar_max3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="下" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\下.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="title_bar_max4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\bin\Debug\UI\title_bar_max4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="逆时针" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\逆时针.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="上箭头" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\上箭头.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="右箭头" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\右箭头.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="启用" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\UI\启用 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="禁用" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\UI\禁用 (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="反馈" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\反馈.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="帮_助" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\帮 助.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="最大化" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\PhoneUI\最大化 (4).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="最小化" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\bin\Debug\PhoneUI\最大化 (3).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

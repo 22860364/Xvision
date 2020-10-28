@@ -3,29 +3,26 @@ using DispenseAPP.CustomControl;
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using static DispenseAPP.CommonClass;
 
 namespace DispenseAPP.OtherTools.VariableSetTools
 {
     public partial class FrmVarList : FormM
     {
-        public event ClickOKDelegate ClickOkEvent;
+        public event Action ClickOkEvent;
         public static bool EditState { get; set; }
-
-        private ProjectParamClass _projectParam;
-
         int row_Index = -1;
 
-        public FrmVarList(ProjectParamClass projectParam)
+        public FrmVarList()
         {
             InitializeComponent();
-            _projectParam = projectParam;
             BindingDG_VarList();
         }
 
         private void BindingDG_VarList()//进入该界面时  绑定List<T>
         {
-            DG_VarList.DataSource = new BindingList<VarCollectionClass>(_projectParam.Vars.varList);
-            if (_projectParam.Vars.varList.Count > 0)
+            DG_VarList.DataSource = new BindingList<VarCollectionClass>(StaticPublicData.VariableData.varList);
+            if (StaticPublicData.VariableData.varList.Count > 0)
             {
                 DG_VarList.CurrentCell = DG_VarList[0, 0];
                 row_Index = 0;
@@ -37,7 +34,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             VarCollectionClass varCollection = new VarCollectionClass();
             for (int i = 1; i < int.MaxValue; i++)
             {
-                if (!_projectParam.Vars.ContainsProperty("var_" + i.ToString()))//如果包含
+                if (!StaticPublicData.VariableData.ContainsProperty("var_" + i.ToString()))//如果包含
                 {
                     varCollection.VarName = "var_" + i.ToString();
                     break;
@@ -68,9 +65,9 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             if (EditState == false)
             {
                 VarCollectionClass varCollection = (VarCollectionClass)(anyType as VarCollectionClass).Clone();
-                _projectParam.Vars.Property = varCollection;
+                StaticPublicData.VariableData.AddProperty(varCollection);
             }
-            DG_VarList.DataSource = new BindingList<VarCollectionClass>(_projectParam.Vars.varList);
+            DG_VarList.DataSource = new BindingList<VarCollectionClass>(StaticPublicData.VariableData.varList);
             if (EditState == true)
             {
                 EditState = false;
@@ -82,19 +79,17 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-
         private void Btn_Delete_Click(object sender, EventArgs e)//删除变量
         {
             if (row_Index >= 0)
             {
-                _projectParam.Vars.DeleteProperty(_projectParam.Vars.varList[row_Index].VarName);
+                StaticPublicData.VariableData.DeleteProperty(StaticPublicData.VariableData.varList[row_Index].VarName);
             }
         }
 
-
         private void Btn_OK_Click(object sender, EventArgs e)//确定 点击确定后要通知VarSet窗体重新绑定
         {
-            ClickOkEvent();
+            ClickOkEvent?.Invoke();
             Close();
         }
 
@@ -108,7 +103,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             EditState = true;
             if (row_Index >= 0)
             {
-                OperationVar(_projectParam.Vars.varList[row_Index]);
+                OperationVar(StaticPublicData.VariableData.varList[row_Index]);
             }
         }
 
@@ -117,13 +112,12 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             row_Index = e.RowIndex;
         }
 
-
         private void DG_VarList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)//双击单元格的任意部分时发生 编辑
         {
             EditState = true;
             if (e.RowIndex >= 0)
             {
-                OperationVar(_projectParam.Vars.varList[e.RowIndex]);
+                OperationVar(StaticPublicData.VariableData.varList[e.RowIndex]);
             }
         }
     }

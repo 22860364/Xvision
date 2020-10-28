@@ -1,43 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using DispenseAPP.MyStyleControl;
+using System;
 
 namespace DispenseAPP.Tools_Other.Script
 {
-    public partial class Tools_Script : UserControl,IEvent 
+    public partial class Tools_Script : MyUserControl
     {
-        public Tools_Script(ScriptClass scriptClass)
+        Tools_ScriptClass _scriptClass;
+
+        public Tools_Script(Tools_ScriptClass scriptClass)
         {
             InitializeComponent();
             _scriptClass = scriptClass;
-            txt_Name.Text = _scriptClass.BlockName;
+            Txt_Name.Text = _scriptClass.StepCustomName;
         }
 
-        public event ClickCancelDelegate _clickCancelButton;
-        public event ClickOKButtonDelegate _clickOKButton;
-        private ScriptClass _scriptClass;
-
-
-        private void btn_Set_Click(object sender, EventArgs e)//设置
+        private void Btn_Set_Click(object sender, EventArgs e)//设置
         {
-            FrmScript frmScript = new FrmScript();
+            FrmScript frmScript = new FrmScript(_scriptClass);
             frmScript.ShowDialog();
         }
 
-        private void btn_OK_Click(object sender, EventArgs e)
+        private void Btn_OK_Click(object sender, EventArgs e)
         {
-            _clickOKButton(_scriptClass);
+           base.ClickOk(_scriptClass);
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
         {
-            _clickCancelButton();
+            base.ClickCancel();
         }
     }
 }

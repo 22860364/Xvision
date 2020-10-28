@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using static DispenseAPP.CommonClass;
 
 namespace DispenseAPP.OtherTools.VariableSetTools
 {
@@ -18,7 +19,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
         Decrement,//自减
     }
 
-    public partial class FrmVarSet : FormM
+    public partial class FrmVariableSet : FormM
     {
         private Button btn_Edit = new Button();//编辑按钮
 
@@ -34,9 +35,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
         private NumericUpDown num_X = new NumericUpDown();
         private NumericUpDown num_Y = new NumericUpDown();//更改Point
 
-        private ProjectParamClass _projectParam;
-
-        private VarSetClass _varSetClass;
+        private VarSetToolEntity _varSetClass;
 
         int row_Index = 0;
 
@@ -44,11 +43,10 @@ namespace DispenseAPP.OtherTools.VariableSetTools
 
         SetVarClass _currentVar = null;//获得当前选择的变量类型 
 
-        public FrmVarSet(ProjectParamClass projectParam, VarSetClass varSetClass)
+        public FrmVariableSet( VarSetToolEntity varSetClass)
         {
             InitializeComponent();
             DG_Var.AutoGenerateColumns = false;
-            _projectParam = projectParam;
             _varSetClass = varSetClass;
             InitialEditButton();
         }
@@ -116,7 +114,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             ck_Value.Visible = false;
             ck_Value.CheckedChanged += Ck_Value_CheckedChanged;
             gb_OPeration.Controls.Add(ck_Value);
-            foreach (VarCollectionClass item in _projectParam.Vars.varList)
+            foreach (VarCollectionClass item in StaticPublicData.VariableData.varList)
             {
                 if (_varSetClass.setVarList.Find(c => c.VarName == item.VarName) == null)
                 {
@@ -204,9 +202,9 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             DG_Var.UpdateCellValue(2, row_Index);
         }
 
-        private void btn_VariableList_Click(object sender, EventArgs e)//变量列表
+        private void Btn_VariableList_Click(object sender, EventArgs e)//变量列表
         {
-            FrmVarList frmVarList = new FrmVarList(_projectParam);
+            FrmVarList frmVarList = new FrmVarList();
             frmVarList.ClickOkEvent += FrmVarList_clickOkEvent;
             frmVarList.ShowDialog();
         }
@@ -214,7 +212,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
         private void FrmVarList_clickOkEvent()
         {
             var v = DG_Var.DataSource as BindingList<SetVarClass>;
-            foreach (VarCollectionClass item in _projectParam.Vars.varList)
+            foreach (VarCollectionClass item in StaticPublicData.VariableData.varList)
             {
                 if (_varSetClass.setVarList.Find(c => c.VarName == item.VarName) == null)
                 {
@@ -235,14 +233,13 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             DG_Var_CellClick(DG_Var, new DataGridViewCellEventArgs(0, 0));
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btn_OK_Click(object sender, EventArgs e)
+        private void Btn_OK_Click(object sender, EventArgs e)
         {
-            _varSetClass.Vars = _projectParam.Vars;
             Close();
         }
 
@@ -326,7 +323,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        private void rbtn_SetMeasureValue_CheckedChanged(object sender, EventArgs e)//设为测量值
+        private void Rbtn_SetMeasureValue_CheckedChanged(object sender, EventArgs e)//设为测量值
         {
             if (rbtn_SetMeasureValue.Checked == true)
             {
@@ -348,7 +345,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        private void rbtn_SetInitialValue_CheckedChanged(object sender, EventArgs e)//设为初始值
+        private void Rbtn_SetInitialValue_CheckedChanged(object sender, EventArgs e)//设为初始值
         {
             if (rbtn_SetInitialValue.Checked == true)
             {
@@ -358,7 +355,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        private void rbtn_Constant_CheckedChanged(object sender, EventArgs e)//设为常量
+        private void Rbtn_Constant_CheckedChanged(object sender, EventArgs e)//设为常量
         {
             if (rbtn_Constant.Checked == true)//选中状态
             {
@@ -412,7 +409,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        private void rbtn_Increment_CheckedChanged(object sender, EventArgs e)//自增
+        private void Rbtn_Increment_CheckedChanged(object sender, EventArgs e)//自增
         {
             if(rbtn_Increment.Checked == true)
             {
@@ -422,7 +419,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        private void rbtn_Decrement_CheckedChanged(object sender, EventArgs e)//自减
+        private void Rbtn_Decrement_CheckedChanged(object sender, EventArgs e)//自减
         {
             if(rbtn_Decrement.Checked == true)
             {
@@ -432,7 +429,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        private void cmb_MeasureValue_DropDown(object sender, EventArgs e)
+        private void Cmb_MeasureValue_DropDown(object sender, EventArgs e)
         {
             if (cmb_MeasureValue.Items.Count == 0)
             {

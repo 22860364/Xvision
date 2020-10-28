@@ -14,14 +14,6 @@ namespace DispenseAPP
             SetStyle(ControlStyles.AllPaintingInWmPaint, true); //禁止擦除背景
             SetStyle(ControlStyles.DoubleBuffer, true); //双缓冲     
             _projectparam = projectParam;
-            for (int i = 0; i < _projectparam.windowCount; i++)
-            {
-                if(!WindowIndexDic.ContainsKey(i+1))
-                {
-                    UC_Image uc_Image = new UC_Image();
-                    WindowIndexDic.Add(i + 1, uc_Image);
-                }
-            }
         }
 
         public void SetPanelLayout()
@@ -29,7 +21,7 @@ namespace DispenseAPP
             TLPanel_Window.ColumnStyles.Clear();
             TLPanel_Window.RowStyles.Clear();
             TLPanel_Window.Controls.Clear();
-            ComputerPanelLayoutRowColCount(_projectparam.windowCount, out int rowCount, out int colCount);
+            ComputerPanelLayoutRowColCount(_projectparam.ImageWindowCount, out int rowCount, out int colCount);
             TLPanel_Window.RowCount = rowCount;
             TLPanel_Window.ColumnCount = colCount;//设置行数和列数
             for (int i = 0; i < TLPanel_Window.ColumnCount; i++)
@@ -45,13 +37,7 @@ namespace DispenseAPP
             {
                 for (int j = 0; j < TLPanel_Window.ColumnCount; j++)//遍历列
                 {
-                    times++;
-                    if (WindowIndexDic.ContainsKey(times))
-                    {
-                        WindowIndexDic[times].Dock = DockStyle.None;
-                        WindowIndexDic[times].Dock = DockStyle.Fill;
-                        TLPanel_Window.Controls.Add(WindowIndexDic[times], j, i);            
-                    }
+                    times++;                    
                 }
             }
         }

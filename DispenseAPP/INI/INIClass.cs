@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace DispenseAPP
 {
-    public static class INIFile
+    public static class INIClass
     {
         [DllImport("kernel32.dll")]
         private static extern int GetPrivateProfileInt(string lpAppName, string lpKeyName, int nDefault, string lpFileName);
@@ -17,9 +13,12 @@ namespace DispenseAPP
         private static extern int GetPrivateProfileString(string lpAppName, string lpKeyName, string lpDefault, StringBuilder lpReturnedString, int nSize, string lpFileName);
 
         [DllImport("kernel32.dll")]
-        private static extern int WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
+        private static extern int GetPrivateProfileStringA(string section, string key, string def, byte[] retVal, int nSize, string lpFileName);
 
-        public static string projectFilePath = Application.StartupPath + "\\项目文件\\";
+
+
+        [DllImport("kernel32.dll")]
+        private static extern int WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
 
         /// <summary>
         /// 读取int类型数值
@@ -86,6 +85,27 @@ namespace DispenseAPP
         public static void DeleteAllSection(string fileName)
         {
             WritePrivateProfileString(null, null, null, fileName);
+        }
+
+        /// <summary>
+        /// 读取全部节点
+        /// </summary>
+        /// <param name="fileName"></param>
+        public static List<string> ReadAllSection(string fileName)
+        {
+            List<string> list = new List<string>();
+            byte[] buffer = new byte[65536];
+            int length = GetPrivateProfileStringA(null, null, null,buffer,buffer.Length, fileName);
+            int j = 0;
+            for (int i = 0; i < length; i++)
+            {
+                if(buffer[i] ==0)
+                {
+                    list.Add(Encoding.Default.GetString(buffer, j, i - j));
+                    j = i + 1;
+                }
+            }
+            return list;
         }
 
         /// <summary>

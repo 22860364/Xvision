@@ -1,7 +1,7 @@
-﻿using DispenseAPP.FlowChart;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using static DispenseAPP.CommonClass;
 
@@ -9,40 +9,57 @@ namespace DispenseAPP
 {
     public partial class UC_FlowChart : UserControl
     {
-
-        public event EditConfirmDelegate ChangeSelectedNormalBolck;//定义所选择的普通算子块发生改变时事件 
-
+        public event Action<OperatorBlock> ChangeSelectedNormalBolck;//定义所选择的普通算子块发生改变时事件 
         MouseEventArgs _e;
+        Canva canvaClass;//画布
 
-        CanvaClass canvaClass;//画布
-
-        private ProjectParamClass _flowChart_ProjectParam;
+        public void ChangePBControlEnable(bool enable)//改变PictureBox控件的使能状态
+        {
+            BeginInvoke(new Action(() => { picFlowChart.Enabled = enable; }));
+        }
 
         #region 初始化
-        public UC_FlowChart(ProjectParamClass projectParam)
+        public UC_FlowChart()
         {
             InitializeComponent();
-            _flowChart_ProjectParam = projectParam;
-            canvaClass = new CanvaClass(_flowChart_ProjectParam);
+            canvaClass = new Canva();
             canvaClass.SelectedNormalChange += CanvaClass_SelectedNormalChange;//注册画布触发的普通算子块改变的事件  
+            CreateInitialBlock();
+            InitialLastSelectedBlock();
         }
 
-        public void DrawStartBlock()//画初始算子块 （一个开始算子块和一个普通算子块）
+        /// <summary>
+        /// 初始化上一次选择的算子块
+        /// </summary>
+        void InitialLastSelectedBlock()
         {
-            //画开始算子块
-            _e = new MouseEventArgs(MouseButtons.Left, 1, 500, 100, 0);
-            canvaClass._elementType = ElementType.StartBlock;
-            canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            //画普通算子块
-            _e = new MouseEventArgs(MouseButtons.Left, 1, 500, 200, 0);
-            canvaClass._elementType = ElementType.NormalBlock;
-            canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            if (StaticPublicData.SystemData.LastSelectedBlockName != null)
+            {
+                if (StaticPublicData.BlockItems[NameType.CustomName,StaticPublicData.SystemData.LastSelectedBlockName] is OperatorBlock block)
+                {
+                    canvaClass.mouseDownSelectBlock = block;
+                    CanvaClass_SelectedNormalChange(block);
+                }
+            }
         }
 
-        private void CanvaClass_SelectedNormalChange(object anyType)
+        /// <summary>
+        /// 创建初始化算子块
+        /// </summary>
+        public void CreateInitialBlock()
         {
-            ChangeSelectedNormalBolck(anyType);
+            if(StaticPublicData.BlockItems.FindIndex(c=>c is StartBlock) == -1)
+            {
+                _e = new MouseEventArgs(MouseButtons.Left, 1, 500, 100, 0);
+                canvaClass._elementType = BlockType.StartBlock;
+                canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
+                picFlowChart.Invalidate();
+            }
+        }
+
+        private void CanvaClass_SelectedNormalChange(OperatorBlock operatorBlock )
+        {
+            ChangeSelectedNormalBolck?.Invoke(operatorBlock);
         }
         #endregion
 
@@ -57,9 +74,8 @@ namespace DispenseAPP
 
         private void PictureBox_FlowChart_MouseDown(object sender, MouseEventArgs e)
         {
-            PictureBox_FlowChart.Focus();
+            picFlowChart.Focus();
             _e = new MouseEventArgs(e.Button, 1, e.X, e.Y, 0);
-            canvaClass.ReceiverCommand = new FlowChartCommand("MouseDown", _e, 0);
             if (IsRunState == false)
             {
                 if (e.Button == MouseButtons.Left)
@@ -69,10 +85,10 @@ namespace DispenseAPP
                 else if (e.Button == MouseButtons.Right)
                 {
                     canvaClass.ReceiverCommand = new FlowChartCommand("MouseRightDown", _e, 0);
-                    BindPictureBoxFlowChartCM();
+                    SetContextMenuStripEnableVisible();
                 }
             }
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
         }
 
         private void PictureBox_FlowChart_MouseMove(object sender, MouseEventArgs e)
@@ -84,9 +100,8 @@ namespace DispenseAPP
                 if (e.Button == MouseButtons.Left)//按下左键拖动所选择的形状
                 {
                     canvaClass.ReceiverCommand = new FlowChartCommand("MouseLeftMove", mouseArgs, 0);
-                    SetScrollMinSize();
                 }
-                PictureBox_FlowChart.Invalidate();
+                picFlowChart.Invalidate();
             }
         }
         public void SetScrollMinSize()//设置自动滚动区域的最小逻辑大小
@@ -94,14 +109,14 @@ namespace DispenseAPP
             //当释放鼠标后如果移动的算子块中超出了工作区域 则需要设置自动滚动区域的最小逻辑大小
             float x1 = 0, y1 = 0;
             int i = 0;
-            foreach (Element item in _flowChart_ProjectParam._flowChartList)
+            foreach (BlockItem item in StaticPublicData.BlockItems)
             {
-                float clientX = item._rectangleRegion.X + item._rectangleRegion.Width;
-                float clientY = item._rectangleRegion.Y + item._rectangleRegion.Height;
+                float clientX = item.Region.X + item.Region.Width;
+                float clientY = item.Region.Y + item.Region.Height;
                 if (i == 0)
                 {
-                    x1 = item._rectangleRegion.X + item._rectangleRegion.Width;
-                    y1 = item._rectangleRegion.Y + item._rectangleRegion.Height;
+                    x1 = item.Region.X + item.Region.Width;
+                    y1 = item.Region.Y + item.Region.Height;
                 }
                 if (clientX > x1)
                 {
@@ -113,7 +128,7 @@ namespace DispenseAPP
                 }
                 i++;
             }
-            Panle_FlowChart.AutoScrollMinSize = new Size((int)x1 + 20, (int)y1 + 20);
+            Panel_FlowChart.AutoScrollMinSize = new Size((int)x1 + 20, (int)y1 + 20);
         }
 
         private void PictureBox_FlowChart_MouseUp(object sender, MouseEventArgs e)
@@ -122,7 +137,11 @@ namespace DispenseAPP
             {
                 MouseEventArgs mouseArgs = new MouseEventArgs(e.Button, 1, e.X, e.Y, 0);
                 canvaClass.ReceiverCommand = new FlowChartCommand("MouseUp", mouseArgs, 0);
-                PictureBox_FlowChart.Invalidate();
+                picFlowChart.Invalidate();
+                if (e.Button == MouseButtons.Left)
+                {
+                    SetScrollMinSize();
+                }
             }
         }
 
@@ -134,17 +153,17 @@ namespace DispenseAPP
                 {
                     MouseEventArgs mouseArgs = new MouseEventArgs(e.Button, 1, e.X, e.Y, 0);
                     canvaClass.ReceiverCommand = new FlowChartCommand("MouseDoubleClick", mouseArgs, 0);
-                    if (canvaClass._selectedChartLine != null)
+                    if (canvaClass.mouseDoubleClickSelectLine != null)
                     {
-                        PictureBox_FlowChart.ContextMenuStrip = CM_Delete;
-                        PictureBox_FlowChart.ContextMenuStrip.Show(PictureBox_FlowChart, e.X, e.Y);
+                        picFlowChart.ContextMenuStrip = CM_Delete;
+                        picFlowChart.ContextMenuStrip.Show(picFlowChart, e.X, e.Y);
                     }
                     if (canvaClass._doubleClickArrow != null)
                     {
-                        FrmIfSwitchPort frmIfSwitchPort = new FrmIfSwitchPort(canvaClass._doubleClickArrow._ifSwitchJudgeClass, _flowChart_ProjectParam);
+                        FrmIfSwitchPort frmIfSwitchPort = new FrmIfSwitchPort(canvaClass._doubleClickArrow.ConditionalJudgmentInstance);
                         frmIfSwitchPort.ShowDialog();
                     }
-                    PictureBox_FlowChart.Invalidate();
+                    picFlowChart.Invalidate();
                 }
             }
         }
@@ -152,24 +171,22 @@ namespace DispenseAPP
         private void PictureBox_FlowChart_Paint(object sender, PaintEventArgs e)//重绘事件
         {
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            e.Graphics.Clear(PictureBox_FlowChart.BackColor);
+            e.Graphics.Clear(picFlowChart.BackColor);
             canvaClass.DrawSelectedBlock(e.Graphics);
             canvaClass.Draw(e.Graphics);
-            canvaClass.DrawArrows(e.Graphics);
             canvaClass.DrawRectangle(e.Graphics);
             canvaClass.DrawArrowLine(e.Graphics);
         }
         #endregion
 
-        private void BindPictureBoxFlowChartCM()
+        /// <summary>
+        /// 设置菜单栏的使能和隐藏
+        /// </summary>
+        private void SetContextMenuStripEnableVisible()
         {
-            if (canvaClass.RightMouseSelectedBlock is StartBlock)
+            if(canvaClass.selectedBlockList.Count >0 )//表示
             {
-                PictureBox_FlowChart.ContextMenuStrip = null;
-            }
-            else if (canvaClass._selectedBlockList.Count > 0)
-            {
-                PictureBox_FlowChart.ContextMenuStrip = CM_Selected;
+                picFlowChart.ContextMenuStrip = CM_Selected;
                 tsmi_复制.Enabled = true;
                 tsmi_删除所有.Enabled = true;
                 if (canvaClass._pastCheckedBlockList.Count <= 0)
@@ -181,53 +198,33 @@ namespace DispenseAPP
                     tsmi_粘贴.Enabled = true;
                 }
             }
-            else if (canvaClass.RightMouseSelectedBlock is NormalBlock)
-            {
-                PictureBox_FlowChart.ContextMenuStrip = CM_Set;
-                tsmi_添加连接端口.Visible = false;
-                tsmi_删除连接端口.Visible = false;
-                tsmi_设为开始算子.Visible = true;
-                tsmi_设为运行一次.Visible = true;
-            }
-            else if (canvaClass.RightMouseSelectedBlock is IfElseBlock)
-            {
-                PictureBox_FlowChart.ContextMenuStrip = CM_Set;
-                tsmi_添加连接端口.Visible = false;
-                tsmi_删除连接端口.Visible = false;
-                tsmi_设为开始算子.Visible = false;
-                tsmi_设为运行一次.Visible = false;
-            }
-            else if (canvaClass.RightMouseSelectedBlock is SwitchBlock || canvaClass.RightMouseSelectedBlock is ThreadStartBlock || canvaClass.RightMouseSelectedBlock is ThreadEndBlock)
-            {
-                PictureBox_FlowChart.ContextMenuStrip = CM_Set;
-                tsmi_设为开始算子.Visible = false;
-                tsmi_设为运行一次.Visible = false;
-                tsmi_添加连接端口.Visible = true;
-                if (canvaClass.RightMouseSelectedBlock.portCount >= 10)
+                else if(canvaClass.MouseRightSelectBlock is OperatorBlock)//如果是普通算子块
                 {
-                    tsmi_添加连接端口.Enabled = false;
+                    picFlowChart.ContextMenuStrip = CM_Set;
+                    tsmi_添加连接端口.Visible = false;
+                    tsmi_删除连接端口.Visible = false;
                 }
-                else
+                else if(canvaClass.MouseRightSelectBlock is IfBlock)//如果是单条件判断算子块
                 {
-                    tsmi_添加连接端口.Enabled = true;
+                    picFlowChart.ContextMenuStrip = CM_Set;
+                    tsmi_添加连接端口.Visible = false;
+                    tsmi_删除连接端口.Visible = false;
                 }
-                tsmi_删除连接端口.Visible = true;
-                if (canvaClass.RightMouseSelectedBlock.portCount <= 3)
+                else if(canvaClass.MouseRightSelectBlock is SwitchBlock || canvaClass.MouseRightSelectBlock is MultiThreadStartBlock || canvaClass.MouseRightSelectBlock is MultiThreadEndBlock)
                 {
-                    tsmi_删除连接端口.Enabled = false;
+                    picFlowChart.ContextMenuStrip = CM_Set;
+                    tsmi_添加连接端口.Visible = true;
+                    tsmi_添加连接端口.Enabled = canvaClass.MouseRightSelectBlock.OutputPortCount >= 10 ? false : true; 
+                    tsmi_删除连接端口.Visible = true;
+                    tsmi_删除连接端口.Enabled = canvaClass.MouseRightSelectBlock.OutputPortCount <= 3 ? false : true;
                 }
-                else
-                {
-                    tsmi_删除连接端口.Enabled = true;
-                }
-            }
-            else if (canvaClass.RightMouseSelectedBlock == null)
+            else if(canvaClass.MouseRightSelectBlock == null)
             {
                 if (canvaClass._pastCheckedBlockList.Count > 0)
                 {
-                    PictureBox_FlowChart.ContextMenuStrip = CM_Selected;
+                    picFlowChart.ContextMenuStrip = CM_Selected;
                     tsmi_粘贴.Enabled = true;
-                    if (canvaClass._selectedBlockList.Count <= 0)
+                    if (canvaClass.selectedBlockList.Count <= 0)
                     {
                         tsmi_复制.Enabled = false;
                         tsmi_删除所有.Enabled = false;
@@ -240,7 +237,7 @@ namespace DispenseAPP
                 }
                 else
                 {
-                    PictureBox_FlowChart.ContextMenuStrip = CM_Add;
+                    picFlowChart.ContextMenuStrip = CM_Add;
                 }
             }
         }
@@ -249,45 +246,45 @@ namespace DispenseAPP
         private void 创建普通算子块ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            canvaClass._elementType = ElementType.NormalBlock;
+            canvaClass._elementType = BlockType.NormalBlock;
             canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
 
         private void 创建单条件算子块ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            canvaClass._elementType = ElementType.IfElseBlock;
+            canvaClass._elementType = BlockType.IfElseBlock;
             canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
 
         private void 创建多条件算子块ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            canvaClass._elementType = ElementType.SwitchBlock;
+            canvaClass._elementType = BlockType.SwitchBlock;
             canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
 
         private void 创建开始线程算子块ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            canvaClass._elementType = ElementType.ThreadStartBlock;
+            canvaClass._elementType = BlockType.ThreadStartBlock;
             canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
 
         private void 创建结束线程算子块ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            canvaClass._elementType = ElementType.ThreadStopBlock;
+            canvaClass._elementType = BlockType.ThreadStopBlock;
             canvaClass.ReceiverCommand = new FlowChartCommand("DrawBlock", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
         #endregion
@@ -296,36 +293,43 @@ namespace DispenseAPP
         private void 设置名称ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            FrmRenameBlock frmRenameBlock = new FrmRenameBlock(canvaClass.RightMouseSelectedBlock.Name, _flowChart_ProjectParam);
+            FrmRenameBlock frmRenameBlock = new FrmRenameBlock(canvaClass.MouseRightSelectBlock.CustomName);
             frmRenameBlock.EditConfirmEvent += FrmRenameBlock_EditConfirmEvent;
             frmRenameBlock.ShowDialog();
         }
 
         private void FrmRenameBlock_EditConfirmEvent(object anyType)//重命名事件
         {
-            canvaClass.RightMouseSelectedBlock.Name = (string)anyType;
+            canvaClass.MouseRightSelectBlock.CustomName = (string)anyType;
+            if(canvaClass.MouseRightSelectBlock is OperatorBlock normalBlock)//如果是普通算子块 则需要修改普通算子块中的所有工具的选择的普通算子块的名称
+            {
+                foreach (IToolable item in normalBlock.ToolList)
+                {
+                    item.OperatorBlockName = (string)anyType;
+                }
+            }
         }
 
         private void 删除算子ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("确认删除此算子块？", "删除算子块", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
-                List<ChartLine> ChartLineList = new List<ChartLine>();
-                foreach (ChartLine chartLine in _flowChart_ProjectParam._chartLineList)
+                List<LineItem> ChartLineList = new List<LineItem>();
+                foreach (LineItem chartLine in StaticPublicData.LineItems)
                 {
-                    if (chartLine.StartBlock == canvaClass.RightMouseSelectedBlock || chartLine.EndBlock == canvaClass.RightMouseSelectedBlock)//清除箭头的_connectElment
+                    if (chartLine.StartBlock == canvaClass.MouseRightSelectBlock || chartLine.EndBlock == canvaClass.MouseRightSelectBlock)//清除箭头的_connectElment
                     {
-                        chartLine.StartArrow._connectElement = null;
-                        chartLine.EndArrow._connectElement = null;
+                        chartLine.StartArrow.ConnectBlockName = null;
+                        chartLine.EndArrow.ConnectBlockName = null;
                         ChartLineList.Add(chartLine);
                     }
                 }
-                foreach (ChartLine item in ChartLineList)
+                foreach (LineItem item in ChartLineList)
                 {
-                    _flowChart_ProjectParam._chartLineList.Remove(item);
+                    StaticPublicData.LineItems.Remove(item);
                 }
-                _flowChart_ProjectParam._flowChartList.Remove(canvaClass.RightMouseSelectedBlock);
-                PictureBox_FlowChart.Invalidate();
+                StaticPublicData.BlockItems.Remove(canvaClass.MouseRightSelectBlock);
+                picFlowChart.Invalidate();
                 ProjectIsChange = true;
                 ChangeSelectedNormalBolck(null);
             }
@@ -336,7 +340,7 @@ namespace DispenseAPP
             ProjectIsChange = true;
             _e = new MouseEventArgs(MouseButtons.Right, 1, 500, 100, 0);
             canvaClass.ReceiverCommand = new FlowChartCommand("AddPort", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
 
@@ -345,22 +349,8 @@ namespace DispenseAPP
             ProjectIsChange = true;
             _e = new MouseEventArgs(MouseButtons.Right, 1, 500, 100, 0);
             canvaClass.ReceiverCommand = new FlowChartCommand("DeletePort", _e, 0);
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
-        }
-
-        private void 设为开始算子ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ProjectIsChange = true;
-            if (canvaClass.RightMouseSelectedBlock is NormalBlock)
-            {
-                canvaClass.RightMouseSelectedBlock.IsStartBlock = true;
-            }
-        }
-
-        private void 设为运行一次ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ProjectIsChange = true;
         }
         #endregion
 
@@ -369,57 +359,55 @@ namespace DispenseAPP
         {
             ProjectIsChange = true;
             canvaClass._pastCheckedBlockList.Clear();
-            foreach (Element item in canvaClass._selectedBlockList)
+            foreach (BlockItem item in canvaClass.selectedBlockList)
             {
                 canvaClass._pastCheckedBlockList.Add(item);
             }
-            canvaClass._selectedBlockList.Clear();
+            canvaClass.selectedBlockList.Clear();
         }
 
         private void 粘贴ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            string name = null;
             for (int i = 0; i < canvaClass._pastCheckedBlockList.Count; i++)
             {
-                Element _element = null;
-                if (canvaClass._pastCheckedBlockList[i] is NormalBlock)//普通算子块
+                canvaClass._pastCheckedBlockList[i].IsDrag = false;
+                BlockItem _element = canvaClass._pastCheckedBlockList[i].Clone();
+                foreach (Arrow item in _element.ArrowList)
                 {
-                    name = "Block";
+                    item.ConnectBlockName = null;
                 }
-                else if (canvaClass._pastCheckedBlockList[i] is IfElseBlock)
+                if (canvaClass._pastCheckedBlockList[i] is OperatorBlock operatorBlock)
                 {
-                    name = "If";
+                    _element.CustomName = GetBlockCustomName("Block");
+                    _element.SystemName = GetBlockSystemName("O");
+                }
+                else if (canvaClass._pastCheckedBlockList[i] is IfBlock ifBlock)
+                {
+                    _element.CustomName = GetBlockCustomName("If");
+                    _element.SystemName = GetBlockSystemName("I");
                 }
                 else if (canvaClass._pastCheckedBlockList[i] is SwitchBlock)
                 {
-                    name = "Switch";
+                    _element.CustomName = GetBlockCustomName("Switch");
+                    _element.SystemName = GetBlockSystemName("SW");
                 }
-                else if (canvaClass._pastCheckedBlockList[i] is ThreadStartBlock)
+                else if (canvaClass._pastCheckedBlockList[i] is MultiThreadStartBlock)
                 {
-                    name = "ThreadStart";
+                    _element.CustomName = GetBlockCustomName("ThreadStart");
+                    _element.SystemName = GetBlockSystemName("TS");
                 }
-                else if (canvaClass._pastCheckedBlockList[i] is ThreadEndBlock)
+                else if (canvaClass._pastCheckedBlockList[i] is MultiThreadEndBlock)
                 {
-                    name = "ThreadEnd";
+                    _element.CustomName = GetBlockCustomName("ThreadEnd");
+                    _element.SystemName = GetBlockSystemName("TE");
                 }
-                _element = canvaClass._pastCheckedBlockList[i].Clone();
-                for (int j = 1; j < int.MaxValue; j++)
-                {
-                    if (QueryFlowChartExitsName(name + j.ToString()) == false)
-                    {
-                        _element.Name = name + j.ToString();
-                        break;
-                    }
-                }
-                _element.NormalIsSelected = false;
-                _element._rectangleRegion.X = _e.X + canvaClass._pastCheckedBlockList[i]._rectangleRegion.X - canvaClass._pastCheckedBlockList[0]._rectangleRegion.X;
-                _element._rectangleRegion.Y = _e.Y + canvaClass._pastCheckedBlockList[i]._rectangleRegion.Y - canvaClass._pastCheckedBlockList[0]._rectangleRegion.Y;
-                _element.ChangePosition();
-                _flowChart_ProjectParam._flowChartList.Add(_element);
+                _element.IsDrag = false;
+                _element.Region = new RectangleF(_e.X + canvaClass._pastCheckedBlockList[i].Region.X - canvaClass._pastCheckedBlockList[0].Region.X, _e.Y + canvaClass._pastCheckedBlockList[i].Region.Y - canvaClass._pastCheckedBlockList[0].Region.Y, _element.Region.Width, _element.Region.Height);
+                StaticPublicData.BlockItems.Add(_element);
             }
             canvaClass._pastCheckedBlockList.Clear();
-            PictureBox_FlowChart.Invalidate();
+            picFlowChart.Invalidate();
             SetScrollMinSize();
         }
 
@@ -427,25 +415,25 @@ namespace DispenseAPP
         {
             if (MessageBox.Show("确认删除此算子块？", "删除算子块", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
-                foreach (Element item in canvaClass._selectedBlockList)
+                foreach (BlockItem item in canvaClass.selectedBlockList)
                 {
-                    if (!(item is StartBlock))
+                    foreach (LineItem chartLine in StaticPublicData.LineItems)
                     {
-                        _flowChart_ProjectParam._flowChartList.Remove(item);
-                    }
-                    foreach (ChartLine chartLine in _flowChart_ProjectParam._chartLineList)
-                    {
-                        if (chartLine.StartBlock == item || chartLine.EndBlock == item)
+                        if (chartLine.StartBlock.SystemName == item.SystemName || chartLine.EndBlock.SystemName == item.SystemName)
                         {
-                            chartLine.StartArrow._connectElement = null;
-                            chartLine.EndArrow._connectElement = null;
-                            _flowChart_ProjectParam._chartLineList.Remove(chartLine);
+                            chartLine.StartArrow.ConnectBlockName = null;
+                            chartLine.EndArrow.ConnectBlockName = null;
+                            StaticPublicData.LineItems.Remove(chartLine);
                             break;
                         }
                     }
+                    if (!(item is StartBlock))
+                    {
+                        StaticPublicData.BlockItems.Remove(item);
+                    }                   
                 }
-                canvaClass._selectedBlockList.Clear();
-                PictureBox_FlowChart.Invalidate();
+                canvaClass.selectedBlockList.Clear();
+                picFlowChart.Invalidate();
                 ProjectIsChange = true;
                 SetScrollMinSize();
             }
@@ -456,18 +444,18 @@ namespace DispenseAPP
         private void 删除ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectIsChange = true;
-            canvaClass._selectedChartLine.StartArrow._connectElement = null;
-            canvaClass._selectedChartLine.EndArrow._connectElement = null;
-            _flowChart_ProjectParam._chartLineList.Remove(canvaClass._selectedChartLine);
-            canvaClass._selectedChartLine = null;
+            canvaClass.mouseDoubleClickSelectLine.StartArrow.ConnectBlockName = null;
+            canvaClass.mouseDoubleClickSelectLine.EndArrow.ConnectBlockName = null;
+            StaticPublicData.LineItems.Remove(canvaClass.mouseDoubleClickSelectLine);
+            canvaClass.mouseDoubleClickSelectLine = null;
         }
         #endregion
 
         private bool QueryFlowChartExitsName(string name)// 查询流程图集合中是否已经存在该名称
         {
-            foreach (Element item in _flowChart_ProjectParam._flowChartList)
+            foreach (BlockItem item in StaticPublicData.BlockItems)
             {
-                if (item.Name == name)
+                if (item.CustomName == name)
                 {
                     return true;
                 }
@@ -477,28 +465,30 @@ namespace DispenseAPP
 
         private void UC_FlowChart_Load(object sender, EventArgs e)
         {
-            if (CurrentWhetherNewProject == true)//如果当前是新建项目 则需要画开始算子块
-            {
-                DrawStartBlock();
-            }
-            else//打开之前的项目
-            {
-                foreach (var item in _flowChart_ProjectParam._flowChartList)
-                {
-                    if (item.NormalIsSelected == true)
-                    {
-                        canvaClass._currentSelectNormalBlock = item;
-                        ChangeSelectedNormalBolck(item);//需注意：如果这个触发事件放在构造函数中会有问题 原因是：在类中事件的初始化在构造函数之后
-                        break;
-                    }
-                }
-            }
+
         }
 
-        private void Panle_FlowChart_Resize(object sender, EventArgs e)
+        private void Panel_FlowChart_Resize(object sender, EventArgs e)
         {
-            CanvaClass.PictureBoxLocation = PictureBox_FlowChart.Location;
-            CanvaClass.PictureBoxBottomRight = new PointF(PictureBox_FlowChart.Location.X + PictureBox_FlowChart.Size.Width, PictureBox_FlowChart.Location.Y + PictureBox_FlowChart.Size.Height);
+            Canva.PictureBoxLocation = picFlowChart.Location;
+            //Canva.PictureBoxBottomRight = new PointF(picFlowChart.Location.X + picFlowChart.Size.Width, picFlowChart.Location.Y + picFlowChart.Size.Height);
         }
+
+        #region 滚动条相关
+        [DllImport("user32.dll")]
+        static extern int SetScrollPos(IntPtr hwnd, int nBar, int nPos, bool bRedraw);
+        [DllImport("user32.dll")]
+        static extern int GetScrollPos(IntPtr hwnd, int nBar);
+        [DllImport("user32.dll")]
+        static extern bool PostMessage(IntPtr hWnd, int nBar, int wParam, int lParam);
+        [DllImport("user32", CharSet = CharSet.Auto)]
+        static extern bool GetScrollRange(IntPtr hWnd, int nBar, out int lpMinPos, out int lpMaxPos);
+
+        const int SB_HORZ = 0x0;
+        const int SB_VERT = 0x1;
+        const int WM_HSCROLL = 0x114;
+        const int WM_VSCROLL = 0x115;
+        const int SB_THUMBPOSITION = 4;
+        #endregion
     }
 }

@@ -33,6 +33,8 @@
             this.Lbl_Delay = new System.Windows.Forms.Label();
             this.Lbl_LogicalOper = new System.Windows.Forms.Label();
             this.Lbl_VarSet = new System.Windows.Forms.Label();
+            this.Lbl_ReadWriteVar = new System.Windows.Forms.Label();
+            this.lblShowMessageBox = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Lbl_Script
@@ -91,12 +93,41 @@
             this.Lbl_VarSet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Lbl_VarSet.Click += new System.EventHandler(this.Lbl_VarSet_Click);
             // 
+            // Lbl_ReadWriteVar
+            // 
+            this.Lbl_ReadWriteVar.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.Lbl_ReadWriteVar.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Lbl_ReadWriteVar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Lbl_ReadWriteVar.Location = new System.Drawing.Point(0, 128);
+            this.Lbl_ReadWriteVar.Name = "Lbl_ReadWriteVar";
+            this.Lbl_ReadWriteVar.Size = new System.Drawing.Size(330, 32);
+            this.Lbl_ReadWriteVar.TabIndex = 5;
+            this.Lbl_ReadWriteVar.Text = "          读写变量";
+            this.Lbl_ReadWriteVar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Lbl_ReadWriteVar.Click += new System.EventHandler(this.Lbl_ReadWriteVar_Click);
+            // 
+            // lblShowMessageBox
+            // 
+            this.lblShowMessageBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblShowMessageBox.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblShowMessageBox.Image = ((System.Drawing.Image)(resources.GetObject("lblShowMessageBox.Image")));
+            this.lblShowMessageBox.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblShowMessageBox.Location = new System.Drawing.Point(0, 160);
+            this.lblShowMessageBox.Name = "lblShowMessageBox";
+            this.lblShowMessageBox.Size = new System.Drawing.Size(330, 32);
+            this.lblShowMessageBox.TabIndex = 6;
+            this.lblShowMessageBox.Text = "          弹出对话框";
+            this.lblShowMessageBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblShowMessageBox.Click += new System.EventHandler(this.Lbl_ShowMessageBox_Click);
+            // 
             // UC_Other_Tools
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.lblShowMessageBox);
+            this.Controls.Add(this.Lbl_ReadWriteVar);
             this.Controls.Add(this.Lbl_Script);
             this.Controls.Add(this.Lbl_Delay);
             this.Controls.Add(this.Lbl_LogicalOper);
@@ -114,5 +145,7 @@
         private System.Windows.Forms.Label Lbl_LogicalOper;
         private System.Windows.Forms.Label Lbl_Delay;
         private System.Windows.Forms.Label Lbl_Script;
+        private System.Windows.Forms.Label Lbl_ReadWriteVar;
+        private System.Windows.Forms.Label lblShowMessageBox;
     }
 }

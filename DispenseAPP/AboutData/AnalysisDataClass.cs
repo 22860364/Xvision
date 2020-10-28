@@ -10,7 +10,7 @@ namespace DispenseAPP.AboutData
 {
     public class AnalysisDataClass //解析数据类
     {
-        public static string AnalysisBracketsData(string SendText, List<ITools> tools)//解析中括号中的数据 用于：【TCP/IP通讯】【三菱Q系列通讯】
+        public static string AnalysisBracketsData(string SendText, List<IToolable> tools)//解析中括号中的数据 用于：【TCP/IP通讯】【三菱Q系列通讯】
         {
             Regex regex = new Regex("<[^<>]*>");
             MatchCollection matchCollection = regex.Matches(SendText);
@@ -22,7 +22,7 @@ namespace DispenseAPP.AboutData
             return SendText;
         }
 
-        public static string GetPropertyValue(string name,List<ITools> tools)
+        public static string GetPropertyValue(string name,List<IToolable> tools)
         {
             string value = null;
             string blockName = name.Split('-')[0].Trim();
@@ -30,11 +30,11 @@ namespace DispenseAPP.AboutData
             string propertyName = null;
             if (blockName == "Vars")//变量
             {
-                value= StaticProjectParamClass.Vars.GetVarClass(varName).VarValue.ToString();
+                value= StaticPublicData.VariableData.GetVarClass(varName).VarValue.ToString();
             }
             else//算子块
             {
-                tools.Find(c => c.BlockName == blockName);
+                tools.Find(c => c.StepCustomName == blockName);
                 if (varName.Contains('['))//如果包含 [ 则代表该数据为数组类型
                 {
                     propertyName = varName.Substring(0, varName.IndexOf('['));//得到属性名称
@@ -86,7 +86,7 @@ namespace DispenseAPP.AboutData
         public static List<string> QueryReferenceVar(string type = "NSBPN[]S[]B[]P[]")//查询引用的变量
         {
             List<string> strValue = new List<string>();
-            foreach (VarCollectionClass item in StaticProjectParamClass.Vars.varList)//初始化变量引用
+            foreach (VarCollectionClass item in StaticPublicData.VariableData.varList)//初始化变量引用
             {
                 if (type.Contains(item.VarType))
                 {
@@ -105,7 +105,7 @@ namespace DispenseAPP.AboutData
                         case "S[]":
                         case "B[]":
                         case "P[]":
-                                for (int i = 0; i < StaticProjectParamClass.Vars.GetVarClass(item.VarName).VarValue.Count; i++)
+                                for (int i = 0; i < StaticPublicData.VariableData.GetVarClass(item.VarName).VarValue.Count; i++)
                                 {
                                     if (item.VarType == "P[]")
                                     {
@@ -124,10 +124,10 @@ namespace DispenseAPP.AboutData
             return strValue;
         }
 
-        public static List<string> QueryReferenceTools(List<ITools> toolsList)//查询引用的工具
+        public static List<string> QueryReferenceTools(List<IToolable> toolsList)//查询引用的工具
         {
             List<string> strValue = new List<string>();
-            foreach (ITools tools in toolsList)
+            foreach (IToolable tools in toolsList)
             {
                 foreach (PropertyInfo items in tools.GetType().GetProperties())//遍历获得当前工具中所有的属性
                 {
@@ -140,15 +140,15 @@ namespace DispenseAPP.AboutData
                             {
                                 for (int i = 0; i < array.Length; i++)
                                 {
-                                    strValue.Add(tools.BlockName + "-" + items.Name + "[" + i.ToString() + "].X");
-                                    strValue.Add(tools.BlockName + "-" + items.Name + "[" + i.ToString() + "].Y");
+                                    strValue.Add(tools.StepCustomName + "-" + items.Name + "[" + i.ToString() + "].X");
+                                    strValue.Add(tools.StepCustomName + "-" + items.Name + "[" + i.ToString() + "].Y");
                                 }
                             }
                             else
                             {
                                 for (int i = 0; i < array.Length; i++)
                                 {
-                                    strValue.Add(tools.BlockName + "-" + items.Name + "[" + i.ToString() + "]");
+                                    strValue.Add(tools.StepCustomName + "-" + items.Name + "[" + i.ToString() + "]");
                                 }
                             }
                         }
@@ -156,12 +156,12 @@ namespace DispenseAPP.AboutData
                         {
                             if (obj is PointF point)
                             {
-                                strValue.Add(tools.BlockName + "-" + items.Name + ".X");
-                                strValue.Add(tools.BlockName + "-" + items.Name + ".Y");
+                                strValue.Add(tools.StepCustomName + "-" + items.Name + ".X");
+                                strValue.Add(tools.StepCustomName + "-" + items.Name + ".Y");
                             }
                             else
                             {
-                                strValue.Add(tools.BlockName + "-" + items.Name);
+                                strValue.Add(tools.StepCustomName + "-" + items.Name);
                             }
                         }
                     }

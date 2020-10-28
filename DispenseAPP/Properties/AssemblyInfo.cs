@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
+[assembly: log4net.Config.XmlConfigurator(ConfigFileExtension = "config", Watch = true)]
 [assembly: AssemblyProduct("DispenseAPP")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]

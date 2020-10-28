@@ -32,37 +32,33 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEdit));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.Panel_ImageWorkFlow = new System.Windows.Forms.Panel();
-            this.CM_Operation = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.Tsmi_Execute = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tsmi_Delete = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tsmi_Edit = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tsmi_Forbidden = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tsmi_Copy = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tsmi_Past = new System.Windows.Forms.ToolStripMenuItem();
-            this.Tsmi_Cut = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiExecute = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiForbidden = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCopy = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPast = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCut = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
             this.DG_Edit = new System.Windows.Forms.DataGridView();
-            this.BlockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExecuteState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExecuteResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ExecuteTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColStepName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ts_Tools = new System.Windows.Forms.ToolStrip();
             this.Tsbtn_Image_IO = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_ImageEnhancement = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_MotionControl = new System.Windows.Forms.ToolStripButton();
             this.Tsbtn_Location = new System.Windows.Forms.ToolStripButton();
             this.Tsbtn_Measure = new System.Windows.Forms.ToolStripButton();
             this.Tsbtn_ImageDetectionAndAnalysis = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_BarcodeRecognition = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_CommunControl = new System.Windows.Forms.ToolStripButton();
             this.Tsbtn_Other = new System.Windows.Forms.ToolStripButton();
             this.Panel_Tools = new System.Windows.Forms.Panel();
-            this.CM_Operation.SuspendLayout();
+            this.BGWrok = new System.ComponentModel.BackgroundWorker();
+            this.cms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Edit)).BeginInit();
             this.ts_Tools.SuspendLayout();
             this.SuspendLayout();
@@ -73,82 +69,100 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel_ImageWorkFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Panel_ImageWorkFlow.Location = new System.Drawing.Point(1, 0);
+            this.Panel_ImageWorkFlow.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Panel_ImageWorkFlow.Location = new System.Drawing.Point(-1, 0);
             this.Panel_ImageWorkFlow.Name = "Panel_ImageWorkFlow";
-            this.Panel_ImageWorkFlow.Size = new System.Drawing.Size(708, 600);
+            this.Panel_ImageWorkFlow.Size = new System.Drawing.Size(710, 600);
             this.Panel_ImageWorkFlow.TabIndex = 0;
-            this.Panel_ImageWorkFlow.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.Panel_ImageWorkFlow_ControlAdded);
             // 
-            // CM_Operation
+            // cms
             // 
-            this.CM_Operation.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(219)))), ((int)(((byte)(233)))));
-            this.CM_Operation.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.CM_Operation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Tsmi_Execute,
-            this.Tsmi_Delete,
-            this.Tsmi_Edit,
-            this.Tsmi_Forbidden,
-            this.Tsmi_Copy,
-            this.Tsmi_Past,
-            this.Tsmi_Cut});
-            this.CM_Operation.Name = "CM_Edit";
-            this.CM_Operation.Size = new System.Drawing.Size(149, 172);
+            this.cms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(219)))), ((int)(((byte)(233)))));
+            this.cms.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiExecute,
+            this.tsmiDelete,
+            this.tsmiEdit,
+            this.tsmiForbidden,
+            this.tsmiCopy,
+            this.tsmiPast,
+            this.tsmiCut,
+            this.tsmiMoveUp,
+            this.tsmiMoveDown});
+            this.cms.Name = "CM_Edit";
+            this.cms.Size = new System.Drawing.Size(149, 220);
             // 
-            // Tsmi_Execute
+            // tsmiExecute
             // 
-            this.Tsmi_Execute.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Execute.Image")));
-            this.Tsmi_Execute.Name = "Tsmi_Execute";
-            this.Tsmi_Execute.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Execute.Text = "执行此工具";
-            this.Tsmi_Execute.Click += new System.EventHandler(this.Tsmi_Execute_Click);
+            this.tsmiExecute.Image = ((System.Drawing.Image)(resources.GetObject("tsmiExecute.Image")));
+            this.tsmiExecute.Name = "tsmiExecute";
+            this.tsmiExecute.Size = new System.Drawing.Size(148, 24);
+            this.tsmiExecute.Text = "执行此工具";
+            this.tsmiExecute.Click += new System.EventHandler(this.Tsmi_Execute_Click);
             // 
-            // Tsmi_Delete
+            // tsmiDelete
             // 
-            this.Tsmi_Delete.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Delete.Image")));
-            this.Tsmi_Delete.Name = "Tsmi_Delete";
-            this.Tsmi_Delete.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Delete.Text = "删除";
-            this.Tsmi_Delete.Click += new System.EventHandler(this.Tsmi_Delete_Click);
+            this.tsmiDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDelete.Image")));
+            this.tsmiDelete.Name = "tsmiDelete";
+            this.tsmiDelete.Size = new System.Drawing.Size(148, 24);
+            this.tsmiDelete.Text = "删除";
+            this.tsmiDelete.Click += new System.EventHandler(this.Tsmi_Delete_Click);
             // 
-            // Tsmi_Edit
+            // tsmiEdit
             // 
-            this.Tsmi_Edit.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Edit.Image")));
-            this.Tsmi_Edit.Name = "Tsmi_Edit";
-            this.Tsmi_Edit.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Edit.Text = "编辑";
-            this.Tsmi_Edit.Click += new System.EventHandler(this.Tsmi_Edit_Click);
+            this.tsmiEdit.Image = ((System.Drawing.Image)(resources.GetObject("tsmiEdit.Image")));
+            this.tsmiEdit.Name = "tsmiEdit";
+            this.tsmiEdit.Size = new System.Drawing.Size(148, 24);
+            this.tsmiEdit.Text = "编辑";
+            this.tsmiEdit.Click += new System.EventHandler(this.Tsmi_Edit_Click);
             // 
-            // Tsmi_Forbidden
+            // tsmiForbidden
             // 
-            this.Tsmi_Forbidden.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Forbidden.Image")));
-            this.Tsmi_Forbidden.Name = "Tsmi_Forbidden";
-            this.Tsmi_Forbidden.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Forbidden.Text = "禁用";
-            this.Tsmi_Forbidden.Click += new System.EventHandler(this.Tsmi_Forbidden_Click);
+            this.tsmiForbidden.Image = global::DispenseAPP.Properties.Resources.禁用;
+            this.tsmiForbidden.Name = "tsmiForbidden";
+            this.tsmiForbidden.Size = new System.Drawing.Size(148, 24);
+            this.tsmiForbidden.Text = "禁用";
+            this.tsmiForbidden.Click += new System.EventHandler(this.Tsmi_Forbidden_Click);
             // 
-            // Tsmi_Copy
+            // tsmiCopy
             // 
-            this.Tsmi_Copy.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Copy.Image")));
-            this.Tsmi_Copy.Name = "Tsmi_Copy";
-            this.Tsmi_Copy.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Copy.Text = "复制";
-            this.Tsmi_Copy.Click += new System.EventHandler(this.Tsmi_Copy_Click);
+            this.tsmiCopy.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCopy.Image")));
+            this.tsmiCopy.Name = "tsmiCopy";
+            this.tsmiCopy.Size = new System.Drawing.Size(148, 24);
+            this.tsmiCopy.Text = "复制";
+            this.tsmiCopy.Click += new System.EventHandler(this.Tsmi_Copy_Click);
             // 
-            // Tsmi_Past
+            // tsmiPast
             // 
-            this.Tsmi_Past.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Past.Image")));
-            this.Tsmi_Past.Name = "Tsmi_Past";
-            this.Tsmi_Past.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Past.Text = "粘贴";
-            this.Tsmi_Past.Click += new System.EventHandler(this.Tsmi_Past_Click);
+            this.tsmiPast.Image = ((System.Drawing.Image)(resources.GetObject("tsmiPast.Image")));
+            this.tsmiPast.Name = "tsmiPast";
+            this.tsmiPast.Size = new System.Drawing.Size(148, 24);
+            this.tsmiPast.Text = "粘贴";
+            this.tsmiPast.Click += new System.EventHandler(this.TsmiPast_Click);
             // 
-            // Tsmi_Cut
+            // tsmiCut
             // 
-            this.Tsmi_Cut.Image = ((System.Drawing.Image)(resources.GetObject("Tsmi_Cut.Image")));
-            this.Tsmi_Cut.Name = "Tsmi_Cut";
-            this.Tsmi_Cut.Size = new System.Drawing.Size(148, 24);
-            this.Tsmi_Cut.Text = "剪切";
-            this.Tsmi_Cut.Click += new System.EventHandler(this.Tsmi_Cut_Click);
+            this.tsmiCut.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCut.Image")));
+            this.tsmiCut.Name = "tsmiCut";
+            this.tsmiCut.Size = new System.Drawing.Size(148, 24);
+            this.tsmiCut.Text = "剪切";
+            this.tsmiCut.Click += new System.EventHandler(this.TsmiCut_Click);
+            // 
+            // tsmiMoveUp
+            // 
+            this.tsmiMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiMoveUp.Image")));
+            this.tsmiMoveUp.Name = "tsmiMoveUp";
+            this.tsmiMoveUp.Size = new System.Drawing.Size(148, 24);
+            this.tsmiMoveUp.Text = "上移";
+            this.tsmiMoveUp.Click += new System.EventHandler(this.Tsmi_MoveUp_Click);
+            // 
+            // tsmiMoveDown
+            // 
+            this.tsmiMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsmiMoveDown.Image")));
+            this.tsmiMoveDown.Name = "tsmiMoveDown";
+            this.tsmiMoveDown.Size = new System.Drawing.Size(148, 24);
+            this.tsmiMoveDown.Text = "下移";
+            this.tsmiMoveDown.Click += new System.EventHandler(this.Tsmi_MoveDown_Click);
             // 
             // DG_Edit
             // 
@@ -163,102 +177,92 @@
             this.DG_Edit.BackgroundColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun-ExtB", 10.5F);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.DG_Edit.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.DG_Edit.ColumnHeadersHeight = 25;
             this.DG_Edit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.DG_Edit.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.BlockName,
-            this.ExecuteState,
-            this.ExecuteResult,
-            this.ExecuteTime});
+            this.ColStepName,
+            this.ColState,
+            this.ColResult,
+            this.ColTime});
             this.DG_Edit.GridColor = System.Drawing.Color.Black;
             this.DG_Edit.Location = new System.Drawing.Point(712, 0);
-            this.DG_Edit.MultiSelect = false;
             this.DG_Edit.Name = "DG_Edit";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("SimSun-ExtB", 10.5F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.DG_Edit.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.DG_Edit.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.DG_Edit.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.DG_Edit.RowHeadersVisible = false;
             this.DG_Edit.RowHeadersWidth = 28;
             this.DG_Edit.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.DG_Edit.RowTemplate.Height = 30;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.DodgerBlue;
+            this.DG_Edit.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.DG_Edit.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.DG_Edit.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LimeGreen;
+            this.DG_Edit.RowTemplate.Height = 28;
             this.DG_Edit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DG_Edit.Size = new System.Drawing.Size(328, 250);
             this.DG_Edit.TabIndex = 28;
+            this.DG_Edit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_Edit_CellDoubleClick);
             this.DG_Edit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DG_Edit_MouseDown);
             // 
-            // BlockName
+            // ColStepName
             // 
-            this.BlockName.DataPropertyName = "BlockName";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.BlockName.DefaultCellStyle = dataGridViewCellStyle3;
-            this.BlockName.HeaderText = "算子名";
-            this.BlockName.Name = "BlockName";
-            this.BlockName.ReadOnly = true;
-            this.BlockName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColStepName.DataPropertyName = "StepCustomName";
+            this.ColStepName.HeaderText = "算子名";
+            this.ColStepName.Name = "ColStepName";
+            this.ColStepName.ReadOnly = true;
+            this.ColStepName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // ExecuteState
+            // ColState
             // 
-            this.ExecuteState.DataPropertyName = "ExecuteState";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExecuteState.DefaultCellStyle = dataGridViewCellStyle4;
-            this.ExecuteState.HeaderText = "状态";
-            this.ExecuteState.Name = "ExecuteState";
-            this.ExecuteState.ReadOnly = true;
-            this.ExecuteState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColState.DataPropertyName = "StepState";
+            this.ColState.FillWeight = 35F;
+            this.ColState.HeaderText = "状态";
+            this.ColState.Name = "ColState";
+            this.ColState.ReadOnly = true;
             // 
-            // ExecuteResult
+            // ColResult
             // 
-            this.ExecuteResult.DataPropertyName = "ExecuteResult";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExecuteResult.DefaultCellStyle = dataGridViewCellStyle5;
-            this.ExecuteResult.HeaderText = "结果";
-            this.ExecuteResult.Name = "ExecuteResult";
-            this.ExecuteResult.ReadOnly = true;
-            this.ExecuteResult.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColResult.DataPropertyName = "ExecutionResult";
+            this.ColResult.HeaderText = "结果";
+            this.ColResult.Name = "ColResult";
+            this.ColResult.ReadOnly = true;
+            this.ColResult.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // ExecuteTime
+            // ColTime
             // 
-            this.ExecuteTime.DataPropertyName = "ExecuteTime";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExecuteTime.DefaultCellStyle = dataGridViewCellStyle6;
-            this.ExecuteTime.HeaderText = "时间(ms)";
-            this.ExecuteTime.Name = "ExecuteTime";
-            this.ExecuteTime.ReadOnly = true;
-            this.ExecuteTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ColTime.DataPropertyName = "ExecutionTime";
+            this.ColTime.FillWeight = 35F;
+            this.ColTime.HeaderText = "时间";
+            this.ColTime.Name = "ColTime";
+            this.ColTime.ReadOnly = true;
+            this.ColTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // ts_Tools
             // 
             this.ts_Tools.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ts_Tools.AutoSize = false;
-            this.ts_Tools.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            this.ts_Tools.BackColor = System.Drawing.Color.White;
             this.ts_Tools.CanOverflow = false;
             this.ts_Tools.Dock = System.Windows.Forms.DockStyle.None;
             this.ts_Tools.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ts_Tools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Tsbtn_Image_IO,
-            this.Tsbtn_ImageEnhancement,
-            this.Tsbtn_MotionControl,
             this.Tsbtn_Location,
             this.Tsbtn_Measure,
             this.Tsbtn_ImageDetectionAndAnalysis,
-            this.Tsbtn_BarcodeRecognition,
-            this.Tsbtn_CommunControl,
             this.Tsbtn_Other});
             this.ts_Tools.Location = new System.Drawing.Point(712, 253);
             this.ts_Tools.MaximumSize = new System.Drawing.Size(325, 35);
@@ -279,30 +283,6 @@
             this.Tsbtn_Image_IO.Size = new System.Drawing.Size(35, 32);
             this.Tsbtn_Image_IO.Text = "图像输入输出";
             this.Tsbtn_Image_IO.Click += new System.EventHandler(this.Tsbtn_Image_IO_Click);
-            // 
-            // Tsbtn_ImageEnhancement
-            // 
-            this.Tsbtn_ImageEnhancement.AutoSize = false;
-            this.Tsbtn_ImageEnhancement.CheckOnClick = true;
-            this.Tsbtn_ImageEnhancement.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Tsbtn_ImageEnhancement.Image = ((System.Drawing.Image)(resources.GetObject("Tsbtn_ImageEnhancement.Image")));
-            this.Tsbtn_ImageEnhancement.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Tsbtn_ImageEnhancement.Name = "Tsbtn_ImageEnhancement";
-            this.Tsbtn_ImageEnhancement.Size = new System.Drawing.Size(35, 32);
-            this.Tsbtn_ImageEnhancement.Text = "图像增强";
-            this.Tsbtn_ImageEnhancement.Click += new System.EventHandler(this.Tsbtn_ImageEnhancement_Click);
-            // 
-            // Tsbtn_MotionControl
-            // 
-            this.Tsbtn_MotionControl.AutoSize = false;
-            this.Tsbtn_MotionControl.CheckOnClick = true;
-            this.Tsbtn_MotionControl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Tsbtn_MotionControl.Image = ((System.Drawing.Image)(resources.GetObject("Tsbtn_MotionControl.Image")));
-            this.Tsbtn_MotionControl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Tsbtn_MotionControl.Name = "Tsbtn_MotionControl";
-            this.Tsbtn_MotionControl.Size = new System.Drawing.Size(35, 32);
-            this.Tsbtn_MotionControl.Text = "运动控制";
-            this.Tsbtn_MotionControl.Click += new System.EventHandler(this.Tsbtn_MotionControl_Click);
             // 
             // Tsbtn_Location
             // 
@@ -340,30 +320,6 @@
             this.Tsbtn_ImageDetectionAndAnalysis.Text = "检测分析";
             this.Tsbtn_ImageDetectionAndAnalysis.Click += new System.EventHandler(this.Tsbtn_ImageDetectionAndAnalysis_Click);
             // 
-            // Tsbtn_BarcodeRecognition
-            // 
-            this.Tsbtn_BarcodeRecognition.AutoSize = false;
-            this.Tsbtn_BarcodeRecognition.CheckOnClick = true;
-            this.Tsbtn_BarcodeRecognition.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Tsbtn_BarcodeRecognition.Image = ((System.Drawing.Image)(resources.GetObject("Tsbtn_BarcodeRecognition.Image")));
-            this.Tsbtn_BarcodeRecognition.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Tsbtn_BarcodeRecognition.Name = "Tsbtn_BarcodeRecognition";
-            this.Tsbtn_BarcodeRecognition.Size = new System.Drawing.Size(35, 32);
-            this.Tsbtn_BarcodeRecognition.Text = "条码识别";
-            this.Tsbtn_BarcodeRecognition.Click += new System.EventHandler(this.Tsbtn_BarcodeRecognition_Click);
-            // 
-            // Tsbtn_CommunControl
-            // 
-            this.Tsbtn_CommunControl.AutoSize = false;
-            this.Tsbtn_CommunControl.CheckOnClick = true;
-            this.Tsbtn_CommunControl.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Tsbtn_CommunControl.Image = ((System.Drawing.Image)(resources.GetObject("Tsbtn_CommunControl.Image")));
-            this.Tsbtn_CommunControl.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.Tsbtn_CommunControl.Name = "Tsbtn_CommunControl";
-            this.Tsbtn_CommunControl.Size = new System.Drawing.Size(35, 32);
-            this.Tsbtn_CommunControl.Text = "通讯控制";
-            this.Tsbtn_CommunControl.Click += new System.EventHandler(this.Tsbtn_CommunControl_Click);
-            // 
             // Tsbtn_Other
             // 
             this.Tsbtn_Other.AutoSize = false;
@@ -387,6 +343,11 @@
             this.Panel_Tools.Size = new System.Drawing.Size(328, 309);
             this.Panel_Tools.TabIndex = 1;
             // 
+            // BGWrok
+            // 
+            this.BGWrok.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrok_DoWork);
+            this.BGWrok.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrok_RunWorkerCompleted);
+            // 
             // FrmEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -397,10 +358,11 @@
             this.Controls.Add(this.DG_Edit);
             this.Controls.Add(this.Panel_Tools);
             this.Controls.Add(this.Panel_ImageWorkFlow);
+            this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FrmEdit";
             this.Text = "FrmWorkFlow";
-            this.CM_Operation.ResumeLayout(false);
+            this.cms.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DG_Edit)).EndInit();
             this.ts_Tools.ResumeLayout(false);
             this.ts_Tools.PerformLayout();
@@ -411,29 +373,28 @@
         #endregion
 
         private System.Windows.Forms.Panel Panel_ImageWorkFlow;
-        private System.Windows.Forms.ContextMenuStrip CM_Operation;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Delete;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Edit;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Forbidden;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Copy;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Past;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Cut;
+        private System.Windows.Forms.ContextMenuStrip cms;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDelete;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEdit;
+        private System.Windows.Forms.ToolStripMenuItem tsmiForbidden;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCopy;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPast;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCut;
         private System.Windows.Forms.DataGridView DG_Edit;
         private System.Windows.Forms.ToolStrip ts_Tools;
         private System.Windows.Forms.ToolStripButton Tsbtn_Image_IO;
-        private System.Windows.Forms.ToolStripButton Tsbtn_ImageEnhancement;
         private System.Windows.Forms.ToolStripButton Tsbtn_Location;
         private System.Windows.Forms.ToolStripButton Tsbtn_Measure;
         private System.Windows.Forms.ToolStripButton Tsbtn_ImageDetectionAndAnalysis;
-        private System.Windows.Forms.ToolStripButton Tsbtn_BarcodeRecognition;
-        private System.Windows.Forms.ToolStripButton Tsbtn_CommunControl;
         private System.Windows.Forms.ToolStripButton Tsbtn_Other;
         private System.Windows.Forms.Panel Panel_Tools;
-        private System.Windows.Forms.ToolStripMenuItem Tsmi_Execute;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BlockName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExecuteState;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExecuteResult;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ExecuteTime;
-        private System.Windows.Forms.ToolStripButton Tsbtn_MotionControl;
+        private System.Windows.Forms.ToolStripMenuItem tsmiExecute;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoveUp;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoveDown;
+        private System.ComponentModel.BackgroundWorker BGWrok;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColStepName;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ColState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColResult;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColTime;
     }
 }

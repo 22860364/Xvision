@@ -3,7 +3,6 @@ using DispenseAPP.CustomControl;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Documents;
 using System.Windows.Forms;
 
 namespace DispenseAPP.OtherTools.VariableSetTools
@@ -16,7 +15,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             InitializeComponent();
             InitialDynamicControl();//初始化动态控件
             _varStruct = varCollection;
-            txt_Name.Text = _varStruct.VarName;
+            Txt_Name.Text = _varStruct.VarName;
             cmb_Type.SelectedItem = _varStruct.VarType;
             txt_Remark.Text = _varStruct.VarRemark;
             switch (cmb_Type.SelectedItem.ToString())
@@ -66,8 +65,7 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             }
         }
 
-        public event EditConfirmDelegate _clickOKEvent;
-
+        public event Action<object> _clickOKEvent;
 
         //N类型的变量
         private NumericUpDown num_Value = new NumericUpDown();
@@ -86,20 +84,20 @@ namespace DispenseAPP.OtherTools.VariableSetTools
         private void InitialDynamicControl()
         {
             //P类型的变量
-            lbl_X.Location = new Point(75, 126);
+            lbl_X.Location = new Point(75, 122);
             lbl_X.Size = new Size(28, 17);
             lbl_X.Text = "X:";
             lbl_X.Visible = false;
             Controls.Add(lbl_X);
             dynamicList.Add(lbl_X);
-            lbl_Y.Location = new Point(202, 126);
+            lbl_Y.Location = new Point(202, 122);
             lbl_Y.Size = new Size(27, 17);
             lbl_Y.Text = "Y:";
             lbl_Y.Visible = false;
             Controls.Add(lbl_Y);
             dynamicList.Add(lbl_Y);
             num_X.DecimalPlaces = 4;
-            num_X.Location = new Point(108, 124);
+            num_X.Location = new Point(108, 122);
             num_X.Minimum = -100000;
             num_X.Maximum = 100000;
             num_X.Size = new Size(87, 23);
@@ -107,16 +105,16 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             Controls.Add(num_X);
             dynamicList.Add(num_X);
             num_Y.DecimalPlaces = 4;
-            num_Y.Location = new Point(235, 124);
+            num_Y.Location = new Point(235, 122);
             num_Y.Size = new Size(87, 23);
             num_Y.Minimum = -100000;
             num_Y.Maximum = 100000;
             num_Y.Visible = false;
-            dynamicList.Add(num_X);
+            dynamicList.Add(num_Y);
             Controls.Add(num_Y);
             //N类型的变量
             num_Value.DecimalPlaces = 8;
-            num_Value.Location = new Point(83, 121);
+            num_Value.Location = new Point(83, 122);
             num_Value.Size = new Size(149, 25);
             num_Value.Minimum = -1000000000;
             num_Value.Maximum = 1000000000;
@@ -124,14 +122,14 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             Controls.Add(num_Value);
             dynamicList.Add(num_Value);
             //B类型的变量
-            rbtn_True.Location = new Point(83, 124);
+            rbtn_True.Location = new Point(83, 122);
             rbtn_True.Size = new Size(52, 21);
             rbtn_True.Text = "True";
             rbtn_True.UseVisualStyleBackColor = true;
             rbtn_True.Visible = false;
             Controls.Add(rbtn_True);
             dynamicList.Add(rbtn_True);
-            rbtn_False.Location = new Point(202, 126);
+            rbtn_False.Location = new Point(202, 122);
             rbtn_False.Size = new Size(55, 21);
             rbtn_False.Text = "False";
             rbtn_False.UseVisualStyleBackColor = true;
@@ -139,15 +137,16 @@ namespace DispenseAPP.OtherTools.VariableSetTools
             Controls.Add(rbtn_False);
             dynamicList.Add(rbtn_False);
             //S类型的变量
-            txt_Value.Location = new Point(83, 123);
+            txt_Value.Location = new Point(83, 122);
             txt_Value.Size = new Size(208, 23);
             txt_Value.Visible = false;
             Controls.Add(txt_Value);
             dynamicList.Add(txt_Value);
         }
 
-        private void btn_OK_Click(object sender, EventArgs e)
+        private void Btn_OK_Click(object sender, EventArgs e)
         {
+            _varStruct.VarName = Txt_Name.Text;
             _varStruct.VarType = cmb_Type.SelectedItem.ToString();//变量类型
             _varStruct.VarRemark = txt_Remark.Text;//变量备注                 
             switch (cmb_Type.SelectedItem.ToString())
@@ -184,16 +183,16 @@ namespace DispenseAPP.OtherTools.VariableSetTools
                     _varStruct.VarValue = new List<PointF>();
                     break;
             }
-            _clickOKEvent(_varStruct);
+            _clickOKEvent?.Invoke(_varStruct); 
             Close();
         }
 
-        private void btn_Cancel_Click(object sender, EventArgs e)
+        private void Btn_Cancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void cmb_Type_SelectedIndexChanged(object sender, EventArgs e)//当combobox的索引发生变化时
+        private void Cmb_Type_SelectedIndexChanged(object sender, EventArgs e)//当combobox的索引发生变化时
         {
             foreach (Control item in dynamicList)
             {
