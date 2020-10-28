@@ -598,7 +598,8 @@ namespace CameraLibrary.CameraType
 
         public override bool InitialCamera(string _serialNumber)  // 初始化相机
         {
-            this.userID = _serialNumber;
+            string name = "Machine Vision:" + _serialNumber;
+            this.userID = name;
             /* 设备搜索 */
             
 
@@ -609,22 +610,33 @@ namespace CameraLibrary.CameraType
                     if (li[i].Key == userID)
                     {
                         m_dev = Enumerator.GetDeviceByKey(userID);
-                        using (IEnumParameter p = m_dev.ParameterCollection[ParametrizeNameSet.ImagePixelFormat])
+                        try
                         {
-                            p.SetValue("Mono8");
-                        }
-                        /* 开启相机线程 */
-                        renderThread = new Thread(new ThreadStart(ShowThread));
-                        renderThread.IsBackground = true;
-                        renderThread.Start();
-                        /* 设置缓存个数为8（默认值为16） */
-                        m_dev.StreamGrabber.SetBufferCount(8);
+                            if (m_dev.Open())
+                            {
+                                using (IEnumParameter p = m_dev.ParameterCollection[ParametrizeNameSet.ImagePixelFormat])
+                                {
+                                    p.SetValue("Mono8");
+                                }
+                                /* 开启相机线程 */
+                                renderThread = new Thread(new ThreadStart(ShowThread));
+                                renderThread.IsBackground = true;
+                                renderThread.Start();
+                                /* 设置缓存个数为8（默认值为16） */
+                                m_dev.StreamGrabber.SetBufferCount(8);
 
-                        /* 注册码流回调事件 图像回调函数 */
-                        m_dev.StreamGrabber.ImageGrabbed += OnImageGrabbed;
-                        /* 相机短线回调 */
-                        m_dev.ConnectionLost += OnConnectLoss;
-                        ConnectState = true;
+                                /* 注册码流回调事件 图像回调函数 */
+                                m_dev.StreamGrabber.ImageGrabbed += OnImageGrabbed;
+                                /* 相机短线回调 */
+                                m_dev.ConnectionLost += OnConnectLoss;
+                                ConnectState = true;
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            return false;
+                        }
+                        
                     }
                 }
             }

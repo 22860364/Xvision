@@ -15,7 +15,7 @@ namespace CameraLibrary
                 case "HIKVISION":
                     camerable = new HIKVISION();
                     break;
-                case "DaHua":
+                case "Machine Vision":
                     camerable = new DaHua();
                     break;
             }
