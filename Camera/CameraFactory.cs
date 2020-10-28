@@ -1,4 +1,6 @@
-﻿namespace CameraLibrary
+﻿using CameraLibrary.CameraType;
+
+namespace CameraLibrary
 {
     public class CameraFactory //这里试着使用工厂方法模式或者抽象工厂模式 
     {
@@ -12,6 +14,9 @@
                     break;
                 case "HIKVISION":
                     camerable = new HIKVISION();
+                    break;
+                case "DaHua":
+                    camerable = new DaHua();
                     break;
             }
             return camerable;
