@@ -139,24 +139,7 @@ namespace DispenseAPP.FrmList
                     });
                 }
             }
-            //foreach (string item in list)
-            //{
-            //    if (StaticPublicData.CameraDataItems[item] != null && StaticPublicData.CameraDataItems[item].AutoConnect)
-            //    {
-            //        ICamerable cameraObject = CameraFactory.CreateCameraObject(item.Split(':')[0]);//根据厂商名称创建对应的相机
-            //        cameraObject.InitialCamera(item.Split(':')[1]);
-            //        CameraIDObjectDict.Add(item, cameraObject);
-            //        if (StaticPublicData.CameraDataItems[item] == null)
-            //        {
-            //            StaticPublicData.CameraDataItems.Add(new CameraDataItem
-            //            {
-            //                SystemName = item,
-            //                CustomName = item.Split(':')[1],
-            //                AutoConnect = true
-            //            });
-            //        }
-            //    }
-            //}
+            
         }
     }
 }

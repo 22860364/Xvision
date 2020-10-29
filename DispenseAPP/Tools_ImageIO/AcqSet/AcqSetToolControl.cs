@@ -101,7 +101,8 @@ namespace DispenseAPP.Tools_ImageIO.AcqSet
             trbExposureTime.Minimum = (int)Camerable.GetMinExposureTime();
             nudExposureTime.Minimum = (decimal)Camerable.GetMinExposureTime();
             SettingControlMinMaxValue = false;
-            if (AcqSetEntity.SelectedCameraName.Equals(cmbCamera.Text))
+           
+            if (AcqSetEntity.SelectedCameraName != null && AcqSetEntity.SelectedCameraName.Equals(cmbCamera.Text))
             {
                 nudExposureTime.Value = (decimal)AcqSetEntity.ExposureTime;
                 nudDelayTime.Value = (decimal)AcqSetEntity.TriggerDelayTime;
