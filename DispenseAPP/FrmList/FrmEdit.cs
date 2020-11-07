@@ -1,5 +1,11 @@
 ﻿using DispenseAPP.MyStyleControl;
 using DispenseAPP.Tools_Image_IO;
+using DispenseAPP.Tools_ImageEnhancement;
+using DispenseAPP.Tools_ImageEnhancement.DisposeImage;
+using DispenseAPP.Tools_ImageEnhancement.Filter;
+using DispenseAPP.Tools_ImageEnhancement.Morphology;
+using DispenseAPP.Tools_ImageEnhancement.Pretreatment;
+using DispenseAPP.Tools_ImageEnhancement.RotateShiftImage;
 using DispenseAPP.Tools_ImageIO.AcqImage;
 using DispenseAPP.Tools_ImageIO.AcqSet;
 using DispenseAPP.Tools_ImageIO.ImportImage;
@@ -11,6 +17,10 @@ using DispenseAPP.Tools_Other.DelayTime;
 using DispenseAPP.Tools_Other.LogicOperation;
 using DispenseAPP.Tools_Other.ShowMessageBox;
 using DispenseAPP.Tools_Other.VarSet;
+using DispenseAPP.Tools_ScreenCheck;
+using DispenseAPP.Tools_ScreenCheck.BadParameterSetting;
+using DispenseAPP.Tools_ScreenCheck.DustFilter;
+using DispenseAPP.Tools_ScreenCheck.LightLeak;
 using DispenseAPP.UserManagement;
 using System;
 using System.Collections.Generic;
@@ -25,10 +35,12 @@ namespace DispenseAPP
     {
         UC_FlowChart _workFlow;
         FrmDebug _frmDebug = new FrmDebug();
+        UC_Image_Enhancement_Tools uc_Image_Enhancement_Tools = new UC_Image_Enhancement_Tools();//图像增强
         UC_Image_IO_Tools uc_ImageIO_Tools = new UC_Image_IO_Tools();//图像输入和输出
         UC_Location_Tools uc_Location_Tools = new UC_Location_Tools();//定位
         UC_Other_Tools uc_Other_Tools = new UC_Other_Tools();//其它工具
-        ToolsKitNameEnum _clickToolsListName;
+        UC_ScreenCheck_Tools uc_ScreenCheck_Tools = new UC_ScreenCheck_Tools(); // 屏检
+         ToolsKitNameEnum _clickToolsListName;
         OperatorBlock normalBlock = null;
         public event Action JumpToDebug;
         public event Action<bool> Tools_Add_Edit_Event;//添加或编辑工具
@@ -61,8 +73,10 @@ namespace DispenseAPP
             Tsbtn_Image_IO.CheckState = CheckState.Checked;
             _workFlow.ChangeSelectedNormalBolck += WorkFlow_ChangeSelectedNormalBolck;//当选择的算子块更改时发生
             uc_ImageIO_Tools.ClickToolsEvent += Uc_ImageIO_Tools_ClickToolsEvent;
+            uc_Image_Enhancement_Tools.ClickToolsEvent += Uc_Image_Enhancement_Tools_ClickToolsEvent;
             uc_Location_Tools.ClickToolsEvent += Uc_Location_Tools_ClickToolsEvent;
             uc_Other_Tools.ClickToolsEvent += Uc_Other_Tools_ClickToolsEvent;
+            uc_ScreenCheck_Tools.ClickToolsEvent += Uc_ScreenCheck_Tools_ClickToolsEvent;
             List<BlockItem> element = StaticPublicData.BlockItems.GetAllOperator();
             foreach (BlockItem item in element)
             {
@@ -75,6 +89,8 @@ namespace DispenseAPP
                 }
             }
         }
+
+       
 
         public void SetPurviewControl()
         {
@@ -125,36 +141,23 @@ namespace DispenseAPP
             Tools_Add_Edit_Event(false);
             return true;
         }
-
+        /// <summary>
+        ///图像增强工具箱
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        private void Uc_Image_Enhancement_Tools_ClickToolsEvent(string toolsName, IToolable tools)
+        {
+            Uc_Tools(toolsName, tools);
+        }
         /// <summary>
         /// 定位工具箱
         /// </summary>
         /// <param name="toolsName"></param>
         /// <param name="tools"></param>
         private void Uc_Location_Tools_ClickToolsEvent(string toolsName, IToolable tools)
-        {
-            if (Tools_Common() == true)
-            {
-                userControlTool = null;
-                _clickToolsListName = ToolsKitNameEnum.Location;
-                tools.OperatorBlockName = normalBlock.CustomName;
-                if (EditState == false)
-                {
-                    tools.StepCustomName = GetToolName(toolsName.ToString() + "_", normalBlock);
-                }
-                switch (toolsName)
-                {
-                    case "轮廓匹配":
-                        userControlTool = new SeachOfContourToolControl(tools as SearchOfContourToolEntity);
-                        break;
-                }
-                if (userControlTool != null)
-                {
-                    userControlTool.ClickOKEvent += Tools_clickOKButton;
-                    userControlTool.ClickCancelEvent += Tools_clickCancelButton;
-                    ControlClass.AddControlToPanel(userControlTool, Panel_Tools);
-                }
-            }
+        {           
+            Uc_Tools(toolsName, tools);
         }
 
         /// <summary>
@@ -164,29 +167,72 @@ namespace DispenseAPP
         /// <param name="tools"></param>
         private void Uc_ImageIO_Tools_ClickToolsEvent(string toolsName, IToolable tools)
         {
+            Uc_Tools(toolsName, tools);           
+        }
+        /// <summary>
+        /// 屏检工具
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        private void Uc_ScreenCheck_Tools_ClickToolsEvent(string toolsName, IToolable tools)
+        {
+            Uc_Tools(toolsName, tools);
+        }
+        private void Uc_Tools(string toolsName, IToolable toolable)
+        {
             if (Tools_Common() == true)
             {
                 _clickToolsListName = ToolsKitNameEnum.ImageIO;
-                tools.OperatorBlockName = normalBlock.CustomName;
+                toolable.OperatorBlockName = normalBlock.CustomName;
                 userControlTool = null;
+            
                 if (EditState == false)
                 {
-                    tools.StepCustomName = GetToolName(toolsName.ToString() + "_", normalBlock);
+                    toolable.StepCustomName = GetToolName(toolsName.ToString() + "_", normalBlock);
                 }
                 switch (toolsName)
                 {
+                    case "滤波":
+                        userControlTool = new FilterToolControl(toolable as FilterToolEntity);
+                        break;
+                    case "预处理":
+                        userControlTool = new PretreatmentToolControl(toolable as PretreatmentToolEntity);
+                        break;
+                    case "图像操作":
+                        userControlTool = new DisposeImageToolControl(toolable as DisposeImageToolEntity);
+                        break;
+                    case "形态学":
+                        userControlTool = new MorphologyToolControl(toolable as MorphologyToolEntity);
+                        break;                        
+                    case "平移旋转":
+                        userControlTool = new Tools_RotateShiftImage(toolable as Tools_RotateShiftImageClass);
+                        break;
+                    case "轮廓匹配":
+                        userControlTool = new SeachOfContourToolControl(toolable as SearchOfContourToolEntity);
+                        break;
                     case "采集设置":
-                        userControlTool = new AcqSetToolControl(tools as AcqSetToolEntity);
+                        userControlTool = new AcqSetToolControl(toolable as AcqSetToolEntity);
                         break;
                     case "采集图像":
-                        userControlTool = new AcqImageToolControl(tools as AcqImageToolEntity);
+                        userControlTool = new AcqImageToolControl(toolable as AcqImageToolEntity);
                         break;
                     case "导入图像":
-                        userControlTool = new ImportImageToolControl(tools as ImportImageToolEntity);
+                        userControlTool = new ImportImageToolControl(toolable as ImportImageToolEntity);
                         break;
                     case "自动标定":
                         //userControlTool = new Tools_AutoCalib(tools as AutoCalibClass);
                         break;
+                    case "灰尘过滤":
+                        userControlTool = new DustFilterToolControl(toolable as DustFilterToolEntity);
+                          break;
+                    case "不良点参数设置":
+                        userControlTool = new BadParameterSettingToolControl(toolable as BadParameterSettingToolEntity);
+                          break;
+                    case "漏光检测":
+                        userControlTool = new LightLeakToolControl(toolable as LightLeakToolEntity);
+                          break;
+
+
                 }
                 if (userControlTool != null)
                 {
@@ -196,7 +242,6 @@ namespace DispenseAPP
                 }
             }
         }
-
         /// <summary>
         /// 其它工具箱
         /// </summary>
@@ -373,7 +418,12 @@ namespace DispenseAPP
             Tsbtn_Image_IO.CheckState = CheckState.Checked;
             ControlClass.AddControlToPanel(uc_ImageIO_Tools, Panel_Tools);
         }
-
+        private void Tsbtn_IEnhance_Click(object sender, EventArgs e) //图像增强
+        {
+            Cancel_TS_Tools_CheckedState();
+            Tsbtn_IEnhance.CheckState = CheckState.Checked;
+            ControlClass.AddControlToPanel(uc_Image_Enhancement_Tools, Panel_Tools);
+        }
         void Tsbtn_Location_Click(object sender, EventArgs e)//定位工具
         {
             Cancel_TS_Tools_CheckedState();
@@ -384,14 +434,19 @@ namespace DispenseAPP
         void Tsbtn_Measure_Click(object sender, EventArgs e)//测量工具
         {
         }
-
         void Tsbtn_Other_Click(object sender, EventArgs e)//其它工具
         {
             Cancel_TS_Tools_CheckedState();
             Tsbtn_Other.CheckState = CheckState.Checked;
             ControlClass.AddControlToPanel(uc_Other_Tools, Panel_Tools);
         }
+        private void Tsbtn_ScreenCheck_Click(object sender, EventArgs e)
+        {
+            Cancel_TS_Tools_CheckedState();
+            Tsbtn_ScreenCheck.CheckState = CheckState.Checked;
+            ControlClass.AddControlToPanel(uc_ScreenCheck_Tools, Panel_Tools);
 
+        }
         void Tsbtn_ImageDetectionAndAnalysis_Click(object sender, EventArgs e)//检测分析
         {
             Cancel_TS_Tools_CheckedState();
@@ -405,6 +460,7 @@ namespace DispenseAPP
             Tsbtn_Other.CheckState = CheckState.Checked;
             ControlClass.AddControlToPanel(uc_Other_Tools, Panel_Tools);
         }
+        
         public void SetFormLayout(FormWindowState windowState)
         {
             if (windowState == FormWindowState.Maximized || windowState == FormWindowState.Normal)
@@ -666,7 +722,7 @@ namespace DispenseAPP
                 toolable.ComputerExecuteTime();
             }
         }
-
+        
         void BGWrok_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             Invoke(new Action(() =>
@@ -682,5 +738,7 @@ namespace DispenseAPP
         {
             _frmDebug.ChangeLayout();
         }
+
+        
     }
 }

@@ -27,6 +27,7 @@ namespace DispenseAPP
         Barcode = 4,
         Commun = 5,
         MotionControl = 6,
+        Enhancement = 7,
     }
 
     public enum Language

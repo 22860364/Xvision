@@ -40,8 +40,9 @@
             this.lbl_ContourMatch.Image = ((System.Drawing.Image)(resources.GetObject("lbl_ContourMatch.Image")));
             this.lbl_ContourMatch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.lbl_ContourMatch.Location = new System.Drawing.Point(0, 0);
+            this.lbl_ContourMatch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_ContourMatch.Name = "lbl_ContourMatch";
-            this.lbl_ContourMatch.Size = new System.Drawing.Size(330, 32);
+            this.lbl_ContourMatch.Size = new System.Drawing.Size(495, 48);
             this.lbl_ContourMatch.TabIndex = 3;
             this.lbl_ContourMatch.Text = "          模板匹配（基于形状）";
             this.lbl_ContourMatch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -49,13 +50,14 @@
             // 
             // UC_Location_Tools
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(144F, 144F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.lbl_ContourMatch);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "UC_Location_Tools";
-            this.Size = new System.Drawing.Size(330, 400);
+            this.Size = new System.Drawing.Size(495, 600);
             this.ResumeLayout(false);
 
         }

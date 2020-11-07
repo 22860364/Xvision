@@ -23,7 +23,9 @@ namespace DispenseAPP
 
         public override void Execute()
         {
-            if (EnableExposureTime == true && !Camerable.SetExposureTime(ExposureTime))
+            if (Camerable is null) return;
+           
+            if ( EnableExposureTime == true && !Camerable.SetExposureTime(ExposureTime))
             {
                 SetNG("设置曝光失败！");
                 return;

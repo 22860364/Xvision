@@ -1,13 +1,17 @@
-﻿using System;
+﻿using DispenseAPP.MyStyleControl;
+using DispenseAPP.Tools_ImageEnhancement.RotateShiftImage;
+using System;
 using System.Windows.Forms;
 
 namespace DispenseAPP.Tools_ImageEnhancement
 {
-    public partial class Tools_RotateShiftImage : UserControl
+    public partial class Tools_RotateShiftImage : UserControlTool
     {
-        public Tools_RotateShiftImage()
+        Tools_RotateShiftImageClass RotateShiftImageEntity { get; set; } = null;
+        public Tools_RotateShiftImage(Tools_RotateShiftImageClass _rotateShiftImageEntity)
         {
             InitializeComponent();
+            RotateShiftImageEntity = _rotateShiftImageEntity;
         }
 
         private void Btn_OK_Click(object sender, EventArgs e)

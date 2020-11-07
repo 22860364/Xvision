@@ -30,7 +30,13 @@ namespace DispenseAPP.Tools_Location.ContourMatchin
         HShapeModel _hShapeModel = null;
 
         SearchOfContourToolEntity Entity { get; set;}
+        private void FrmContourMathing_Load(object sender, EventArgs e)
+        {
+            if (!DesignMode)
+            {
 
+            }
+        }
         public FrmContourMathing(SearchOfContourToolEntity entity,Controller controller)
         {
             InitializeComponent();      
@@ -72,17 +78,17 @@ namespace DispenseAPP.Tools_Location.ContourMatchin
 
         void Btn_New_Click(object sender, EventArgs e)//新建 如果有画ROI 则裁剪出模板图片 如果没有裁剪 
         {
-            if (uC_MyWindow1.Control.ROIBase == null)
-            {
-                MessageBox.Show("未设置ROI或ROI越界！");
-                return;
-            }
-            rectangle = uC_MyWindow1.Control.GetRectangleROI();
-            tempBitmap = uC_MyWindow1.Control.CutImageByRectangleROI();
-            hTempImage = uC_MyWindow1.Control._HImage.CropPart(rectangle.Y, rectangle.X, rectangle.Width, rectangle.Height);
-            uC_MyWindow1.Control.ROIBase = null;
-            uC_MyWindow1.Control.ExecuteRePaint();
-            ExecuteCreateModel();
+            //if (uC_MyWindow1.Control.ROIBase == null)
+            //{
+            //    MessageBox.Show("未设置ROI或ROI越界！");
+            //    return;
+            //}
+            //rectangle = uC_MyWindow1.Control.GetRectangleROI();
+            //tempBitmap = uC_MyWindow1.Control.CutImageByRectangleROI();
+            //hTempImage = uC_MyWindow1.Control._HImage.CropPart(rectangle.Y, rectangle.X, rectangle.Width, rectangle.Height);
+            //uC_MyWindow1.Control.ROIBase = null;
+            //uC_MyWindow1.Control.ExecuteRePaint();
+            //ExecuteCreateModel();
         }
 
         private void Btn_Matching_Click(object sender, EventArgs e)//执行匹配

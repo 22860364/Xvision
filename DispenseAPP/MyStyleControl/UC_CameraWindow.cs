@@ -33,7 +33,13 @@ namespace DispenseAPP.MyStyleControl
                 Camerable.StopAcquisition();
             }
         }
+        private void UC_CameraWindow_Load(object sender, System.EventArgs e)
+        {
+            if (!DesignMode)
+            {
 
+            }
+        }
         ICamerable Camerable = null;//表示当前选择的相机
 
         public void InitialControlAndCamera()//初始化控件和相机
@@ -187,7 +193,7 @@ namespace DispenseAPP.MyStyleControl
 
         private void Tsbtn_DrawRectangle_Click(object sender, EventArgs e)
         {
-            uC_MyWindow1.DrawRectangle();
+          //  uC_MyWindow1.DrawRectangle();
         }
 
         private void Tsbtn_ImageAdaptation_Click(object sender, EventArgs e)

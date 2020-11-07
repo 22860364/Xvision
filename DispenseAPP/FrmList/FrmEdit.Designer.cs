@@ -29,13 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEdit));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmEdit));
             this.Panel_ImageWorkFlow = new System.Windows.Forms.Panel();
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.DG_Edit = new System.Windows.Forms.DataGridView();
+            this.ColStepName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ColResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ts_Tools = new System.Windows.Forms.ToolStrip();
+            this.Panel_Tools = new System.Windows.Forms.Panel();
+            this.BGWrok = new System.ComponentModel.BackgroundWorker();
+            this.Tsbtn_Image_IO = new System.Windows.Forms.ToolStripButton();
+            this.Tsbtn_IEnhance = new System.Windows.Forms.ToolStripButton();
+            this.Tsbtn_Location = new System.Windows.Forms.ToolStripButton();
+            this.Tsbtn_Measure = new System.Windows.Forms.ToolStripButton();
+            this.Tsbtn_ImageDetectionAndAnalysis = new System.Windows.Forms.ToolStripButton();
+            this.Tsbtn_Other = new System.Windows.Forms.ToolStripButton();
+            this.Tsbtn_ScreenCheck = new System.Windows.Forms.ToolStripButton();
             this.tsmiExecute = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,19 +60,6 @@
             this.tsmiCut = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMoveUp = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMoveDown = new System.Windows.Forms.ToolStripMenuItem();
-            this.DG_Edit = new System.Windows.Forms.DataGridView();
-            this.ColStepName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.ColResult = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ts_Tools = new System.Windows.Forms.ToolStrip();
-            this.Tsbtn_Image_IO = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_Location = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_Measure = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_ImageDetectionAndAnalysis = new System.Windows.Forms.ToolStripButton();
-            this.Tsbtn_Other = new System.Windows.Forms.ToolStripButton();
-            this.Panel_Tools = new System.Windows.Forms.Panel();
-            this.BGWrok = new System.ComponentModel.BackgroundWorker();
             this.cms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DG_Edit)).BeginInit();
             this.ts_Tools.SuspendLayout();
@@ -70,15 +72,16 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Panel_ImageWorkFlow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Panel_ImageWorkFlow.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Panel_ImageWorkFlow.Location = new System.Drawing.Point(-1, 0);
+            this.Panel_ImageWorkFlow.Location = new System.Drawing.Point(-2, 0);
             this.Panel_ImageWorkFlow.Name = "Panel_ImageWorkFlow";
-            this.Panel_ImageWorkFlow.Size = new System.Drawing.Size(710, 600);
+            this.Panel_ImageWorkFlow.Size = new System.Drawing.Size(887, 749);
             this.Panel_ImageWorkFlow.TabIndex = 0;
             // 
             // cms
             // 
             this.cms.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(214)))), ((int)(((byte)(219)))), ((int)(((byte)(233)))));
             this.cms.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cms.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiExecute,
             this.tsmiDelete,
@@ -90,79 +93,7 @@
             this.tsmiMoveUp,
             this.tsmiMoveDown});
             this.cms.Name = "CM_Edit";
-            this.cms.Size = new System.Drawing.Size(149, 220);
-            // 
-            // tsmiExecute
-            // 
-            this.tsmiExecute.Image = ((System.Drawing.Image)(resources.GetObject("tsmiExecute.Image")));
-            this.tsmiExecute.Name = "tsmiExecute";
-            this.tsmiExecute.Size = new System.Drawing.Size(148, 24);
-            this.tsmiExecute.Text = "执行此工具";
-            this.tsmiExecute.Click += new System.EventHandler(this.Tsmi_Execute_Click);
-            // 
-            // tsmiDelete
-            // 
-            this.tsmiDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDelete.Image")));
-            this.tsmiDelete.Name = "tsmiDelete";
-            this.tsmiDelete.Size = new System.Drawing.Size(148, 24);
-            this.tsmiDelete.Text = "删除";
-            this.tsmiDelete.Click += new System.EventHandler(this.Tsmi_Delete_Click);
-            // 
-            // tsmiEdit
-            // 
-            this.tsmiEdit.Image = ((System.Drawing.Image)(resources.GetObject("tsmiEdit.Image")));
-            this.tsmiEdit.Name = "tsmiEdit";
-            this.tsmiEdit.Size = new System.Drawing.Size(148, 24);
-            this.tsmiEdit.Text = "编辑";
-            this.tsmiEdit.Click += new System.EventHandler(this.Tsmi_Edit_Click);
-            // 
-            // tsmiForbidden
-            // 
-            this.tsmiForbidden.Image = global::DispenseAPP.Properties.Resources.禁用;
-            this.tsmiForbidden.Name = "tsmiForbidden";
-            this.tsmiForbidden.Size = new System.Drawing.Size(148, 24);
-            this.tsmiForbidden.Text = "禁用";
-            this.tsmiForbidden.Click += new System.EventHandler(this.Tsmi_Forbidden_Click);
-            // 
-            // tsmiCopy
-            // 
-            this.tsmiCopy.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCopy.Image")));
-            this.tsmiCopy.Name = "tsmiCopy";
-            this.tsmiCopy.Size = new System.Drawing.Size(148, 24);
-            this.tsmiCopy.Text = "复制";
-            this.tsmiCopy.Click += new System.EventHandler(this.Tsmi_Copy_Click);
-            // 
-            // tsmiPast
-            // 
-            this.tsmiPast.Image = ((System.Drawing.Image)(resources.GetObject("tsmiPast.Image")));
-            this.tsmiPast.Name = "tsmiPast";
-            this.tsmiPast.Size = new System.Drawing.Size(148, 24);
-            this.tsmiPast.Text = "粘贴";
-            this.tsmiPast.Click += new System.EventHandler(this.TsmiPast_Click);
-            // 
-            // tsmiCut
-            // 
-            this.tsmiCut.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCut.Image")));
-            this.tsmiCut.Name = "tsmiCut";
-            this.tsmiCut.Size = new System.Drawing.Size(148, 24);
-            this.tsmiCut.Text = "剪切";
-            this.tsmiCut.Click += new System.EventHandler(this.TsmiCut_Click);
-            // 
-            // tsmiMoveUp
-            // 
-            this.tsmiMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiMoveUp.Image")));
-            this.tsmiMoveUp.Name = "tsmiMoveUp";
-            this.tsmiMoveUp.Size = new System.Drawing.Size(148, 24);
-            this.tsmiMoveUp.Text = "上移";
-            this.tsmiMoveUp.Click += new System.EventHandler(this.Tsmi_MoveUp_Click);
-            // 
-            // tsmiMoveDown
-            // 
-            this.tsmiMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsmiMoveDown.Image")));
-            this.tsmiMoveDown.Name = "tsmiMoveDown";
-            this.tsmiMoveDown.Size = new System.Drawing.Size(148, 24);
-            this.tsmiMoveDown.Text = "下移";
-            this.tsmiMoveDown.Click += new System.EventHandler(this.Tsmi_MoveDown_Click);
+            this.cms.Size = new System.Drawing.Size(179, 274);
             // 
             // DG_Edit
             // 
@@ -190,7 +121,7 @@
             this.ColResult,
             this.ColTime});
             this.DG_Edit.GridColor = System.Drawing.Color.Black;
-            this.DG_Edit.Location = new System.Drawing.Point(712, 0);
+            this.DG_Edit.Location = new System.Drawing.Point(890, 0);
             this.DG_Edit.Name = "DG_Edit";
             this.DG_Edit.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -211,7 +142,7 @@
             this.DG_Edit.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LimeGreen;
             this.DG_Edit.RowTemplate.Height = 28;
             this.DG_Edit.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DG_Edit.Size = new System.Drawing.Size(328, 250);
+            this.DG_Edit.Size = new System.Drawing.Size(410, 312);
             this.DG_Edit.TabIndex = 28;
             this.DG_Edit.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_Edit_CellDoubleClick);
             this.DG_Edit.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DG_Edit_MouseDown);
@@ -260,17 +191,36 @@
             this.ts_Tools.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.ts_Tools.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Tsbtn_Image_IO,
+            this.Tsbtn_IEnhance,
             this.Tsbtn_Location,
             this.Tsbtn_Measure,
             this.Tsbtn_ImageDetectionAndAnalysis,
-            this.Tsbtn_Other});
-            this.ts_Tools.Location = new System.Drawing.Point(712, 253);
-            this.ts_Tools.MaximumSize = new System.Drawing.Size(325, 35);
-            this.ts_Tools.MinimumSize = new System.Drawing.Size(325, 35);
+            this.Tsbtn_Other,
+            this.Tsbtn_ScreenCheck});
+            this.ts_Tools.Location = new System.Drawing.Point(890, 317);
+            this.ts_Tools.MaximumSize = new System.Drawing.Size(407, 43);
+            this.ts_Tools.MinimumSize = new System.Drawing.Size(407, 43);
             this.ts_Tools.Name = "ts_Tools";
-            this.ts_Tools.Size = new System.Drawing.Size(325, 35);
+            this.ts_Tools.Padding = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.ts_Tools.Size = new System.Drawing.Size(407, 43);
             this.ts_Tools.TabIndex = 29;
             this.ts_Tools.Text = "toolStrip1";
+            // 
+            // Panel_Tools
+            // 
+            this.Panel_Tools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Panel_Tools.AutoSize = true;
+            this.Panel_Tools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Panel_Tools.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Panel_Tools.Location = new System.Drawing.Point(890, 363);
+            this.Panel_Tools.Name = "Panel_Tools";
+            this.Panel_Tools.Size = new System.Drawing.Size(409, 385);
+            this.Panel_Tools.TabIndex = 1;
+            // 
+            // BGWrok
+            // 
+            this.BGWrok.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrok_DoWork);
+            this.BGWrok.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrok_RunWorkerCompleted);
             // 
             // Tsbtn_Image_IO
             // 
@@ -283,6 +233,18 @@
             this.Tsbtn_Image_IO.Size = new System.Drawing.Size(35, 32);
             this.Tsbtn_Image_IO.Text = "图像输入输出";
             this.Tsbtn_Image_IO.Click += new System.EventHandler(this.Tsbtn_Image_IO_Click);
+            // 
+            // Tsbtn_IEnhance
+            // 
+            this.Tsbtn_IEnhance.AutoSize = false;
+            this.Tsbtn_IEnhance.CheckOnClick = true;
+            this.Tsbtn_IEnhance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Tsbtn_IEnhance.Image = ((System.Drawing.Image)(resources.GetObject("Tsbtn_IEnhance.Image")));
+            this.Tsbtn_IEnhance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Tsbtn_IEnhance.Name = "Tsbtn_IEnhance";
+            this.Tsbtn_IEnhance.Size = new System.Drawing.Size(35, 32);
+            this.Tsbtn_IEnhance.Text = "增强";
+            this.Tsbtn_IEnhance.Click += new System.EventHandler(this.Tsbtn_IEnhance_Click);
             // 
             // Tsbtn_Location
             // 
@@ -332,28 +294,96 @@
             this.Tsbtn_Other.Text = "其它工具";
             this.Tsbtn_Other.Click += new System.EventHandler(this.Tsbtn_Other_Click);
             // 
-            // Panel_Tools
+            // Tsbtn_ScreenCheck
             // 
-            this.Panel_Tools.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.Panel_Tools.AutoSize = true;
-            this.Panel_Tools.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Panel_Tools.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Panel_Tools.Location = new System.Drawing.Point(712, 291);
-            this.Panel_Tools.Name = "Panel_Tools";
-            this.Panel_Tools.Size = new System.Drawing.Size(328, 309);
-            this.Panel_Tools.TabIndex = 1;
+            this.Tsbtn_ScreenCheck.AutoSize = false;
+            this.Tsbtn_ScreenCheck.CheckOnClick = true;
+            this.Tsbtn_ScreenCheck.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.Tsbtn_ScreenCheck.Image = ((System.Drawing.Image)(resources.GetObject("Tsbtn_ScreenCheck.Image")));
+            this.Tsbtn_ScreenCheck.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Tsbtn_ScreenCheck.Name = "Tsbtn_ScreenCheck";
+            this.Tsbtn_ScreenCheck.Size = new System.Drawing.Size(35, 32);
+            this.Tsbtn_ScreenCheck.Text = "屏检";
+            this.Tsbtn_ScreenCheck.Click += new System.EventHandler(this.Tsbtn_ScreenCheck_Click);
             // 
-            // BGWrok
+            // tsmiExecute
             // 
-            this.BGWrok.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BGWrok_DoWork);
-            this.BGWrok.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BGWrok_RunWorkerCompleted);
+            this.tsmiExecute.Image = ((System.Drawing.Image)(resources.GetObject("tsmiExecute.Image")));
+            this.tsmiExecute.Name = "tsmiExecute";
+            this.tsmiExecute.Size = new System.Drawing.Size(178, 30);
+            this.tsmiExecute.Text = "执行此工具";
+            this.tsmiExecute.Click += new System.EventHandler(this.Tsmi_Execute_Click);
+            // 
+            // tsmiDelete
+            // 
+            this.tsmiDelete.Image = ((System.Drawing.Image)(resources.GetObject("tsmiDelete.Image")));
+            this.tsmiDelete.Name = "tsmiDelete";
+            this.tsmiDelete.Size = new System.Drawing.Size(178, 30);
+            this.tsmiDelete.Text = "删除";
+            this.tsmiDelete.Click += new System.EventHandler(this.Tsmi_Delete_Click);
+            // 
+            // tsmiEdit
+            // 
+            this.tsmiEdit.Image = ((System.Drawing.Image)(resources.GetObject("tsmiEdit.Image")));
+            this.tsmiEdit.Name = "tsmiEdit";
+            this.tsmiEdit.Size = new System.Drawing.Size(178, 30);
+            this.tsmiEdit.Text = "编辑";
+            this.tsmiEdit.Click += new System.EventHandler(this.Tsmi_Edit_Click);
+            // 
+            // tsmiForbidden
+            // 
+            this.tsmiForbidden.Image = global::DispenseAPP.Properties.Resources.禁用;
+            this.tsmiForbidden.Name = "tsmiForbidden";
+            this.tsmiForbidden.Size = new System.Drawing.Size(178, 30);
+            this.tsmiForbidden.Text = "禁用";
+            this.tsmiForbidden.Click += new System.EventHandler(this.Tsmi_Forbidden_Click);
+            // 
+            // tsmiCopy
+            // 
+            this.tsmiCopy.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCopy.Image")));
+            this.tsmiCopy.Name = "tsmiCopy";
+            this.tsmiCopy.Size = new System.Drawing.Size(178, 30);
+            this.tsmiCopy.Text = "复制";
+            this.tsmiCopy.Click += new System.EventHandler(this.Tsmi_Copy_Click);
+            // 
+            // tsmiPast
+            // 
+            this.tsmiPast.Image = ((System.Drawing.Image)(resources.GetObject("tsmiPast.Image")));
+            this.tsmiPast.Name = "tsmiPast";
+            this.tsmiPast.Size = new System.Drawing.Size(178, 30);
+            this.tsmiPast.Text = "粘贴";
+            this.tsmiPast.Click += new System.EventHandler(this.TsmiPast_Click);
+            // 
+            // tsmiCut
+            // 
+            this.tsmiCut.Image = ((System.Drawing.Image)(resources.GetObject("tsmiCut.Image")));
+            this.tsmiCut.Name = "tsmiCut";
+            this.tsmiCut.Size = new System.Drawing.Size(178, 30);
+            this.tsmiCut.Text = "剪切";
+            this.tsmiCut.Click += new System.EventHandler(this.TsmiCut_Click);
+            // 
+            // tsmiMoveUp
+            // 
+            this.tsmiMoveUp.Image = ((System.Drawing.Image)(resources.GetObject("tsmiMoveUp.Image")));
+            this.tsmiMoveUp.Name = "tsmiMoveUp";
+            this.tsmiMoveUp.Size = new System.Drawing.Size(178, 30);
+            this.tsmiMoveUp.Text = "上移";
+            this.tsmiMoveUp.Click += new System.EventHandler(this.Tsmi_MoveUp_Click);
+            // 
+            // tsmiMoveDown
+            // 
+            this.tsmiMoveDown.Image = ((System.Drawing.Image)(resources.GetObject("tsmiMoveDown.Image")));
+            this.tsmiMoveDown.Name = "tsmiMoveDown";
+            this.tsmiMoveDown.Size = new System.Drawing.Size(178, 30);
+            this.tsmiMoveDown.Text = "下移";
+            this.tsmiMoveDown.Click += new System.EventHandler(this.Tsmi_MoveDown_Click);
             // 
             // FrmEdit
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1040, 600);
+            this.ClientSize = new System.Drawing.Size(1300, 750);
             this.Controls.Add(this.ts_Tools);
             this.Controls.Add(this.DG_Edit);
             this.Controls.Add(this.Panel_Tools);
@@ -396,5 +426,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn ColState;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColResult;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColTime;
+        private System.Windows.Forms.ToolStripButton Tsbtn_IEnhance;
+        private System.Windows.Forms.ToolStripButton Tsbtn_ScreenCheck;
     }
 }

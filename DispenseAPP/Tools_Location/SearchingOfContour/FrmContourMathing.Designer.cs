@@ -1,4 +1,6 @@
-﻿namespace DispenseAPP.Tools_Location.ContourMatchin
+﻿using System;
+
+namespace DispenseAPP.Tools_Location.ContourMatchin
 {
     partial class FrmContourMathing
     {
@@ -634,8 +636,8 @@
             // 
             // uC_MyWindow1
             // 
-            this.uC_MyWindow1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.uC_MyWindow1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uC_MyWindow1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
             this.uC_MyWindow1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -649,7 +651,7 @@
             this.uC_MyWindow1.Name = "uC_MyWindow1";
             this.uC_MyWindow1.Size = new System.Drawing.Size(772, 680);
             this.uC_MyWindow1.TabIndex = 11;
-            // 
+
             // FrmContourMathing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -663,6 +665,7 @@
             this.Name = "FrmContourMathing";
             this.Text = "轮廓匹配";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmContourMathing_FormClosing);
+            this.Load += new System.EventHandler(this.FrmContourMathing_Load);
             this.Controls.SetChildIndex(this.panel_Param, 0);
             this.Controls.SetChildIndex(this.Btn_OK, 0);
             this.Controls.SetChildIndex(this.Btn_Cancel, 0);
@@ -688,6 +691,8 @@
             this.ResumeLayout(false);
 
         }
+
+        
 
         #endregion
         private System.Windows.Forms.Panel panel_Param;

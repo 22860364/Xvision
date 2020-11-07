@@ -13,7 +13,7 @@ namespace DispenseAPP.Tools_ImageEnhancement.RotateShiftImage
 
         public bool ChangeImageSize { get; set; } = false;//不改变图像尺寸
 
-        public override ToolsKitNameEnum ToolKitName => ToolsKitNameEnum.ImageIO;
+        public override ToolsKitNameEnum ToolKitName => ToolsKitNameEnum.Enhancement;
 
         public override string ToolName => "旋转平移图像";
 

@@ -186,10 +186,12 @@
             // 
             // UC_CameraWindow
             // 
+
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(246)))), ((int)(((byte)(246)))), ((int)(((byte)(246)))));
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Load += UC_CameraWindow_Load;
             this.Controls.Add(this.uC_MyWindow1);
             this.Controls.Add(this.Ts);
             this.Name = "UC_CameraWindow";
@@ -199,6 +201,8 @@
             this.ResumeLayout(false);
 
         }
+
+        
 
         #endregion
 

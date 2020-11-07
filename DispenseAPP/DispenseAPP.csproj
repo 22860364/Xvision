@@ -124,6 +124,7 @@
     <Compile Include="FrmSystemSet.Designer.cs">
       <DependentUpon>FrmSystemSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyStyleControl\Controller.cs" />
     <Compile Include="MyStyleControl\DgvDisplayMessage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -172,6 +173,18 @@
     <Compile Include="MyStyleControl\UC_CameraWindow.Designer.cs">
       <DependentUpon>UC_CameraWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MyStyleControl\UC_DrawComponent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyStyleControl\UC_DrawComponent.Designer.cs">
+      <DependentUpon>UC_DrawComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MyStyleControl\UC_MyWindows.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MyStyleControl\UC_MyWindows.Designer.cs">
+      <DependentUpon>UC_MyWindows.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyStyleControl\UserControlTool.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -183,6 +196,77 @@
     </Compile>
     <Compile Include="MyStyleToolStripItem\ToolStripRadioButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Binaryzation\BinaryzationToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Binaryzation\BinaryzationToolControl.Designer.cs">
+      <DependentUpon>BinaryzationToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Binaryzation\BinaryzationToolEntity.cs" />
+    <Compile Include="Tools_ImageEnhancement\Binaryzation\FrmBinaryzation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Binaryzation\FrmBinaryzation.Designer.cs">
+      <DependentUpon>FrmBinaryzation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\DisposeImage\DisposeImageToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\DisposeImage\DisposeImageToolControl.Designer.cs">
+      <DependentUpon>DisposeImageToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\DisposeImage\DisposeImageToolEntity.cs" />
+    <Compile Include="Tools_ImageEnhancement\DisposeImage\FrmDisposeImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\DisposeImage\FrmDisposeImage.Designer.cs">
+      <DependentUpon>FrmDisposeImage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Filter\FilterToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Filter\FilterToolControl.Designer.cs">
+      <DependentUpon>FilterToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Filter\FilterToolEntity.cs" />
+    <Compile Include="Tools_ImageEnhancement\Filter\FrmFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Filter\FrmFilter.Designer.cs">
+      <DependentUpon>FrmFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Morphology\FrmMorphology.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Morphology\FrmMorphology.Designer.cs">
+      <DependentUpon>FrmMorphology.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Morphology\MorphologyToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Morphology\MorphologyToolControl.Designer.cs">
+      <DependentUpon>MorphologyToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Morphology\MorphologyToolEntity.cs" />
+    <Compile Include="Tools_ImageEnhancement\Pretreatment\FrmPretreatment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Pretreatment\FrmPretreatment.Designer.cs">
+      <DependentUpon>FrmPretreatment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Pretreatment\PretreatmentToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Pretreatment\PretreatmentToolControl.Designer.cs">
+      <DependentUpon>PretreatmentToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\Pretreatment\PretreatmentToolEntity.cs" />
+    <Compile Include="Tools_ImageEnhancement\RotateShiftImage\FrmRotateShiftImage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools_ImageEnhancement\RotateShiftImage\FrmRotateShiftImage.Designer.cs">
+      <DependentUpon>FrmRotateShiftImage.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools_Location\SearchingOfContour\SeachOfContourToolControl.cs">
       <SubType>UserControl</SubType>
@@ -259,6 +343,33 @@
     </Compile>
     <Compile Include="Tools_Other\VarSet\VarSetToolControl.Designer.cs">
       <DependentUpon>VarSetToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\BadParameterSetting\BadParameterSettingToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\BadParameterSetting\BadParameterSettingToolControl.Designer.cs">
+      <DependentUpon>BadParameterSettingToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\BadParameterSetting\BadParameterSettingToolEntity.cs" />
+    <Compile Include="Tools_ScreenCheck\DustFilter\DustFilterToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\DustFilter\DustFilterToolControl.Designer.cs">
+      <DependentUpon>DustFilterToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\DustFilter\DustFilterToolEntity.cs" />
+    <Compile Include="Tools_ScreenCheck\LightLeak\LightLeakToolControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\LightLeak\LightLeakToolControl.Designer.cs">
+      <DependentUpon>LightLeakToolControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\LightLeak\LightLeakToolEntity.cs" />
+    <Compile Include="Tools_ScreenCheck\UC_ScreenCheck_Tools.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools_ScreenCheck\UC_ScreenCheck_Tools.Designer.cs">
+      <DependentUpon>UC_ScreenCheck_Tools.cs</DependentUpon>
     </Compile>
     <Compile Include="UserManagement\CoordinatePurview.cs" />
     <Compile Include="UserManagement\DisplayPurview.cs" />
@@ -522,8 +633,38 @@
     <EmbeddedResource Include="MyStyleControl\UC_CameraWindow.resx">
       <DependentUpon>UC_CameraWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyStyleControl\UC_DrawComponent.resx">
+      <DependentUpon>UC_DrawComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MyStyleControl\UC_MyWindows.resx">
+      <DependentUpon>UC_MyWindows.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MyStyleControl\UserControlTool.resx">
       <DependentUpon>UserControlTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\Binaryzation\BinaryzationToolControl.resx">
+      <DependentUpon>BinaryzationToolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\Binaryzation\FrmBinaryzation.resx">
+      <DependentUpon>FrmBinaryzation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\DisposeImage\DisposeImageToolControl.resx">
+      <DependentUpon>DisposeImageToolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\Filter\FilterToolControl.resx">
+      <DependentUpon>FilterToolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\Filter\FrmFilter.resx">
+      <DependentUpon>FrmFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\Morphology\FrmMorphology.resx">
+      <DependentUpon>FrmMorphology.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\Pretreatment\PretreatmentToolControl.resx">
+      <DependentUpon>PretreatmentToolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ImageEnhancement\RotateShiftImage\FrmRotateShiftImage.resx">
+      <DependentUpon>FrmRotateShiftImage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools_Location\SearchingOfContour\SeachOfContourToolControl.resx">
       <DependentUpon>SeachOfContourToolControl.cs</DependentUpon>
@@ -560,6 +701,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Tools_Other\VarSet\VarSetToolControl.resx">
       <DependentUpon>VarSetToolControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools_ScreenCheck\UC_ScreenCheck_Tools.resx">
+      <DependentUpon>UC_ScreenCheck_Tools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserManagement\FrmChangePassword.resx">
       <DependentUpon>FrmChangePassword.cs</DependentUpon>
@@ -742,6 +886,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+    <Folder Include="HPictureProcessing\" />
     <Folder Include="obj\x86\Release\" />
   </ItemGroup>
   <ItemGroup>
