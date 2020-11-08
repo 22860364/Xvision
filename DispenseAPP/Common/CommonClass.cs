@@ -28,6 +28,7 @@ namespace DispenseAPP
         Commun = 5,
         MotionControl = 6,
         Enhancement = 7,
+        ScreenCheck = 8,
     }
 
     public enum Language

@@ -77,6 +77,7 @@ namespace DispenseAPP
             uc_Location_Tools.ClickToolsEvent += Uc_Location_Tools_ClickToolsEvent;
             uc_Other_Tools.ClickToolsEvent += Uc_Other_Tools_ClickToolsEvent;
             uc_ScreenCheck_Tools.ClickToolsEvent += Uc_ScreenCheck_Tools_ClickToolsEvent;
+            uc_ScreenCheck_Tools.ClickToolsEvent += Uc_ScreenCheck_Tools_ClickToolsEvent1;
             List<BlockItem> element = StaticPublicData.BlockItems.GetAllOperator();
             foreach (BlockItem item in element)
             {
@@ -141,6 +142,16 @@ namespace DispenseAPP
             Tools_Add_Edit_Event(false);
             return true;
         }
+        /// <summary>
+        /// 屏检
+        /// </summary>
+        /// <param name="arg1"></param>
+        /// <param name="arg2"></param>
+        private void Uc_ScreenCheck_Tools_ClickToolsEvent1(string toolsName, IToolable tools)
+        {
+            Uc_Tools(toolsName, tools);
+        }
+
         /// <summary>
         ///图像增强工具箱
         /// </summary>
@@ -228,9 +239,7 @@ namespace DispenseAPP
                     case "不良点参数设置":
                         userControlTool = new BadParameterSettingToolControl(toolable as BadParameterSettingToolEntity);
                           break;
-                    case "漏光检测":
-                        userControlTool = new LightLeakToolControl(toolable as LightLeakToolEntity);
-                          break;
+                    
 
 
                 }

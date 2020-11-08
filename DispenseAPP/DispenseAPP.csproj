@@ -358,13 +358,12 @@
       <DependentUpon>DustFilterToolControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Tools_ScreenCheck\DustFilter\DustFilterToolEntity.cs" />
-    <Compile Include="Tools_ScreenCheck\LightLeak\LightLeakToolControl.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="Tools_ScreenCheck\DustFilter\FrmDustFilter.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools_ScreenCheck\LightLeak\LightLeakToolControl.Designer.cs">
-      <DependentUpon>LightLeakToolControl.cs</DependentUpon>
+    <Compile Include="Tools_ScreenCheck\DustFilter\FrmDustFilter.Designer.cs">
+      <DependentUpon>FrmDustFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tools_ScreenCheck\LightLeak\LightLeakToolEntity.cs" />
     <Compile Include="Tools_ScreenCheck\UC_ScreenCheck_Tools.cs">
       <SubType>UserControl</SubType>
     </Compile>

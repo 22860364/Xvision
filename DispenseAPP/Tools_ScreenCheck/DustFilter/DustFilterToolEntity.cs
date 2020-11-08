@@ -11,9 +11,9 @@ namespace DispenseAPP.Tools_ScreenCheck.DustFilter
     /// </summary>
     public class DustFilterToolEntity : IToolable
     {
-        public override ToolsKitNameEnum ToolKitName => throw new NotImplementedException();
+        public override ToolsKitNameEnum ToolKitName => ToolsKitNameEnum.ScreenCheck;
 
-        public override string ToolName => throw new NotImplementedException();
+        public override string ToolName => "灰尘过滤";
 
         public override void Execute()
         {
